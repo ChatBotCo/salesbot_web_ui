@@ -111,12 +111,12 @@ export function Avatar(props) {
     "/models/64f1a714fe61576b46f27ca2.glb"
   );
 
-  const { message, onMessagePlayed, chat } = useChat();
+  const { message, onMessagePlayed, chat, audio, setAudio } = useChat();
 
   const [lipsync, setLipsync] = useState();
 
   useEffect(() => {
-    console.log(message);
+    message && console.log(message);
     if (!message) {
       setAnimation("Idle");
       return;
@@ -124,10 +124,10 @@ export function Avatar(props) {
     setAnimation(message.animation);
     setFacialExpression(message.facialExpression);
     setLipsync(message.lipsync);
-    const audio = new Audio("data:audio/mp3;base64," + message.audio);
-    audio.play();
-    setAudio(audio);
-    audio.onended = onMessagePlayed;
+    // const audio = new Audio("data:audio/mp3;base64," + message.audio);
+    // audio.play();
+    // setAudio(audio);
+    // audio.onended = onMessagePlayed;
   }, [message]);
 
   const { animations } = useGLTF("/models/animations.glb");
@@ -176,7 +176,6 @@ export function Avatar(props) {
   const [winkLeft, setWinkLeft] = useState(false);
   const [winkRight, setWinkRight] = useState(false);
   const [facialExpression, setFacialExpression] = useState("");
-  const [audio, setAudio] = useState();
 
   useFrame(() => {
     !setupMode &&
@@ -201,7 +200,7 @@ export function Avatar(props) {
     }
 
     const appliedMorphTargets = [];
-    if (message && lipsync) {
+    if (message && lipsync && audio && audio.currentTime) {
       const currentAudioTime = audio.currentTime;
       for (let i = 0; i < lipsync.mouthCues.length; i++) {
         const mouthCue = lipsync.mouthCues[i];

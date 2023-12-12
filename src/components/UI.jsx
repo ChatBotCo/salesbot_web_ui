@@ -1,14 +1,55 @@
-import { useRef } from "react";
+import {useEffect, useRef} from "react";
 import { useChat } from "../hooks/useChat";
 
 export const UI = ({ hidden, ...props }) => {
   const input = useRef();
-  const { chat, loading, cameraZoomed, setCameraZoomed, message } = useChat();
+  const {
+    chat,
+    loading,
+    cameraZoomed,
+    setCameraZoomed,
+    message,
+    setMessages,
+    setAudio,
+    onMessagePlayed,
+    setLoading,
+    backendUrl,
+  } = useChat();
 
-  const sendMessage = () => {
+  // useEffect(() => {
+  //   if (!message) {
+  //     return;
+  //   }
+  //   const audio = new Audio("data:audio/mp3;base64," + message.audio);
+  //   audio.play();
+  //   setAudio(audio);
+  //   audio.onended = onMessagePlayed;
+  // }, [message]);
+
+  const sendMessage = async () => {
     const text = input.current.value;
     if (!loading && !message) {
-      chat(text);
+      // chat(text)
+      setLoading(true);
+      const body = JSON.stringify({ message: text })
+      // console.log(body)
+      const data = await fetch(`${backendUrl}/chat`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: body,
+      });
+      const resp = (await data.json()).messages;
+      setMessages([...resp]);
+      setLoading(false);
+
+      const newMsg = resp[0]
+      const audio = new Audio("data:audio/mp3;base64," + newMsg.audio);
+      audio.play();
+      setAudio(audio);
+      audio.onended = onMessagePlayed;
+
       input.current.value = "";
     }
   };

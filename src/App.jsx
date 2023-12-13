@@ -13,6 +13,9 @@ function App() {
   const handleClickCloseChatWindow = () => {
     setShowChatwindow(false)
   }
+  const handleClickShowChatWindow = () => {
+    setShowChatwindow(true)
+  }
 
 
   return (
@@ -28,7 +31,7 @@ function App() {
           bottom: '0px',
         }}
       >
-        {showChatWindow && <ChatWindow handleClickCloseChatWindow={handleClickCloseChatWindow} />}
+        <ChatWindow handleClickCloseChatWindow={handleClickCloseChatWindow} showChatWindow={showChatWindow} />
         <Canvas
           shadows
           camera={{ position: [0, 0, 1], fov: 30 }}
@@ -36,6 +39,7 @@ function App() {
             position: 'relative',
             right: '-100px'
           }}
+          onClick={handleClickShowChatWindow}
         >
           <Experience />
         </Canvas>

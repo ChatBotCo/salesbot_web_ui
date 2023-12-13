@@ -1,8 +1,8 @@
 import {useEffect, useRef, useState} from "react";
 import { useChat } from "../hooks/useChat";
-import { FaVolumeUp, FaVolumeMute, FaTimes } from 'react-icons/fa';
+import { FaVolumeUp, FaVolumeMute, FaTimes, FaPaperPlane } from 'react-icons/fa';
 
-export const ChatWindow = ({ hidden, handleClickCloseChatWindow }) => {
+export const ChatWindow = ({ showChatWindow, handleClickCloseChatWindow }) => {
   const input = useRef();
   const {
     chatMsgs,
@@ -62,9 +62,6 @@ export const ChatWindow = ({ hidden, handleClickCloseChatWindow }) => {
       audio.onended = onMessagePlayed;
     }
   };
-  if (hidden) {
-    return null;
-  }
 
   useEffect(() => {
     if(avatarResponse && avatarResponse.text) {
@@ -72,35 +69,45 @@ export const ChatWindow = ({ hidden, handleClickCloseChatWindow }) => {
     }
   }, [avatarResponse]);
 
-  return (
-    <>
-      <div className="flex justify-between p-2 ml-3 flex-col bg-white rounded-lg">
-        <div className="flex flex-row items-start">
-          <div className="flex-grow md:text-xl overflow-y-auto max-h-56">{lastAvatarResponseText}</div>
-          <div className="flex-shrink-0">
-            <FaTimes onClick={handleClickCloseChatWindow} />
+  if(showChatWindow) {
+    return (
+      <>
+        <div className="flex justify-between p-2 ml-3 flex-col bg-white rounded-lg">
+          <div className="flex flex-row items-start">
+            <div className="flex-grow md:text-xl overflow-y-auto max-h-56">{lastAvatarResponseText}</div>
+            <div className="flex-shrink-0">
+              <FaTimes onClick={handleClickCloseChatWindow} />
+            </div>
+          </div>
+
+          <div className="flex flex-row items-end">
+
+            <input
+              className="flex-grow w-full placeholder:text-gray-500 placeholder:italic italic focus:outline-none"
+              placeholder="Type a message..."
+              ref={input}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  sendMessage();
+                }
+              }}
+            />
+
+            <button
+              disabled={loading || avatarResponse}
+              onClick={sendMessage}
+              className={`flex-shrink-0 text-pink-500 ${
+                loading || avatarResponse ? "cursor-not-allowed opacity-30" : ""
+              }`}
+            >
+              <FaPaperPlane/>
+            </button>
           </div>
         </div>
-        <input
-          className="w-full placeholder:text-gray-500 placeholder:italic focus:outline-none"
-          placeholder="Type a message..."
-          ref={input}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              sendMessage();
-            }
-          }}
-        />
-        <button
-          disabled={loading || avatarResponse}
-          onClick={sendMessage}
-          className={`bg-pink-500 hover:bg-pink-600 text-white font-semibold uppercase rounded-md ${
-            loading || avatarResponse ? "cursor-not-allowed opacity-30" : ""
-          }`}
-        >
-          Send
-        </button>
-      </div>
-    </>
-  );
+      </>
+    );
+  } else {
+    return (<></>)
+  }
+
 };

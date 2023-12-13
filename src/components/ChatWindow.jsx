@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import {useEffect, useRef, useState} from "react";
 import { useChat } from "../hooks/useChat";
 
 export const ChatWindow = ({ hidden }) => {
@@ -12,6 +12,7 @@ export const ChatWindow = ({ hidden }) => {
     setLoading,
     backendUrl,
   } = useChat();
+  const [lastMessage, setLastMessage] = useState('Hello, I\'m Keli!')
 
   const sendMessage = async () => {
     const text = input.current.value;
@@ -43,10 +44,16 @@ export const ChatWindow = ({ hidden }) => {
     return null;
   }
 
+  useEffect(() => {
+    if(message && message.text) {
+      setLastMessage(message.text)
+    }
+  }, [message]);
+
   return (
     <>
       <div className="flex justify-between p-2 flex-col bg-white rounded-lg">
-        <div className=" md:text-xl">Hello I'm Keli!</div>
+        <div className=" md:text-xl">{lastMessage}</div>
 
         <input
           className="w-full placeholder:text-gray-500 placeholder:italic bg-opacity-50 bg-white backdrop-blur-md"

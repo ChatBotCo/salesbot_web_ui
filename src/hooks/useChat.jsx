@@ -6,19 +6,22 @@ const backendUrl = "http://localhost:3000";
 const ChatContext = createContext();
 
 export const ChatProvider = ({ children }) => {
-  const [message, setMessage] = useState();
+  const [chatMsgs, setChatMsgs] = useState([]);
+  const [avatarResponse, setAvatarResponse] = useState();
   const [loading, setLoading] = useState(false);
   const [cameraZoomed, setCameraZoomed] = useState(true);
   const [audio, setAudio] = useState();
   const onMessagePlayed = () => {
-    setMessage();
+    setAvatarResponse();
   };
 
   return (
     <ChatContext.Provider
       value={{
-        message,
-        setMessage,
+        chatMsgs,
+        setChatMsgs,
+        avatarResponse,
+        setAvatarResponse,
         onMessagePlayed,
         loading,
         setLoading,

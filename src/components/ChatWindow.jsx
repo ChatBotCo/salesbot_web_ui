@@ -4,21 +4,28 @@ import { useChat } from "../hooks/useChat";
 export const ChatWindow = ({ hidden }) => {
   const input = useRef();
   const {
+    chatMsgs,
+    setChatMsgs,
     loading,
-    message,
-    setMessage,
+    avatarResponse,
+    setAvatarResponse,
     setAudio,
     onMessagePlayed,
     setLoading,
     backendUrl,
   } = useChat();
-  const [lastMessage, setLastMessage] = useState('Hello, I\'m Keli!')
+  const [lastAvatarResponseText, setLastAvatarResponseText] = useState('Hello, I\'m Keli!')
 
   const sendMessage = async () => {
     const text = input.current.value;
-    if (!loading && !message) {
+    if (!loading && !avatarResponse) {
       setLoading(true);
-      const body = JSON.stringify({ message: text })
+      const newMsg = {
+        role: "user",
+        content: text || "Hello",
+      }
+      const chat = [...chatMsgs, newMsg]
+      const body = JSON.stringify({ chat })
       // console.log(body)
       const data = await fetch(`${backendUrl}/chat`, {
         method: "POST",
@@ -27,16 +34,31 @@ export const ChatWindow = ({ hidden }) => {
         },
         body: body,
       });
-      const message = await data.json()
-      setMessage(message);
-      setLoading(false);
+      const newAvatarResponse = await data.json()
+      // Example: avatarResponse = {
+      //   text: "It appears that you have forgotten to add your API keys.",
+      //   audio: await audioFileToBase64("audios/api_0.wav"),
+      //   lipsync: await readJsonTranscript("audios/api_0.json"),
+      //   facialExpression: "angry",
+      //   animation: "Angry",
+      // }
 
-      const audio = new Audio("data:audio/mp3;base64," + message.audio);
+      // Update state
+      setLoading(false);
+      setAvatarResponse(newAvatarResponse)// ephemeral
+      setLastAvatarResponseText(newAvatarResponse.text)// persists - so the text remains on the screen
+      const newAvatarChatMsgObj = {
+        role: "assistant",
+        content: newAvatarResponse.text,
+      }
+      setChatMsgs([...chat, newAvatarChatMsgObj])
+      input.current.value = "";
+
+      // Play the audio - this must be inline with the user-initiated event (button press) due to mobile device auto-playback permission issues
+      const audio = new Audio("data:audio/mp3;base64," + newAvatarResponse.audio);
       audio.play();
       setAudio(audio);
       audio.onended = onMessagePlayed;
-
-      input.current.value = "";
     }
   };
   if (hidden) {
@@ -44,15 +66,15 @@ export const ChatWindow = ({ hidden }) => {
   }
 
   useEffect(() => {
-    if(message && message.text) {
-      setLastMessage(message.text)
+    if(avatarResponse && avatarResponse.text) {
+      setLastAvatarResponseText(avatarResponse.text)
     }
-  }, [message]);
+  }, [avatarResponse]);
 
   return (
     <>
       <div className="flex justify-between p-2 ml-3 flex-col bg-white rounded-lg">
-        <div className=" md:text-xl">{lastMessage}</div>
+        <div className=" md:text-xl">{lastAvatarResponseText}</div>
 
         <input
           className="w-full placeholder:text-gray-500 placeholder:italic bg-opacity-50 bg-white backdrop-blur-md"
@@ -65,10 +87,10 @@ export const ChatWindow = ({ hidden }) => {
           }}
         />
         <button
-          disabled={loading || message}
+          disabled={loading || avatarResponse}
           onClick={sendMessage}
           className={`bg-pink-500 hover:bg-pink-600 text-white font-semibold uppercase rounded-md ${
-            loading || message ? "cursor-not-allowed opacity-30" : ""
+            loading || avatarResponse ? "cursor-not-allowed opacity-30" : ""
           }`}
         >
           Send

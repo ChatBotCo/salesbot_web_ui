@@ -111,20 +111,20 @@ export function Avatar(props) {
     "/models/64f1a714fe61576b46f27ca2.glb"
   );
 
-  const { message, audio } = useChat();
+  const { avatarResponse, audio } = useChat();
 
   const [lipsync, setLipsync] = useState();
 
   useEffect(() => {
-    message && console.log(message);
-    if (!message) {
+    avatarResponse && console.log(avatarResponse);
+    if (!avatarResponse) {
       setAnimation("Idle");
       return;
     }
-    setAnimation(message.animation);
-    setFacialExpression(message.facialExpression);
-    setLipsync(message.lipsync);
-  }, [message]);
+    setAnimation(avatarResponse.animation);
+    setFacialExpression(avatarResponse.facialExpression);
+    setLipsync(avatarResponse.lipsync);
+  }, [avatarResponse]);
 
   const { animations } = useGLTF("/models/animations.glb");
 
@@ -196,7 +196,7 @@ export function Avatar(props) {
     }
 
     const appliedMorphTargets = [];
-    if (message && lipsync && audio && audio.currentTime) {
+    if (avatarResponse && lipsync && audio && audio.currentTime) {
       const currentAudioTime = audio.currentTime;
       for (let i = 0; i < lipsync.mouthCues.length; i++) {
         const mouthCue = lipsync.mouthCues[i];

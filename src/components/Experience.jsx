@@ -39,19 +39,39 @@ const Dots = (props) => {
 
 export const Experience = () => {
   const cameraControls = useRef();
-  const { cameraZoomed } = useChat();
+  console.log(CameraControls)
+  // cameraControls.mouseButtons.left = CameraControls.ACTION.NONE
+
+  // cameraControls.mouseButtons.middle =
+  //   CameraControls.ACTION.NONE
+  //
+  // cameraControls.mouseButtons.right =
+  //   CameraControls.ACTION.NONE
+  //
+  // cameraControls.mouseButtons.wheel =
+  //   CameraControls.ACTION.NONE
+  //
+  // cameraControls.touches.one =
+  //   CameraControls.ACTION.NONE
+  //
+  // cameraControls.touches.two =
+  //   CameraControls.ACTION.NONE
+
+  // cameraControls.touches.three =
+  // const { cameraZoomed } = useChat();
 
   useEffect(() => {
-    cameraControls.current.setLookAt(0, 2, 5, 0, 1.5, 0);
+    console.log(cameraControls.current.setLookAt)
+    cameraControls.current.setLookAt(0, 1.5, 1.5, 0, 1.5, 0, false);
   }, []);
 
-  useEffect(() => {
-    if (cameraZoomed) {
-      cameraControls.current.setLookAt(0, 1.5, 1.5, 0, 1.5, 0, true);
-    } else {
-      cameraControls.current.setLookAt(0, 2.2, 5, 0, 1.0, 0, true);
-    }
-  }, [cameraZoomed]);
+  // useEffect(() => {
+  //   if (cameraZoomed) {
+  //     cameraControls.current.setLookAt(0, 1.5, 1.5, 0, 1.5, 0, true);
+  //   } else {
+  //     cameraControls.current.setLookAt(0, 2.2, 5, 0, 1.0, 0, true);
+  //   }
+  // }, [cameraZoomed]);
   return (
     <>
       <CameraControls ref={cameraControls} />

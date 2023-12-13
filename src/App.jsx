@@ -4,6 +4,7 @@ import { Leva } from "leva";
 import { Experience } from "./components/Experience";
 import { UI } from "./components/UI";
 import {FakeWebPage} from "./components/FakeWebPage.jsx";
+import {ChatWindow} from "./components/ChatWindow.jsx";
 
 function App() {
   return (
@@ -12,14 +13,15 @@ function App() {
       <Leva hidden />
       <UI hidden/>
       <FakeWebPage />
-      <div style={{
-        width: '200px',
-        height: '300px',
-        position: 'fixed',
-        right: '10px',
-        bottom: '0px',
-      }}>
-
+      <div
+        className="max-w-full md:max-w-xs"
+        style={{
+          position: 'fixed',
+          right: '10px',
+          bottom: '0px',
+        }}
+      >
+        <ChatWindow />
         <Canvas
           shadows
           camera={{ position: [0, 0, 1], fov: 30 }}

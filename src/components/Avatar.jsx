@@ -111,7 +111,7 @@ export function Avatar(props) {
     "/models/64f1a714fe61576b46f27ca2.glb"
   );
 
-  const { message, onMessagePlayed, chat, audio, setAudio } = useChat();
+  const { message, audio } = useChat();
 
   const [lipsync, setLipsync] = useState();
 
@@ -220,7 +220,6 @@ export function Avatar(props) {
   });
 
   useControls("FacialExpressions", {
-    chat: button(() => chat()),
     winkLeft: button(() => {
       setWinkLeft(true);
       setTimeout(() => setWinkLeft(false), 300);

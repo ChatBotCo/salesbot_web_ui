@@ -6,7 +6,7 @@ export const ChatWindow = ({ hidden }) => {
   const {
     loading,
     message,
-    setMessages,
+    setMessage,
     setAudio,
     onMessagePlayed,
     setLoading,
@@ -27,12 +27,11 @@ export const ChatWindow = ({ hidden }) => {
         },
         body: body,
       });
-      const resp = (await data.json()).messages;
-      setMessages([...resp]);
+      const message = await data.json()
+      setMessage(message);
       setLoading(false);
 
-      const newMsg = resp[0]
-      const audio = new Audio("data:audio/mp3;base64," + newMsg.audio);
+      const audio = new Audio("data:audio/mp3;base64," + message.audio);
       audio.play();
       setAudio(audio);
       audio.onended = onMessagePlayed;
@@ -52,7 +51,7 @@ export const ChatWindow = ({ hidden }) => {
 
   return (
     <>
-      <div className="flex justify-between p-2 flex-col bg-white rounded-lg">
+      <div className="flex justify-between p-2 ml-3 flex-col bg-white rounded-lg">
         <div className=" md:text-xl">{lastMessage}</div>
 
         <input

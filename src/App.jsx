@@ -4,8 +4,17 @@ import { Leva } from "leva";
 import { Experience } from "./components/Experience";
 import {FakeWebPage} from "./components/FakeWebPage.jsx";
 import {ChatWindow} from "./components/ChatWindow.jsx";
+import {useState} from "react";
 
 function App() {
+
+  const [showChatWindow, setShowChatwindow] = useState(true)
+
+  const handleClickCloseChatWindow = () => {
+    setShowChatwindow(false)
+  }
+
+
   return (
     <>
       <Loader />
@@ -19,7 +28,7 @@ function App() {
           bottom: '0px',
         }}
       >
-        <ChatWindow />
+        {showChatWindow && <ChatWindow handleClickCloseChatWindow={handleClickCloseChatWindow} />}
         <Canvas
           shadows
           camera={{ position: [0, 0, 1], fov: 30 }}

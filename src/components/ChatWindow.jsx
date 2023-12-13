@@ -1,7 +1,8 @@
 import {useEffect, useRef, useState} from "react";
 import { useChat } from "../hooks/useChat";
+import { FaVolumeUp, FaVolumeMute, FaTimes } from 'react-icons/fa';
 
-export const ChatWindow = ({ hidden }) => {
+export const ChatWindow = ({ hidden, handleClickCloseChatWindow }) => {
   const input = useRef();
   const {
     chatMsgs,
@@ -74,8 +75,12 @@ export const ChatWindow = ({ hidden }) => {
   return (
     <>
       <div className="flex justify-between p-2 ml-3 flex-col bg-white rounded-lg">
-        <div className=" md:text-xl overflow-y-scroll max-h-56">{lastAvatarResponseText}</div>
-
+        <div className="flex flex-row items-start">
+          <div className="flex-grow md:text-xl overflow-y-auto max-h-56">{lastAvatarResponseText}</div>
+          <div className="flex-shrink-0">
+            <FaTimes onClick={handleClickCloseChatWindow} />
+          </div>
+        </div>
         <input
           className="w-full placeholder:text-gray-500 placeholder:italic focus:outline-none"
           placeholder="Type a message..."

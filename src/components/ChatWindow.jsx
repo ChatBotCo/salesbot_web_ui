@@ -45,11 +45,11 @@ export const ChatWindow = ({ hidden }) => {
 
   return (
     <>
-      <div className="flex justify-between p-2 flex-col backdrop-blur-md bg-white bg-opacity-50 rounded-lg max-h-10 scroll-auto">
+      <div className="flex justify-between p-2 flex-col bg-white rounded-lg">
         <div className=" md:text-xl">Hello I'm Keli!</div>
 
         <input
-          className="w-full placeholder:text-gray-800 placeholder:italic rounded-md bg-opacity-50 bg-white backdrop-blur-md"
+          className="w-full placeholder:text-gray-500 placeholder:italic bg-opacity-50 bg-white backdrop-blur-md"
           placeholder="Type a message..."
           ref={input}
           onKeyDown={(e) => {

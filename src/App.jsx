@@ -14,7 +14,7 @@ function App() {
       <UI hidden/>
       <FakeWebPage />
       <div
-        className="max-w-full md:max-w-xs"
+        className="max-w-full md:max-w-xs flex flex-col items-end"
         style={{
           position: 'fixed',
           right: '10px',
@@ -25,6 +25,10 @@ function App() {
         <Canvas
           shadows
           camera={{ position: [0, 0, 1], fov: 30 }}
+          style={{
+            position: 'relative',
+            right: '-100px'
+          }}
         >
           <Experience />
         </Canvas>

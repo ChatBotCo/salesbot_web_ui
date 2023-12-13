@@ -7,6 +7,8 @@ import {
 import { Suspense, useEffect, useRef, useState } from "react";
 import { useChat } from "../hooks/useChat";
 import { Avatar } from "./Avatar";
+import { useThree } from '@react-three/fiber';
+import * as THREE from "three";
 
 const Dots = (props) => {
   const { loading } = useChat();
@@ -38,43 +40,18 @@ const Dots = (props) => {
 };
 
 export const Experience = () => {
-  const cameraControls = useRef();
-  console.log(CameraControls)
-  // cameraControls.mouseButtons.left = CameraControls.ACTION.NONE
-
-  // cameraControls.mouseButtons.middle =
-  //   CameraControls.ACTION.NONE
-  //
-  // cameraControls.mouseButtons.right =
-  //   CameraControls.ACTION.NONE
-  //
-  // cameraControls.mouseButtons.wheel =
-  //   CameraControls.ACTION.NONE
-  //
-  // cameraControls.touches.one =
-  //   CameraControls.ACTION.NONE
-  //
-  // cameraControls.touches.two =
-  //   CameraControls.ACTION.NONE
-
-  // cameraControls.touches.three =
-  // const { cameraZoomed } = useChat();
-
-  useEffect(() => {
-    console.log(cameraControls.current.setLookAt)
-    cameraControls.current.setLookAt(0, 1.5, 1.5, 0, 1.5, 0, false);
-  }, []);
-
+  // const cameraControls = useRef();
   // useEffect(() => {
-  //   if (cameraZoomed) {
-  //     cameraControls.current.setLookAt(0, 1.5, 1.5, 0, 1.5, 0, true);
-  //   } else {
-  //     cameraControls.current.setLookAt(0, 2.2, 5, 0, 1.0, 0, true);
-  //   }
-  // }, [cameraZoomed]);
+  //   console.log(cameraControls.current.setLookAt)
+  //   cameraControls.current.setLookAt(0, 1.5, 1.5, 0, 1.5, 0, false);
+  // }, []);
+  const { camera } = useThree();
+  useEffect(() => {
+    camera.position.set(0, 1.5, 1.5);
+    camera.lookAt(new THREE.Vector3(0, 1.5, 0));
+  }, [camera]);
   return (
     <>
-      <CameraControls ref={cameraControls} />
       <Environment preset="sunset" />
       {/* Wrapping Dots into Suspense to prevent Blink when Troika/Font is loaded */}
       <Suspense>

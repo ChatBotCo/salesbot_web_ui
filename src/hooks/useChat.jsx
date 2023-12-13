@@ -10,6 +10,7 @@ export const ChatProvider = ({ children }) => {
   const [avatarResponse, setAvatarResponse] = useState();
   const [loading, setLoading] = useState(false);
   const [cameraZoomed, setCameraZoomed] = useState(true);
+  const [mute, setMute] = useState(true);
   const [audio, setAudio] = useState();
   const onMessagePlayed = () => {
     setAvatarResponse();
@@ -30,6 +31,8 @@ export const ChatProvider = ({ children }) => {
         audio,
         setAudio,
         backendUrl,
+        mute,
+        setMute,
       }}
     >
       {children}

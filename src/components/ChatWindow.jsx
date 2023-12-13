@@ -2,7 +2,11 @@ import {useEffect, useRef, useState} from "react";
 import { useChat } from "../hooks/useChat";
 import { FaVolumeUp, FaVolumeMute, FaTimes, FaPaperPlane } from 'react-icons/fa';
 
-export const ChatWindow = ({ showChatWindow, handleClickCloseChatWindow }) => {
+export const ChatWindow = ({
+                             showChatWindow,
+                             handleClickCloseChatWindow,
+                             handleToggleMute
+}) => {
   const input = useRef();
   const {
     chatMsgs,
@@ -14,6 +18,7 @@ export const ChatWindow = ({ showChatWindow, handleClickCloseChatWindow }) => {
     onMessagePlayed,
     setLoading,
     backendUrl,
+    mute,
   } = useChat();
   const [lastAvatarResponseText, setLastAvatarResponseText] = useState('Hello, I\'m Keli!')
 
@@ -26,7 +31,7 @@ export const ChatWindow = ({ showChatWindow, handleClickCloseChatWindow }) => {
         content: text || "Hello",
       }
       const chat = [...chatMsgs, newMsg]
-      const body = JSON.stringify({ chat })
+      const body = JSON.stringify({ chat, mute })
       // console.log(body)
       const data = await fetch(`${backendUrl}/chat`, {
         method: "POST",
@@ -55,11 +60,16 @@ export const ChatWindow = ({ showChatWindow, handleClickCloseChatWindow }) => {
       setChatMsgs([...chat, newAvatarChatMsgObj])
       input.current.value = "";
 
-      // Play the audio - this must be inline with the user-initiated event (button press) due to mobile device auto-playback permission issues
-      const audio = new Audio("data:audio/mp3;base64," + newAvatarResponse.audio);
-      audio.play();
-      setAudio(audio);
-      audio.onended = onMessagePlayed;
+      if(!mute) {
+        // Play the audio - this must be inline with the user-initiated event (button press) due to mobile device auto-playback permission issues
+        const audio = new Audio("data:audio/mp3;base64," + newAvatarResponse.audio);
+        audio.play();
+        setAudio(audio);
+        audio.onended = onMessagePlayed;
+      } else {
+        // If muted, then immediately clear the message
+        onMessagePlayed()
+      }
     }
   };
 

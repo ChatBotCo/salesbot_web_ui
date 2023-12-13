@@ -47,6 +47,26 @@ export const ChatWindow = ({ hidden }) => {
     <>
       <div className="flex justify-between p-2 flex-col backdrop-blur-md bg-white bg-opacity-50 rounded-lg max-h-10 scroll-auto">
         <div className=" md:text-xl">Hello I'm Keli!</div>
+
+        <input
+          className="w-full placeholder:text-gray-800 placeholder:italic rounded-md bg-opacity-50 bg-white backdrop-blur-md"
+          placeholder="Type a message..."
+          ref={input}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              sendMessage();
+            }
+          }}
+        />
+        <button
+          disabled={loading || message}
+          onClick={sendMessage}
+          className={`bg-pink-500 hover:bg-pink-600 text-white font-semibold uppercase rounded-md ${
+            loading || message ? "cursor-not-allowed opacity-30" : ""
+          }`}
+        >
+          Send
+        </button>
       </div>
     </>
   );

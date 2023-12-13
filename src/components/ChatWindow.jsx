@@ -74,10 +74,10 @@ export const ChatWindow = ({ hidden }) => {
   return (
     <>
       <div className="flex justify-between p-2 ml-3 flex-col bg-white rounded-lg">
-        <div className=" md:text-xl">{lastAvatarResponseText}</div>
+        <div className=" md:text-xl overflow-y-scroll max-h-56">{lastAvatarResponseText}</div>
 
         <input
-          className="w-full placeholder:text-gray-500 placeholder:italic bg-opacity-50 bg-white backdrop-blur-md"
+          className="w-full placeholder:text-gray-500 placeholder:italic focus:outline-none"
           placeholder="Type a message..."
           ref={input}
           onKeyDown={(e) => {

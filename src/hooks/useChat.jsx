@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-const backendUrl = "http://localhost:3000";
-// const backendUrl = "https://keli-bot-backend-325d5558f8b6.herokuapp.com";
+// const backendUrl = "http://localhost:3000";
+const backendUrl = "https://keli-bot-backend-325d5558f8b6.herokuapp.com";
 
 const ChatContext = createContext();
 
@@ -10,7 +10,7 @@ export const ChatProvider = ({ children }) => {
   const [avatarResponse, setAvatarResponse] = useState();
   const [loading, setLoading] = useState(false);
   const [cameraZoomed, setCameraZoomed] = useState(true);
-  const [mute, setMute] = useState(true);
+  const [mute, setMute] = useState(false);
   const [audio, setAudio] = useState();
   const onMessagePlayed = () => {
     setAvatarResponse();

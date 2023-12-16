@@ -204,8 +204,8 @@ export function Avatar(props) {
           currentAudioTime >= mouthCue.start &&
           currentAudioTime <= mouthCue.end
         ) {
-          appliedMorphTargets.push(corresponding[mouthCue.value]);
-          lerpMorphTarget(corresponding[mouthCue.value], 1, 0.2);
+          appliedMorphTargets.push(mouthCue.target);
+          lerpMorphTarget(mouthCue.target, mouthCue.value, (mouthCue.end - mouthCue.start));
           break;
         }
       }

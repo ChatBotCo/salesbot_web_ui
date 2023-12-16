@@ -83,8 +83,8 @@ export const ChatWindow = ({
 
   const stopDictation = () => {
     recognition.stop()
-    setRecording(false)
-    sendMessage()
+    // setRecording(false)
+    // sendMessage()
   }
   const startDictation = ()=>{
     if (window.hasOwnProperty('webkitSpeechRecognition')) {
@@ -103,6 +103,7 @@ export const ChatWindow = ({
       recognition.onresult = function(e) {
         for (let i = e.resultIndex; i < e.results.length; ++i) {
           if (e.results[i].isFinal) {
+            console.log("FINAL")
             input.current.value = e.results[i][0].transcript;
             recognition.stop();
             setRecording(false)
@@ -142,8 +143,8 @@ export const ChatWindow = ({
           </div>
 
           <div className="flex flex-row items-end">
-
             <input
+              disabled={loading || avatarResponse}
               className="flex-grow w-full placeholder:text-gray-500 placeholder:italic italic focus:outline-none"
               placeholder="Type a message..."
               ref={input}
@@ -156,8 +157,24 @@ export const ChatWindow = ({
 
             {
               recording ?
-                <FaStop className="flex-shrink-0 text-pink-500" onClick={stopDictation} /> :
-                <FaMicrophone className="flex-shrink-0 text-pink-500" onClick={startDictation} />
+                <button
+                  disabled={loading || avatarResponse}
+                  onClick={stopDictation}
+                  className={`flex-shrink-0 text-pink-500 ${
+                    loading || avatarResponse ? "cursor-not-allowed opacity-30" : ""
+                  }`}
+                >
+                  <FaStop/>
+                </button> :
+                <button
+                  disabled={loading || avatarResponse}
+                  onClick={startDictation}
+                  className={`flex-shrink-0 text-pink-500 ${
+                    loading || avatarResponse ? "cursor-not-allowed opacity-30" : ""
+                  }`}
+                >
+                  <FaMicrophone/>
+                </button>
             }
 
             <button

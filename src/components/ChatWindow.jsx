@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import { useChat } from "../hooks/useChat";
-import { FaVolumeUp, FaVolumeMute, FaTimes, FaPaperPlane } from 'react-icons/fa';
+import { FaMicrophone, FaStop, FaTimes, FaPaperPlane } from 'react-icons/fa';
 
 export const ChatWindow = ({
                              showChatWindow,
@@ -21,6 +21,8 @@ export const ChatWindow = ({
     mute,
   } = useChat();
   const [lastAvatarResponseText, setLastAvatarResponseText] = useState('Hello, I\'m Keli!')
+  const [recording, setRecording] = useState(false)
+  const [recognition, setRecognition] = useState()
 
   const sendMessage = async () => {
     const text = input.current.value;
@@ -79,6 +81,50 @@ export const ChatWindow = ({
     }
   }, [avatarResponse]);
 
+  const stopDictation = () => {
+    recognition.stop()
+    setRecording(false)
+    sendMessage()
+  }
+  const startDictation = ()=>{
+    if (window.hasOwnProperty('webkitSpeechRecognition')) {
+
+      var recognition = new webkitSpeechRecognition();
+      setRecognition(recognition)
+      setRecording(true)
+
+      recognition.continuous = true;
+      recognition.interimResults = true;
+
+      recognition.lang = "en-US";
+      recognition.start();
+
+
+      recognition.onresult = function(e) {
+        for (let i = e.resultIndex; i < e.results.length; ++i) {
+          if (e.results[i].isFinal) {
+            input.current.value = e.results[i][0].transcript;
+            recognition.stop();
+            setRecording(false)
+            sendMessage()
+          } else {
+            if(e.results[i][0].confidence >= 0.75) {
+              input.current.value = e.results[i][0].transcript;
+            }
+          }
+          input.current.scrollTop = input.current.scrollHeight;
+          input.current.scrollLeft = input.current.scrollWidth;
+        }
+      };
+
+      recognition.onerror = function(e) {
+        recognition.stop();
+        setRecording(false)
+      }
+    }
+  }
+
+
   if(showChatWindow) {
     return (
       <>
@@ -102,6 +148,12 @@ export const ChatWindow = ({
                 }
               }}
             />
+
+            {
+              recording ?
+                <FaStop className="flex-shrink-0 text-pink-500" onClick={stopDictation} /> :
+                <FaMicrophone className="flex-shrink-0 text-pink-500" onClick={startDictation} />
+            }
 
             <button
               disabled={loading || avatarResponse}

@@ -1,6 +1,6 @@
 import {useEffect, useRef, useState} from "react";
 import { useChat } from "../hooks/useChat";
-import { FaMicrophone, FaStop, FaTimes, FaPaperPlane } from 'react-icons/fa';
+import { FaMicrophone, FaStop, FaTimes, FaPaperPlane, FaCog } from 'react-icons/fa';
 
 export const ChatWindow = ({
                              showChatWindow,
@@ -128,7 +128,12 @@ export const ChatWindow = ({
   if(showChatWindow) {
     return (
       <>
-        <div className="flex justify-between p-2 ml-3 flex-col bg-white rounded-lg">
+        <div id="speech-bubble" className="relative flex justify-between p-2 ml-3 flex-col bg-white rounded-lg">
+          {loading && (
+            <div id="loading-parent" className="absolute inset-0 bg-white bg-opacity-50 flex items-center justify-center">
+              <FaCog className="animate-spin" style={{ fontSize: '24px' }} />
+            </div>
+          )}
           <div className="flex flex-row items-start">
             <div className="flex-grow md:text-xl overflow-y-auto max-h-56">{lastAvatarResponseText}</div>
             <div className="flex-shrink-0">

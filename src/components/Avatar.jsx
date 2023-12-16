@@ -122,7 +122,7 @@ export function Avatar(props) {
       setAnimation("Idle");
       return;
     }
-    setAnimation(avatarResponse.animation);
+    // setAnimation(avatarResponse.animation);
     setFacialExpression(avatarResponse.facialExpression);
     setLipsync(avatarResponse.lipsync);
   }, [avatarResponse]);

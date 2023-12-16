@@ -103,7 +103,6 @@ export const ChatWindow = ({
       recognition.onresult = function(e) {
         for (let i = e.resultIndex; i < e.results.length; ++i) {
           if (e.results[i].isFinal) {
-            console.log("FINAL")
             input.current.value = e.results[i][0].transcript;
             recognition.stop();
             setRecording(false)
@@ -125,6 +124,8 @@ export const ChatWindow = ({
     }
   }
 
+  const recordingFunc = (recording) ? stopDictation : startDictation
+  const recordingEl = (recording) ? <FaStop/> : <FaMicrophone/>
 
   if(showChatWindow) {
     return (
@@ -155,27 +156,15 @@ export const ChatWindow = ({
               }}
             />
 
-            {
-              recording ?
-                <button
-                  disabled={loading || avatarResponse}
-                  onClick={stopDictation}
-                  className={`flex-shrink-0 text-pink-500 ${
-                    loading || avatarResponse ? "cursor-not-allowed opacity-30" : ""
-                  }`}
-                >
-                  <FaStop/>
-                </button> :
-                <button
-                  disabled={loading || avatarResponse}
-                  onClick={startDictation}
-                  className={`flex-shrink-0 text-pink-500 ${
-                    loading || avatarResponse ? "cursor-not-allowed opacity-30" : ""
-                  }`}
-                >
-                  <FaMicrophone/>
-                </button>
-            }
+            <button
+              disabled={loading || avatarResponse}
+              onClick={recordingFunc}
+              className={`flex-shrink-0 text-pink-500 hidden md:block ${
+                loading || avatarResponse ? "cursor-not-allowed opacity-30" : ""
+              }`}
+            >
+              {recordingEl}
+            </button>
 
             <button
               disabled={loading || avatarResponse}

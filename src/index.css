@@ -33,3 +33,12 @@ body.greenScreen {
 .animate-spin {
   animation: spin 2s linear infinite;
 }
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+.fade-in-out {
+  animation: fadeInOut 1s ease-in-out infinite;
+}

@@ -38,7 +38,6 @@ export const SpeechInput = ({sendMessage, inputActive, inputRef}) => {
             }
           }
           inputRef.current.scrollTop = inputRef.current.scrollHeight;
-          inputRef.current.scrollLeft = inputRef.current.scrollWidth;
         }
       };
 
@@ -48,9 +47,6 @@ export const SpeechInput = ({sendMessage, inputActive, inputRef}) => {
       }
     }
   }
-
-  const recordingFunc = (recording) ? stopDictation : startDictation
-  const recordingEl = (recording) ? <FaStop/> : <FaMicrophone/>
 
   return (
     <>
@@ -63,16 +59,25 @@ export const SpeechInput = ({sendMessage, inputActive, inputRef}) => {
         />
 
         <div className="absolute bottom-4 flex flex-row justify-center w-full">
-          <button
-            disabled={!inputActive}
-            onClick={recordingFunc}
-            className={`text-white bg-blue-500 rounded pt-1 pr-4 pb-1 pl-4 flex flex-row items-center justify-center w-9/12 ${
-              !inputActive ? "cursor-not-allowed opacity-30" : ""
-            }`}
-          >
-            <span className='pr-2'>Press Here to Speak</span>
-            {recordingEl}
-          </button>
+          {
+            recording ? (
+              <div className="bg-red-50 flex flex-row justify-center items-center rounded text-2xl text-blue-500 p-4">
+                <span className="mr-2">Keli is listening</span>
+                <FaMicrophone className='fade-in-out' />
+              </div>
+            ) : (
+              <button
+                disabled={!inputActive}
+                onClick={startDictation}
+                className={`text-white bg-blue-500 rounded pt-1 pr-4 pb-1 pl-4 flex flex-row items-center justify-center w-9/12 text-xl md:text-2xl ${
+                  !inputActive ? "cursor-not-allowed opacity-30" : ""
+                }`}
+              >
+                <span className='pr-2'>Press Here to Speak</span>
+                <FaMicrophone/>
+              </button>
+            )
+          }
         </div>
       </div>
     </>

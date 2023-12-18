@@ -32,27 +32,13 @@ function App() {
     <>
       <Loader />
       <Leva hidden />
-      <div
-        className="max-w-full md:max-w-xs flex flex-col items-end"
-        style={{
-          position: 'fixed',
-          right: '10px',
-          bottom: '0px',
-        }}
+      <Canvas
+        shadows
+        camera={{ position: [0, 0, 1], fov: 30 }}
+        onClick={handleClickShowChatWindow}
       >
-        <ChatWindow handleClickCloseChatWindow={handleClickCloseChatWindow} showChatWindow={showChatWindow} />
-        <Canvas
-          shadows
-          camera={{ position: [0, 0, 1], fov: 30 }}
-          style={{
-            position: 'relative',
-            right: '-100px'
-          }}
-          onClick={handleClickShowChatWindow}
-        >
-          <Experience />
-        </Canvas>
-      </div>
+        <Experience />
+      </Canvas>
 
       {showChatWindow && (
         <div className={`fixed right-1 bottom-1 text-2xl bg-blue-100 rounded p-1 bg-blend-luminosity bg-opacity-80 ${muteBtnColor}`}>
@@ -63,5 +49,16 @@ function App() {
     </>
   );
 }
+
+// <div
+//   className="max-w-full md:max-w-xs flex flex-col items-end"
+//   style={{
+//     position: 'fixed',
+//     right: '10px',
+//     bottom: '0px',
+//   }}
+// >
+//   <ChatWindow handleClickCloseChatWindow={handleClickCloseChatWindow} showChatWindow={showChatWindow} />
+// </div>
 
 export default App;

@@ -30,8 +30,8 @@ function App() {
   return (
     <>
       <Loader />
-      <div className="flex h-screen">
-        <div className="w-1/2 h-full">
+      <div className="flex h-screen flex-col md:flex-row">
+        <div className="w-full h-1/3 md:w-1/2 md:h-full border-b-8 border-blue-300 md:border-0">
           <Canvas
             shadows
             camera={{ position: [0, 0, 1], fov: 30 }}
@@ -40,11 +40,11 @@ function App() {
             <Experience />
           </Canvas>
         </div>
-        <div className="w-1/2 h-full">
+        <div className="w-full h-2/3 md:w-1/2 md:h-full md:p-4">
           <ChatWindow />
         </div>
       </div>
-      <div className={`fixed right-1 bottom-1 text-2xl bg-blue-100 rounded p-1 bg-blend-luminosity bg-opacity-80 ${muteBtnColor}`}>
+      <div className={`absolute right-1 bottom-1 text-2xl bg-blue-100 rounded p-1 bg-blend-luminosity bg-opacity-80 ${muteBtnColor}`}>
         {mute ? <FaVolumeMute onClick={handleToggleMute} /> : <FaVolumeUp onClick={handleToggleMute} />}
       </div>
     </>

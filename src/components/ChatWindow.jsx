@@ -3,6 +3,7 @@ import { useChat } from "../hooks/useChat";
 import { FaMicrophone, FaStop, FaPaperPlane, FaCog } from 'react-icons/fa';
 import {SpeechTypeToggle} from "./SpeechTypeToggle.jsx";
 import {TextInput} from "./TextInput.jsx";
+import {AvatarResponse} from "./AvatarResponse.jsx";
 
 export const ChatWindow = () => {
   const input = useRef();
@@ -128,13 +129,13 @@ export const ChatWindow = () => {
 
   return (
     <>
-      <div className="flex-grow flex justify-end p-2 flex-col h-full bg-white md:rounded md:bg-opacity-80">
+      <div className="flex-grow flex justify-evenly flex-col h-full">
         {loading && (
           <div className="absolute inset-0 bg-white bg-opacity-50 flex items-center justify-center">
             <FaCog className="animate-spin" style={{ fontSize: '24px' }} />
           </div>
         )}
-        <div className="md:text-xl overflow-y-auto max-h-56">{lastAvatarResponseText}</div>
+        <AvatarResponse avatarResponse={lastAvatarResponseText}/>
 
         {
           inputMode==='text' ?

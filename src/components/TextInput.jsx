@@ -8,10 +8,10 @@ export const TextInput = ({sendMessage, inputActive}) => {
 
   return (
     <>
-      <div className="flex flex-row items-end">
+      <div className="flex-grow flex flex-row items-end">
         <input
           disabled={!inputActive}
-          className="flex-grow w-full placeholder:text-gray-500 placeholder:italic italic focus:outline-none"
+          className="w-full placeholder:text-gray-500 placeholder:italic italic focus:outline-none"
           placeholder="Type a message..."
           ref={input}
           onKeyDown={(e) => {

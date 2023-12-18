@@ -40,7 +40,7 @@ function App() {
             <Experience />
           </Canvas>
         </div>
-        <div className="w-full h-2/3 md:w-1/2 md:h-full md:p-4">
+        <div className="w-full h-2/3 md:w-1/2 md:h-full">
           <ChatWindow />
         </div>
 

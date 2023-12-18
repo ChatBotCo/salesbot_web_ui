@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 // const backendUrl = "http://localhost:3000";
 // const backendUrl = "http://localhost:7071/api";
-const backendUrl = "https://keli-bot-backend-325d5558f8b6.herokuapp.com";
+const backendUrl = "https://keli-bot-backend-f8a1542bca44.herokuapp.com";
 
 const ChatContext = createContext();
 

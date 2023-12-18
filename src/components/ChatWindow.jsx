@@ -1,6 +1,8 @@
 import {useEffect, useRef, useState} from "react";
 import { useChat } from "../hooks/useChat";
 import { FaMicrophone, FaStop, FaPaperPlane, FaCog } from 'react-icons/fa';
+import {SpeechTypeToggle} from "./SpeechTypeToggle.jsx";
+import {TextInput} from "./TextInput.jsx";
 
 export const ChatWindow = () => {
   const input = useRef();
@@ -19,6 +21,7 @@ export const ChatWindow = () => {
   const [lastAvatarResponseText, setLastAvatarResponseText] = useState('Hello, I\'m Keli!')
   const [recording, setRecording] = useState(false)
   const [recognition, setRecognition] = useState()
+  const [inputMode, setInputMode] = useState('text')
 
   const sendMessage = async () => {
     const text = input.current.value;
@@ -125,47 +128,20 @@ export const ChatWindow = () => {
 
   return (
     <>
-      <div id="speech-bubble" className="flex justify-end p-2 flex-col h-full bg-white md:rounded md:bg-opacity-80">
+      <div className="flex-grow flex justify-end p-2 flex-col h-full bg-white md:rounded md:bg-opacity-80">
         {loading && (
-          <div id="loading-parent" className="absolute inset-0 bg-white bg-opacity-50 flex items-center justify-center">
+          <div className="absolute inset-0 bg-white bg-opacity-50 flex items-center justify-center">
             <FaCog className="animate-spin" style={{ fontSize: '24px' }} />
           </div>
         )}
         <div className="md:text-xl overflow-y-auto max-h-56">{lastAvatarResponseText}</div>
 
-        <div className="flex flex-row items-end">
-          <input
-            disabled={loading || avatarResponse}
-            className="flex-grow w-full placeholder:text-gray-500 placeholder:italic italic focus:outline-none"
-            placeholder="Type a message..."
-            ref={input}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                sendMessage();
-              }
-            }}
-          />
-
-          <button
-            disabled={loading || avatarResponse}
-            onClick={recordingFunc}
-            className={`flex-shrink-0 text-pink-500 hidden md:block ${
-              loading || avatarResponse ? "cursor-not-allowed opacity-30" : ""
-            }`}
-          >
-            {recordingEl}
-          </button>
-
-          <button
-            disabled={loading || avatarResponse}
-            onClick={sendMessage}
-            className={`flex-shrink-0 text-pink-500 ${
-              loading || avatarResponse ? "cursor-not-allowed opacity-30" : ""
-            }`}
-          >
-            <FaPaperPlane/>
-          </button>
-        </div>
+        {
+          inputMode==='text' ?
+            <TextInput inputActive={!(loading || avatarResponse)} sendMessage={sendMessage} /> :
+            <div>Recording button</div>
+        }
+        <SpeechTypeToggle inputMode={inputMode} setMode={setInputMode} />
       </div>
     </>
   );

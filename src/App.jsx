@@ -44,7 +44,7 @@ function App() {
           <ChatWindow />
         </div>
 
-        <div className="absolute w-full h-1/3 md:w-1/2 md:h-full border-b-8 bg-transparent pointer-events-none flex flex-row justify-center items-start">
+        <div className="absolute w-full h-1/3 md:w-1/2 md:h-full bg-transparent pointer-events-none flex flex-row justify-center items-start">
           <button
             className={`flex flex-row items-center text-2xl bg-blue-100 rounded p-1 mt-1 ml-4 md:ml-10 bg-blend-luminosity bg-opacity-80 ${muteBtnColor} pointer-events-auto`}
             onClick={handleToggleMute}

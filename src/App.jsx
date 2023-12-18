@@ -43,9 +43,16 @@ function App() {
         <div className="w-full h-2/3 md:w-1/2 md:h-full md:p-4">
           <ChatWindow />
         </div>
-      </div>
-      <div className={`absolute right-1 bottom-1 text-2xl bg-blue-100 rounded p-1 bg-blend-luminosity bg-opacity-80 ${muteBtnColor}`}>
-        {mute ? <FaVolumeMute onClick={handleToggleMute} /> : <FaVolumeUp onClick={handleToggleMute} />}
+
+        <div className="absolute w-full h-1/3 md:w-1/2 md:h-full border-b-8 bg-transparent pointer-events-none flex flex-row justify-center items-start">
+          <button
+            className={`flex flex-row items-center text-2xl bg-blue-100 rounded p-1 mt-1 ml-4 md:ml-10 bg-blend-luminosity bg-opacity-80 ${muteBtnColor} pointer-events-auto`}
+            onClick={handleToggleMute}
+          >
+            {mute && <span className="pr-3 hidden md:block ">Muted</span>}
+            {mute ? <FaVolumeMute /> : <FaVolumeUp />}
+          </button>
+        </div>
       </div>
     </>
   );

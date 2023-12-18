@@ -27,12 +27,12 @@ export const ChatWindow = () => {
   const [inputMode, setInputMode] = useState('text')
 
   // Send initial message to initiate the conversation
-  useEffect(() => {
-    if(!initialRequestSent) {
-      initialRequestSent = true
-      sendMessage()
-    }
-  }, [])
+  // useEffect(() => {
+  //   if(!initialRequestSent) {
+  //     initialRequestSent = true
+  //     sendMessage()
+  //   }
+  // }, [])
 
   const sendMessage = async () => {
     const text = input.current.value;

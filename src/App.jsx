@@ -2,7 +2,6 @@ import { Loader } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
 import { Leva } from "leva";
 import { Experience } from "./components/Experience";
-import {FakeWebPage} from "./components/FakeWebPage.jsx";
 import {ChatWindow} from "./components/ChatWindow.jsx";
 import {useState} from "react";
 import { FaVolumeUp, FaVolumeMute } from 'react-icons/fa';
@@ -33,7 +32,6 @@ function App() {
     <>
       <Loader />
       <Leva hidden />
-      <FakeWebPage />
       <div
         className="max-w-full md:max-w-xs flex flex-col items-end"
         style={{

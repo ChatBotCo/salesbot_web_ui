@@ -22,8 +22,7 @@ export const ChatWindow = () => {
     backendUrl,
     mute,
   } = useChat();
-  const [recording, setRecording] = useState(false)
-  const [recognition, setRecognition] = useState()
+
   const [inputMode, setInputMode] = useState('text')
 
   const sendMessage = async () => {
@@ -82,52 +81,6 @@ export const ChatWindow = () => {
       setLastAvatarResponseText(avatarResponse.text)
     }
   }, [avatarResponse]);
-
-  const stopDictation = () => {
-    recognition.stop()
-    // setRecording(false)
-    // sendMessage()
-  }
-  const startDictation = ()=>{
-    if (window.hasOwnProperty('webkitSpeechRecognition')) {
-
-      var recognition = new webkitSpeechRecognition();
-      setRecognition(recognition)
-      setRecording(true)
-
-      recognition.continuous = true;
-      recognition.interimResults = true;
-
-      recognition.lang = "en-US";
-      recognition.start();
-
-
-      recognition.onresult = function(e) {
-        for (let i = e.resultIndex; i < e.results.length; ++i) {
-          if (e.results[i].isFinal) {
-            input.current.value = e.results[i][0].transcript;
-            recognition.stop();
-            setRecording(false)
-            sendMessage()
-          } else {
-            if(e.results[i][0].confidence >= 0.75) {
-              input.current.value = e.results[i][0].transcript;
-            }
-          }
-          input.current.scrollTop = input.current.scrollHeight;
-          input.current.scrollLeft = input.current.scrollWidth;
-        }
-      };
-
-      recognition.onerror = function(e) {
-        recognition.stop();
-        setRecording(false)
-      }
-    }
-  }
-
-  const recordingFunc = (recording) ? stopDictation : startDictation
-  const recordingEl = (recording) ? <FaStop/> : <FaMicrophone/>
 
   return (
     <>

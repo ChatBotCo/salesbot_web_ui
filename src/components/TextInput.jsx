@@ -1,7 +1,4 @@
-import {useEffect, useRef, useState} from "react";
-import { useChat } from "../hooks/useChat";
-import { FaMicrophone, FaStop, FaPaperPlane, FaCog } from 'react-icons/fa';
-import {SpeechTypeToggle} from "./SpeechTypeToggle.jsx";
+import { FaPaperPlane } from 'react-icons/fa';
 
 export const TextInput = ({sendMessage, inputActive, inputRef}) => {
 

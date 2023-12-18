@@ -7,10 +7,10 @@ export const TextInput = ({sendMessage, inputActive, inputRef}) => {
 
   return (
     <>
-      <div className="flex-grow p-2 relative">
+      <div className="flex-grow pt-2 pr-2 pl-2 relative md:ml-6 md:mr-1">
         <textarea
           disabled={!inputActive}
-          className="w-full h-full placeholder:text-gray-500 placeholder:italic italic focus:outline-none rounded resize-none"
+          className="w-full h-full placeholder:text-gray-500 placeholder:italic italic focus:outline-none rounded resize-none p-1"
           placeholder="Type something to Keli here!"
           ref={inputRef}
           onKeyDown={(e) => {

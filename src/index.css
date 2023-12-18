@@ -10,12 +10,14 @@
 #root {
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
 }
 
 body {
   margin: 0;
   background-color: #a8cefa;
   background-image: linear-gradient(19deg, #a8cefa 0%, #ddd6f3 100%);
+  overflow: hidden;
 }
 
 body.greenScreen {

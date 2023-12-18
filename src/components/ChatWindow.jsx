@@ -74,10 +74,15 @@ export const ChatWindow = () => {
 
       if(!mute) {
         // Play the audio - this must be inline with the user-initiated event (button press) due to mobile device auto-playback permission issues
-        const audio = new Audio("data:audio/mp3;base64," + newAvatarResponse.audio);
-        audio.play();
-        setAudio(audio);
-        audio.onended = onMessagePlayed;
+        if(newAvatarResponse.audio.startsWith("AAAAAAAAAAAAAAAA")) {
+          console.error(`Bad audio file data:${newAvatarResponse.audio}`)
+          onMessagePlayed()
+        } else {
+          const audio = new Audio("data:audio/mp3;base64," + newAvatarResponse.audio);
+          audio.play();
+          setAudio(audio);
+          audio.onended = onMessagePlayed;
+        }
       } else {
         // If muted, then immediately clear the message
         onMessagePlayed()

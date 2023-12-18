@@ -130,7 +130,7 @@ export const ChatWindow = ({
   if(showChatWindow) {
     return (
       <>
-        <div id="speech-bubble" className="relative flex justify-between p-2 ml-3 flex-col bg-white rounded-lg">
+        <div id="speech-bubble" className="absolute top-0 left-0 right-0 bottom-0 z-10 flex justify-between p-2 ml-3 flex-col bg-white rounded-lg">
           {loading && (
             <div id="loading-parent" className="absolute inset-0 bg-white bg-opacity-50 flex items-center justify-center">
               <FaCog className="animate-spin" style={{ fontSize: '24px' }} />

@@ -1,6 +1,5 @@
 import { Loader } from "@react-three/drei";
 import { Canvas } from "@react-three/fiber";
-import { Leva } from "leva";
 import { Experience } from "./components/Experience";
 import {ChatWindow} from "./components/ChatWindow.jsx";
 import {useState} from "react";
@@ -31,7 +30,6 @@ function App() {
   return (
     <>
       <Loader />
-      <Leva hidden />
       <Canvas
         shadows
         camera={{ position: [0, 0, 1], fov: 30 }}
@@ -40,25 +38,12 @@ function App() {
         <Experience />
       </Canvas>
 
-      {showChatWindow && (
-        <div className={`fixed right-1 bottom-1 text-2xl bg-blue-100 rounded p-1 bg-blend-luminosity bg-opacity-80 ${muteBtnColor}`}>
-          {mute ? <FaVolumeMute onClick={handleToggleMute} /> : <FaVolumeUp onClick={handleToggleMute} />}
-
-        </div>
-      )}
+      <ChatWindow handleClickCloseChatWindow={handleClickCloseChatWindow} showChatWindow={showChatWindow} />
+      <div className={`fixed right-1 bottom-1 text-2xl bg-blue-100 rounded p-1 bg-blend-luminosity bg-opacity-80 ${muteBtnColor}`}>
+        {mute ? <FaVolumeMute onClick={handleToggleMute} /> : <FaVolumeUp onClick={handleToggleMute} />}
+      </div>
     </>
   );
 }
-
-// <div
-//   className="max-w-full md:max-w-xs flex flex-col items-end"
-//   style={{
-//     position: 'fixed',
-//     right: '10px',
-//     bottom: '0px',
-//   }}
-// >
-//   <ChatWindow handleClickCloseChatWindow={handleClickCloseChatWindow} showChatWindow={showChatWindow} />
-// </div>
 
 export default App;

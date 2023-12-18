@@ -13,13 +13,14 @@ export const ChatWindow = () => {
     loading,
     avatarResponse,
     setAvatarResponse,
+    lastAvatarResponseText,
+    setLastAvatarResponseText,
     setAudio,
     onMessagePlayed,
     setLoading,
     backendUrl,
     mute,
   } = useChat();
-  const [lastAvatarResponseText, setLastAvatarResponseText] = useState('Hello, I\'m Keli!')
   const [recording, setRecording] = useState(false)
   const [recognition, setRecognition] = useState()
   const [inputMode, setInputMode] = useState('text')
@@ -139,7 +140,7 @@ export const ChatWindow = () => {
 
         {
           inputMode==='text' ?
-            <TextInput inputActive={!(loading || avatarResponse)} sendMessage={sendMessage} /> :
+            <TextInput inputActive={!(loading || avatarResponse)} sendMessage={sendMessage} inputRef={input} /> :
             <div>Recording button</div>
         }
         <SpeechTypeToggle inputMode={inputMode} setMode={setInputMode} />

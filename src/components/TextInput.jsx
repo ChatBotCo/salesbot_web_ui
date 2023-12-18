@@ -3,8 +3,7 @@ import { useChat } from "../hooks/useChat";
 import { FaMicrophone, FaStop, FaPaperPlane, FaCog } from 'react-icons/fa';
 import {SpeechTypeToggle} from "./SpeechTypeToggle.jsx";
 
-export const TextInput = ({sendMessage, inputActive}) => {
-  const input = useRef();
+export const TextInput = ({sendMessage, inputActive, inputRef}) => {
 
   return (
     <>
@@ -13,7 +12,7 @@ export const TextInput = ({sendMessage, inputActive}) => {
           disabled={!inputActive}
           className="w-full placeholder:text-gray-500 placeholder:italic italic focus:outline-none"
           placeholder="Type a message..."
-          ref={input}
+          ref={inputRef}
           onKeyDown={(e) => {
             if (e.key === "Enter") {
               sendMessage();

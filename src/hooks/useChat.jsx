@@ -9,6 +9,7 @@ const ChatContext = createContext();
 export const ChatProvider = ({ children }) => {
   const [chatMsgs, setChatMsgs] = useState([]);
   const [avatarResponse, setAvatarResponse] = useState();
+  const [lastAvatarResponseText, setLastAvatarResponseText] = useState('Hello, I\'m Keli!')
   const [loading, setLoading] = useState(false);
   const [cameraZoomed, setCameraZoomed] = useState(true);
   const [mute, setMute] = useState(false);
@@ -24,6 +25,8 @@ export const ChatProvider = ({ children }) => {
         setChatMsgs,
         avatarResponse,
         setAvatarResponse,
+        lastAvatarResponseText,
+        setLastAvatarResponseText,
         onMessagePlayed,
         loading,
         setLoading,

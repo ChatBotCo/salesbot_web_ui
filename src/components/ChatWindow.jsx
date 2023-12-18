@@ -4,6 +4,7 @@ import { FaMicrophone, FaStop, FaPaperPlane, FaCog } from 'react-icons/fa';
 import {SpeechTypeToggle} from "./SpeechTypeToggle.jsx";
 import {TextInput} from "./TextInput.jsx";
 import {AvatarResponse} from "./AvatarResponse.jsx";
+import {SpeechInput} from "./SpeechInput.jsx";
 
 export const ChatWindow = () => {
   const input = useRef();
@@ -141,7 +142,7 @@ export const ChatWindow = () => {
         {
           inputMode==='text' ?
             <TextInput inputActive={!(loading || avatarResponse)} sendMessage={sendMessage} inputRef={input} /> :
-            <div>Recording button</div>
+            <SpeechInput inputActive={!(loading || avatarResponse)} sendMessage={sendMessage} inputRef={input} />
         }
         <SpeechTypeToggle inputMode={inputMode} setMode={setInputMode} />
       </div>

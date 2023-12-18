@@ -1,11 +1,12 @@
 import {useEffect, useRef, useState} from "react";
 import { useChat } from "../hooks/useChat";
-import { FaMicrophone, FaStop, FaPaperPlane, FaCog } from 'react-icons/fa';
+import {  FaCog } from 'react-icons/fa';
 import {SpeechTypeToggle} from "./SpeechTypeToggle.jsx";
 import {TextInput} from "./TextInput.jsx";
 import {AvatarResponse} from "./AvatarResponse.jsx";
 import {SpeechInput} from "./SpeechInput.jsx";
 
+let initialRequestSent = false
 export const ChatWindow = () => {
   const input = useRef();
   const {
@@ -24,6 +25,14 @@ export const ChatWindow = () => {
   } = useChat();
 
   const [inputMode, setInputMode] = useState('text')
+
+  // Send initial message to initiate the conversation
+  useEffect(() => {
+    if(!initialRequestSent) {
+      initialRequestSent = true
+      sendMessage()
+    }
+  }, [])
 
   const sendMessage = async () => {
     const text = input.current.value;

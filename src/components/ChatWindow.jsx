@@ -136,7 +136,7 @@ export const ChatWindow = () => {
             <FaCog className="animate-spin" style={{ fontSize: '24px' }} />
           </div>
         )}
-        <AvatarResponse avatarResponse={lastAvatarResponseText}/>
+        <AvatarResponse extraClassNames={'hidden md:flex'} orientation='horizontal' />
 
         {
           inputMode==='text' ?

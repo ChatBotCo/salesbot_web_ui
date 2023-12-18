@@ -10,7 +10,7 @@ export const AvatarResponse = ({extraClassNames='', orientation}) => {
     // horizontal - DESKTOP
     return (
       <>
-        <div className={`flex-grow flex flex-row justify-start ${extraClassNames}`}>
+        <div className={`h-1/2 flex flex-row justify-start ${extraClassNames}`}>
           <div className="flex-shrink-0 h-full flex flex-col justify-end">
             <img src='/chat_triangle_horizontal.png' className="opacity-80 mb-10" style={{width:'30px'}}/>
           </div>

@@ -1,12 +1,8 @@
 import {useEffect, useRef, useState} from "react";
 import { useChat } from "../hooks/useChat";
-import { FaMicrophone, FaStop, FaTimes, FaPaperPlane, FaCog } from 'react-icons/fa';
+import { FaMicrophone, FaStop, FaPaperPlane, FaCog } from 'react-icons/fa';
 
-export const ChatWindow = ({
-                             showChatWindow,
-                             handleClickCloseChatWindow,
-                             handleToggleMute
-}) => {
+export const ChatWindow = () => {
   const input = useRef();
   const {
     chatMsgs,
@@ -127,60 +123,51 @@ export const ChatWindow = ({
   const recordingFunc = (recording) ? stopDictation : startDictation
   const recordingEl = (recording) ? <FaStop/> : <FaMicrophone/>
 
-  if(showChatWindow) {
-    return (
-      <>
-        <div id="speech-bubble" className="absolute top-0 left-0 right-0 bottom-0 z-10 flex justify-between p-2 ml-3 flex-col bg-white rounded-lg">
-          {loading && (
-            <div id="loading-parent" className="absolute inset-0 bg-white bg-opacity-50 flex items-center justify-center">
-              <FaCog className="animate-spin" style={{ fontSize: '24px' }} />
-            </div>
-          )}
-          <div className="flex flex-row items-start">
-            <div className="flex-grow md:text-xl overflow-y-auto max-h-56">{lastAvatarResponseText}</div>
-            <div className="flex-shrink-0">
-              <FaTimes onClick={handleClickCloseChatWindow} />
-            </div>
+  return (
+    <>
+      <div id="speech-bubble" className="flex justify-end p-2 ml-3 flex-col h-full">
+        {loading && (
+          <div id="loading-parent" className="absolute inset-0 bg-white bg-opacity-50 flex items-center justify-center">
+            <FaCog className="animate-spin" style={{ fontSize: '24px' }} />
           </div>
+        )}
+        <div className="md:text-xl overflow-y-auto max-h-56">{lastAvatarResponseText}</div>
 
-          <div className="flex flex-row items-end">
-            <input
-              disabled={loading || avatarResponse}
-              className="flex-grow w-full placeholder:text-gray-500 placeholder:italic italic focus:outline-none"
-              placeholder="Type a message..."
-              ref={input}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  sendMessage();
-                }
-              }}
-            />
+        <div className="flex flex-row items-end">
+          <input
+            disabled={loading || avatarResponse}
+            className="flex-grow w-full placeholder:text-gray-500 placeholder:italic italic focus:outline-none"
+            placeholder="Type a message..."
+            ref={input}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                sendMessage();
+              }
+            }}
+          />
 
-            <button
-              disabled={loading || avatarResponse}
-              onClick={recordingFunc}
-              className={`flex-shrink-0 text-pink-500 hidden md:block ${
-                loading || avatarResponse ? "cursor-not-allowed opacity-30" : ""
-              }`}
-            >
-              {recordingEl}
-            </button>
+          <button
+            disabled={loading || avatarResponse}
+            onClick={recordingFunc}
+            className={`flex-shrink-0 text-pink-500 hidden md:block ${
+              loading || avatarResponse ? "cursor-not-allowed opacity-30" : ""
+            }`}
+          >
+            {recordingEl}
+          </button>
 
-            <button
-              disabled={loading || avatarResponse}
-              onClick={sendMessage}
-              className={`flex-shrink-0 text-pink-500 ${
-                loading || avatarResponse ? "cursor-not-allowed opacity-30" : ""
-              }`}
-            >
-              <FaPaperPlane/>
-            </button>
-          </div>
+          <button
+            disabled={loading || avatarResponse}
+            onClick={sendMessage}
+            className={`flex-shrink-0 text-pink-500 ${
+              loading || avatarResponse ? "cursor-not-allowed opacity-30" : ""
+            }`}
+          >
+            <FaPaperPlane/>
+          </button>
         </div>
-      </>
-    );
-  } else {
-    return (<></>)
-  }
+      </div>
+    </>
+  );
 
 };

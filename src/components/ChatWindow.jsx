@@ -6,7 +6,6 @@ import {TextInput} from "./TextInput.jsx";
 import {AvatarResponse} from "./AvatarResponse.jsx";
 import {SpeechInput} from "./SpeechInput.jsx";
 
-let initialRequestSent = false
 export const ChatWindow = () => {
   const input = useRef();
   const {
@@ -15,7 +14,6 @@ export const ChatWindow = () => {
     loading,
     avatarResponse,
     setAvatarResponse,
-    lastAvatarResponseText,
     setLastAvatarResponseText,
     setAudio,
     onMessagePlayed,
@@ -26,14 +24,6 @@ export const ChatWindow = () => {
 
   const [inputMode, setInputMode] = useState('text')
 
-  // Send initial message to initiate the conversation
-  // useEffect(() => {
-  //   if(!initialRequestSent) {
-  //     initialRequestSent = true
-  //     sendMessage()
-  //   }
-  // }, [])
-
   const sendMessage = async () => {
     const text = input.current.value;
     if (!loading && !avatarResponse) {
@@ -42,8 +32,11 @@ export const ChatWindow = () => {
         role: "user",
         content: text || "Hello",
       }
-      const chat = [...chatMsgs, newMsg]
-      const body = JSON.stringify({ chat, mute })
+      const body = JSON.stringify({
+        query:  newMsg,
+        msgs:   chatMsgs,
+        mute,
+      })
       // console.log(body)
       const data = await fetch(`${backendUrl}/chat`, {
         method: "POST",
@@ -53,23 +46,38 @@ export const ChatWindow = () => {
         body: body,
       });
       const newAvatarResponse = await data.json()
+      console.log(newAvatarResponse)
       // Example: avatarResponse = {
-      //   text: "It appears that you have forgotten to add your API keys.",
-      //   audio: await audioFileToBase64("audios/api_0.wav"),
-      //   lipsync: await readJsonTranscript("audios/api_0.json"),
-      //   facialExpression: "angry",
-      //   animation: "Angry",
+      // {
+      //     "assistant_response": {
+      //         "role": "assistant",
+      //         "content": "{\"text\": \"Hello world!\", \"facialExpression\": \"smile\", \"animation\": \"Talking_0\"}"
+      //     },
+      //     "usage": {
+      //         "completion_tokens": 24,
+      //         "prompt_tokens": 241,
+      //         "total_tokens": 265
+      //     },
+      //     "lipsync": {
+      //         "mouthCues": [
+      //             {
+      //                 "start": 0,
+      //                 "end": 0.05,
+      //                 "target": "viseme_sil",
+      //                 "value": 1
+      //             },
+      //             ...
+      //         ]
+      //     },
+      //     "audio": "..."
       // }
 
       // Update state
       setLoading(false);
       setAvatarResponse(newAvatarResponse)// ephemeral
-      setLastAvatarResponseText(newAvatarResponse.text)// persists - so the text remains on the screen
-      const newAvatarChatMsgObj = {
-        role: "assistant",
-        content: newAvatarResponse.text,
-      }
-      setChatMsgs([...chat, newAvatarChatMsgObj])
+      console.log(`content:${newAvatarResponse.assistant_response.content}`)
+      setLastAvatarResponseText(newAvatarResponse.assistant_response.content)// persists - so the text remains on the screen
+      setChatMsgs([...chatMsgs, newAvatarResponse.assistant_response])
       input.current.value = "";
 
       if(!mute) {
@@ -90,11 +98,11 @@ export const ChatWindow = () => {
     }
   };
 
-  useEffect(() => {
-    if(avatarResponse && avatarResponse.text) {
-      setLastAvatarResponseText(avatarResponse.text)
-    }
-  }, [avatarResponse]);
+  // useEffect(() => {
+  //   if(avatarResponse && avatarResponse.assistant_response.content) {
+  //     setLastAvatarResponseText(avatarResponse.text)
+  //   }
+  // }, [avatarResponse]);
 
   return (
     <>

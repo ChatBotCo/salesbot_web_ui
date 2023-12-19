@@ -116,13 +116,12 @@ export function Avatar(props) {
   const [lipsync, setLipsync] = useState();
 
   useEffect(() => {
-    avatarResponse && console.log(avatarResponse);
     if (!avatarResponse) {
       setAnimation("Idle");
       return;
     }
     // setAnimation(avatarResponse.animation);
-    setFacialExpression(avatarResponse.facialExpression);
+    setFacialExpression(avatarResponse.assistant_response.facialExpression);
     setLipsync(avatarResponse.lipsync);
   }, [avatarResponse]);
 

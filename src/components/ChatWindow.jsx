@@ -6,7 +6,7 @@ import {TextInput} from "./TextInput.jsx";
 import {AvatarResponse} from "./AvatarResponse.jsx";
 import {SpeechInput} from "./SpeechInput.jsx";
 
-export const ChatWindow = () => {
+export const ChatWindow = ({selectedAvatarId}) => {
   const input = useRef();
   const {
     chatMsgs,
@@ -98,12 +98,6 @@ export const ChatWindow = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if(avatarResponse && avatarResponse.assistant_response.content) {
-  //     setLastAvatarResponseText(avatarResponse.text)
-  //   }
-  // }, [avatarResponse]);
-
   return (
     <>
       <div className="flex-grow flex justify-evenly flex-col h-full">
@@ -112,7 +106,7 @@ export const ChatWindow = () => {
             <FaCog className="animate-spin" style={{ fontSize: '24px' }} />
           </div>
         )}
-        <AvatarResponse extraClassNames={'hidden md:flex'} orientation='horizontal' />
+        <AvatarResponse extraClassNames={'hidden md:flex'} orientation='horizontal' selectedAvatarId={selectedAvatarId} />
 
         {
           inputMode==='text' ?

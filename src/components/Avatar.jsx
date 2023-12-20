@@ -105,13 +105,12 @@ const corresponding = {
 
 let setupMode = false;
 
-export function Avatar(props) {
-  const { nodes, materials, scene } = useGLTF(
-    // "/models/64f1a714fe61576b46f27ca2.glb"
-    "/models/keli.glb"
-  );
-
+export function Avatar({selectedAvatarId}) {
   const { avatarResponse, audio } = useChat();
+
+  const { nodes, materials, scene } = useGLTF(
+    `/models/${selectedAvatarId || 'keli'}.glb`
+  );
 
   const [lipsync, setLipsync] = useState();
 
@@ -236,7 +235,7 @@ export function Avatar(props) {
   }, []);
 
   return (
-    <group {...props} dispose={null} ref={group}>
+    <group dispose={null} ref={group}>
       <primitive object={nodes.Hips} />
       <skinnedMesh
         name="Wolf3D_Body"
@@ -305,5 +304,5 @@ export function Avatar(props) {
 }
 
 // useGLTF.preload("/models/64f1a714fe61576b46f27ca2.glb");
-useGLTF.preload("/models/keli.glb");
+// useGLTF.preload("/models/keli.glb");
 useGLTF.preload("/models/animations.glb");

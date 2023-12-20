@@ -61,11 +61,11 @@ function App() {
                   camera={{ position: [0, 0, 1], fov: 30 }}
                   onClick={()=>console.log('clicked the avatar')}
                 >
-                  <Experience />
+                  <Experience selectedAvatarId={selectedAvatarId} />
                 </Canvas>
               </div>
               <div className="w-full h-1/3 md:w-1/2 md:h-full">
-                <ChatWindow />
+                <ChatWindow selectedAvatarId={selectedAvatarId} />
               </div>
             </div>
           ) :

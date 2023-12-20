@@ -1,14 +1,15 @@
 import {useChat} from "../hooks/useChat.jsx";
 import {MuteBtn} from "./MuteBtn.jsx";
 
-let initialized = false
 export const AvatarResponse = ({extraClassNames='', orientation, selectedAvatarId}) => {
   const {
     lastAvatarResponseText,
     setLastAvatarResponseText,
   } = useChat();
 
+  console.log(`AvatarResponse selectedAvatarId:${selectedAvatarId}`)
   const nameCapitalized = selectedAvatarId ? (selectedAvatarId.charAt(0).toUpperCase() + selectedAvatarId.slice(1)) : ''
+  console.log(`AvatarResponse nameCapitalized:${nameCapitalized}`)
 
   if(orientation==='horizontal') {
     // horizontal - DESKTOP
@@ -19,7 +20,7 @@ export const AvatarResponse = ({extraClassNames='', orientation, selectedAvatarI
             <img src='/chat_triangle_horizontal.png' className="opacity-80 mb-10" style={{width:'30px'}}/>
           </div>
           <div className="flex-grow flex flex-col justify-start items-start text-xl overflow-y-auto bg-white rounded-2xl bg-opacity-80 p-3 m-3 ml-0">
-            <div className="flex-grow">{lastAvatarResponseText || `Hello, I'm ${nameCapitalized}!  It's nice to meet you!`}</div>
+            <div className="flex-grow">{lastAvatarResponseText || `Hello!  It's nice to meet you!`}</div>
             <MuteBtn />
           </div>
         </div>
@@ -31,7 +32,7 @@ export const AvatarResponse = ({extraClassNames='', orientation, selectedAvatarI
       <>
         <div className={`flex-grow flex flex-col justify-start ${extraClassNames}`}>
           <div className="flex-grow flex flex-col justify-start items-start overflow-y-auto bg-white rounded-2xl bg-opacity-80 p-1 m-1 mb-0">
-            <div className="flex-grow">{lastAvatarResponseText || `Hello, I'm ${nameCapitalized}!  It's nice to meet you!`}</div>
+            <div className="flex-grow">{lastAvatarResponseText || `Hello!  It's nice to meet you!`}</div>
             <MuteBtn />
           </div>
           <div className="flex-shrink-0 w-full flex flex-row justify-end">

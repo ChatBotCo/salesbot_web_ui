@@ -7,7 +7,7 @@ export const AvatarPickerForm = ({onSelectedAvatar}) => {
   const [selectedAvatar, setSelectedAvatar] = useState()
 
   const avatarIds = [
-    'keli', 'allen', 'david', 'janice', 'raymond', 'robyn', 'tonya', 'tina'
+    'keli', 'janice', 'robyn', 'tonya', 'tina'
   ]
 
   return (

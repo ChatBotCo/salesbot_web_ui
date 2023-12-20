@@ -9,7 +9,7 @@ export const AvatarPickerItem = ({avatarId, onClick, selected}) => {
       onClick={()=>onClick(avatarId)}
     >
       <img
-        className={`max-w-[40vw] md:max-w-[25vw] rounded-2xl m-1 pointer-events-none ${selected ? 'border-8 border-yellow-300 shadow-lg shadow-yellow-600' : 'border-4 border-blue-400'}`}
+        className={`max-w-[40vw] md:max-w-[15vw] rounded-2xl m-1 pointer-events-none ${selected ? 'border-8 border-yellow-300 shadow-lg shadow-yellow-600' : 'border-4 border-blue-400'}`}
         src={`img/${avatarId}.png`}
         alt={avatarId}
       />

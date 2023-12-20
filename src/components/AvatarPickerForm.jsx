@@ -10,14 +10,21 @@ export const AvatarPickerForm = () => {
   ]
 
   return (
-    <div className="flex flex-row flex-wrap overflow-y-scroll justify-center items-start">
-      {avatarIds.map(avatarId =>
-        <AvatarPickerItem
-          avatarId={avatarId}
-          onClick={avatarId=>setSelectedAvatar(avatarId)}
-          selected={selectedAvatar===avatarId}
-        />
-      )}
+    <div className="h-screen overflow-y-scroll flex flex-col justify-start items-center">
+      <div className="text-blue-800 font-extrabold text-2xl border-yellow-300 border-2 bg-amber-100 rounded-xl p-2 m-1">Pick your new friend</div>
+      <button
+        className={`md:fixed top-1 right-1 text-amber-100 font-extrabold text-2xl border-yellow-300 border-2 bg-blue-500 rounded-xl p-2 m-1 ${selectedAvatar ? 'block' : 'hidden'}`}
+      >Done ->
+      </button>
+      <div className="flex flex-row flex-wrap justify-center items-start">
+        {avatarIds.map(avatarId =>
+          <AvatarPickerItem
+            avatarId={avatarId}
+            onClick={avatarId=>setSelectedAvatar(avatarId)}
+            selected={selectedAvatar===avatarId}
+          />
+        )}
+      </div>
     </div>
   );
 

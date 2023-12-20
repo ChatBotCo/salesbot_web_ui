@@ -1,5 +1,6 @@
 import {useState} from "react";
 import {AvatarPickerItem} from "./AvatarPickerItem.jsx";
+import {FaArrowRight} from "react-icons/fa";
 
 export const AvatarPickerForm = ({onSelectedAvatar}) => {
 
@@ -15,7 +16,8 @@ export const AvatarPickerForm = ({onSelectedAvatar}) => {
       <button
         className={`md:fixed top-1 right-1 text-amber-100 font-extrabold text-2xl border-yellow-300 border-2 bg-blue-500 rounded-xl p-2 m-1 ${selectedAvatar ? 'block' : 'hidden'}`}
         onClick={()=>onSelectedAvatar(selectedAvatar)}
-      >Done ->
+      >
+        <div className="flex flex-row items-center">Done <FaArrowRight/></div>
       </button>
       <div className="flex flex-row flex-wrap justify-center items-start">
         {avatarIds.map(avatarId =>

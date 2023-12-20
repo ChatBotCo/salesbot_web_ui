@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {AvatarPickerItem} from "./AvatarPickerItem.jsx";
 
-export const AvatarPickerForm = () => {
+export const AvatarPickerForm = ({onSelectedAvatar}) => {
 
   const [selectedAvatar, setSelectedAvatar] = useState()
 
@@ -14,6 +14,7 @@ export const AvatarPickerForm = () => {
       <div className="text-blue-800 font-extrabold text-2xl border-yellow-300 border-2 bg-amber-100 rounded-xl p-2 m-1">Pick your new friend</div>
       <button
         className={`md:fixed top-1 right-1 text-amber-100 font-extrabold text-2xl border-yellow-300 border-2 bg-blue-500 rounded-xl p-2 m-1 ${selectedAvatar ? 'block' : 'hidden'}`}
+        onClick={()=>onSelectedAvatar(selectedAvatar)}
       >Done ->
       </button>
       <div className="flex flex-row flex-wrap justify-center items-start">
@@ -22,6 +23,7 @@ export const AvatarPickerForm = () => {
             avatarId={avatarId}
             onClick={avatarId=>setSelectedAvatar(avatarId)}
             selected={selectedAvatar===avatarId}
+            key={avatarId}
           />
         )}
       </div>

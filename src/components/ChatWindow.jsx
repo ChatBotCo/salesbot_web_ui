@@ -9,8 +9,6 @@ import {SpeechInput} from "./SpeechInput.jsx";
 export const ChatWindow = ({selectedAvatarId}) => {
   const input = useRef();
   const {
-    chatMsgs,
-    setChatMsgs,
     loading,
     avatarResponse,
     setAvatarResponse,
@@ -20,6 +18,7 @@ export const ChatWindow = ({selectedAvatarId}) => {
     setLoading,
     backendUrl,
     mute,
+    conversationId,
   } = useChat();
 
   const [inputMode, setInputMode] = useState('text')
@@ -28,18 +27,14 @@ export const ChatWindow = ({selectedAvatarId}) => {
     const text = input.current.value;
     if (!loading && !avatarResponse) {
       setLoading(true);
-      const newMsg = {
-        role: "user",
-        content: text || "Hello",
-      }
       const body = JSON.stringify({
-        query:  newMsg,
-        msgs:   chatMsgs,
+        conversation_id: conversationId,
+        user_msg:  text || "Hello",
         mute,
       })
       // console.log(body)
       const data = await fetch(`${backendUrl}/chat`, {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -77,7 +72,6 @@ export const ChatWindow = ({selectedAvatarId}) => {
       setAvatarResponse(newAvatarResponse)// ephemeral
       console.log(`content:${newAvatarResponse.assistant_response.content}`)
       setLastAvatarResponseText(newAvatarResponse.assistant_response.content)// persists - so the text remains on the screen
-      setChatMsgs([...chatMsgs, newAvatarResponse.assistant_response])
       input.current.value = "";
 
       if(!mute) {

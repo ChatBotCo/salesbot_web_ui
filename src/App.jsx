@@ -7,18 +7,18 @@ import {AvatarPickerForm} from "./components/AvatarPickerForm.jsx";
 import {useEffect, useState} from "react";
 import {FaCog} from "react-icons/fa";
 import {ConfigMenu} from "./components/ConfigMenu.jsx";
+import {useChat} from "./hooks/useChat.jsx";
 
 let initialized = false
 function App() {
-  const [conversationId, setConversationId] = useState()
   const [selectedAvatarId, setSelectedAvatarId] = useState()
   const [showConfigMenu, setShowConfigMenu] = useState(false)
 
-  function generateUUID() {
-    return ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(/[018]/g, c =>
-      (c ^ (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))).toString(16)
-    );
-  }
+  const {
+    backendUrl,
+    conversationId,
+    setConversationId,
+  } = useChat();
 
   useEffect(() => {
     if(!initialized) {
@@ -27,12 +27,23 @@ function App() {
         let _conversationId = localStorage.getItem('conversationId')
         if (_conversationId) {
           console.log(`Found _conversationId:${_conversationId}`)
+          setConversationId(_conversationId)
+          localStorage.setItem('conversationId', _conversationId)
         } else {
-          _conversationId = generateUUID()
-          console.log(`Creating a new _conversationId:${_conversationId}`)
+          // _conversationId = generateUUID()
+          // console.log(`Creating a new _conversationId:${_conversationId}`)
+          fetch(`${backendUrl}/chat`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }).then(r1 => r1.json())
+            .then(r2 => {
+              _conversationId = r2.id
+              setConversationId(_conversationId)
+              localStorage.setItem('conversationId', _conversationId)
+            })
         }
-        setConversationId(_conversationId)
-        localStorage.setItem('conversationId', _conversationId)
       }
       if(!selectedAvatarId) {
         setSelectedAvatarId(localStorage.getItem('selectedAvatarId'))
@@ -52,7 +63,9 @@ function App() {
   const onCreateNewAvatar = () => {
     if(window.confirm("Are you sure you want to create a new avatar?  This entire conversation will be permanently lost!")) {
       setShowConfigMenu(false)
+      localStorage.removeItem('conversationId')
       localStorage.removeItem('selectedAvatarId')
+      setConversationId(null)
       setSelectedAvatarId(null)
     }
   }

@@ -4,12 +4,11 @@ import {MuteBtn} from "./MuteBtn.jsx";
 export const AvatarResponse = ({extraClassNames='', orientation, selectedAvatarId}) => {
   const {
     lastAvatarResponseText,
-    setLastAvatarResponseText,
   } = useChat();
 
-  console.log(`AvatarResponse selectedAvatarId:${selectedAvatarId}`)
+  // console.log(`AvatarResponse selectedAvatarId:${selectedAvatarId}`)
   const nameCapitalized = selectedAvatarId ? (selectedAvatarId.charAt(0).toUpperCase() + selectedAvatarId.slice(1)) : ''
-  console.log(`AvatarResponse nameCapitalized:${nameCapitalized}`)
+  // console.log(`AvatarResponse nameCapitalized:${nameCapitalized}`)
 
   if(orientation==='horizontal') {
     // horizontal - DESKTOP

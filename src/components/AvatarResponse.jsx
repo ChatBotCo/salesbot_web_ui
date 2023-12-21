@@ -1,14 +1,10 @@
 import {useChat} from "../hooks/useChat.jsx";
 import {MuteBtn} from "./MuteBtn.jsx";
 
-export const AvatarResponse = ({extraClassNames='', orientation, selectedAvatarId}) => {
+export const AvatarResponse = ({extraClassNames='', orientation}) => {
   const {
     lastAvatarResponseText,
   } = useChat();
-
-  // console.log(`AvatarResponse selectedAvatarId:${selectedAvatarId}`)
-  const nameCapitalized = selectedAvatarId ? (selectedAvatarId.charAt(0).toUpperCase() + selectedAvatarId.slice(1)) : ''
-  // console.log(`AvatarResponse nameCapitalized:${nameCapitalized}`)
 
   if(orientation==='horizontal') {
     // horizontal - DESKTOP

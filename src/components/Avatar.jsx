@@ -105,11 +105,11 @@ const corresponding = {
 
 let setupMode = false;
 
-export function Avatar({selectedAvatarId}) {
+export function Avatar() {
   const { avatarResponse, audio } = useChat();
 
   const { nodes, materials, scene } = useGLTF(
-    `/models/${selectedAvatarId || 'keli'}.glb`
+    '/models/keli.glb'
   );
 
   const [lipsync, setLipsync] = useState();
@@ -203,9 +203,7 @@ export function Avatar({selectedAvatarId}) {
           currentAudioTime <= mouthCue.end
         ) {
           appliedMorphTargets.push(mouthCue.target);
-          // lerpMorphTarget(mouthCue.target, mouthCue.value, (mouthCue.end - mouthCue.start));
           lerpMorphTarget(mouthCue.target, 1, 0.1);
-
           break;
         }
       }
@@ -303,6 +301,5 @@ export function Avatar({selectedAvatarId}) {
   );
 }
 
-// useGLTF.preload("/models/64f1a714fe61576b46f27ca2.glb");
-// useGLTF.preload("/models/keli.glb");
+useGLTF.preload("/models/keli.glb");
 useGLTF.preload("/models/animations.glb");

@@ -39,7 +39,7 @@ const Dots = (props) => {
   );
 };
 
-export const Experience = ({selectedAvatarId}) => {
+export const Experience = () => {
   // const cameraControls = useRef();
   // useEffect(() => {
   //   console.log(cameraControls.current.setLookAt)
@@ -57,7 +57,7 @@ export const Experience = ({selectedAvatarId}) => {
       <Suspense>
         <Dots position-y={1.75} position-x={-0.02} />
       </Suspense>
-      <Avatar selectedAvatarId={selectedAvatarId} />
+      <Avatar />
       <ContactShadows opacity={0.7} />
     </>
   );

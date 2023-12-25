@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 
-// const backendUrl = "https://us-west2-cook-250617.cloudfunctions.net/keli-chatbot-001/api/v1";
-const backendUrl = "http://localhost:7071";
+const backendUrl = "https://keli-chatbot-003.azurewebsites.net";
+// const backendUrl = "http://localhost:7071";
 
 const ChatContext = createContext();
 

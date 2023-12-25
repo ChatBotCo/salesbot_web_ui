@@ -28,12 +28,11 @@ export const ChatWindow = () => {
     if (!loading && !avatarResponse) {
       setLoading(true);
       const body = JSON.stringify({
-        conversation_id: conversationId,
         user_msg:  text || "Hello",
         mute,
       })
       // console.log(body)
-      const data = await fetch(`${backendUrl}/chat`, {
+      const data = await fetch(`${backendUrl}/api/submit_user_message?convoid=${conversationId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

@@ -30,7 +30,7 @@ function App() {
         } else {
           // _conversationId = generateUUID()
           // console.log(`Creating a new _conversationId:${_conversationId}`)
-          fetch(`${backendUrl}/chat`, {
+          fetch(`${backendUrl}/api/create_conversation`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",

@@ -1,4 +1,15 @@
-export const ConfigMenu = ({showMenu, onCreateNewAvatar, onDismiss}) => {
+import {useAvatar} from "../hooks/useAvatar.jsx";
+
+export const ConfigMenu = ({showMenu, onDismiss}) => {
+
+  const {
+    resetConversation,
+  } = useAvatar();
+
+  const closeAndResetConvo = ()=> {
+    onDismiss()
+    resetConversation()
+  }
 
   if(showMenu) {
     return (
@@ -9,7 +20,7 @@ export const ConfigMenu = ({showMenu, onCreateNewAvatar, onDismiss}) => {
         <div className='bg-amber-100 border-2 border-blue-500 rounded-2xl p-4'>
           <button
             className='text-blue-200 font-extrabold text-2xl border-yellow-300 border-2 bg-red-500 rounded-xl p-2 m-1'
-            onClick={onCreateNewAvatar}
+            onClick={closeAndResetConvo}
           >
             Create a new avatar
           </button>

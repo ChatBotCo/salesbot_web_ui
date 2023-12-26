@@ -8,7 +8,7 @@ export const TextInput = ({sendMessage, inputActive, inputRef}) => {
         <textarea
           disabled={!inputActive}
           className="w-full h-full placeholder:text-gray-500 placeholder:italic italic focus:outline-none rounded resize-none p-1"
-          placeholder="Type something to Keli here!"
+          placeholder="Type something here!"
           ref={inputRef}
           onKeyDown={(e) => {
             if (e.key === "Enter") {

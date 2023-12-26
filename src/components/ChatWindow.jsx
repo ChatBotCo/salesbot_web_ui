@@ -6,7 +6,7 @@ import {TextInput} from "./TextInput.jsx";
 import {AvatarResponse} from "./AvatarResponse.jsx";
 import {SpeechInput} from "./SpeechInput.jsx";
 
-export const ChatWindow = () => {
+export const ChatWindow = ({selectedAvatarId}) => {
   const input = useRef();
   const {
     loading,
@@ -99,7 +99,7 @@ export const ChatWindow = () => {
             <FaCog className="animate-spin" style={{ fontSize: '24px' }} />
           </div>
         )}
-        <AvatarResponse extraClassNames={'hidden md:flex'} orientation='horizontal' />
+        <AvatarResponse extraClassNames={'hidden md:flex'} orientation='horizontal' selectedAvatarId={selectedAvatarId} />
 
         {
           inputMode==='text' ?

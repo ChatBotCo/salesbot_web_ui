@@ -9,6 +9,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import * as THREE from "three";
 import { useChat } from "../hooks/useChat";
+import {useAvatar} from "../hooks/useAvatar.jsx";
 
 const facialExpressions = {
   default: {},
@@ -105,11 +106,15 @@ const corresponding = {
 
 let setupMode = false;
 
-export function Avatar({selectedAvatarId}) {
+export function Avatar() {
+  const {
+    selectedAvatar,
+  } = useAvatar()
+
   const { avatarResponse, audio } = useChat();
 
   const { nodes, materials, scene } = useGLTF(
-    `/models/${selectedAvatarId || 'keli'}.glb`
+    `/models/${selectedAvatar.id || 'keli'}.glb`
   );
 
   const [lipsync, setLipsync] = useState();

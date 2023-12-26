@@ -8,29 +8,41 @@ export const AvatarProvider = ({ children }) => {
     setConversationId,
   } = useChat();
 
-  const [selectedAvatarId, _setSelectedAvatarId] = useState(
-    localStorage.getItem('selectedAvatarId')
+  const [selectedAvatar, _setSelectedAvatar] = useState(
+    localStorage.getItem('selectedAvatar')
   );
 
-  const setSelectedAvatarId = avatarId => {
-    localStorage.setItem('selectedAvatarId', avatarId)
-    _setSelectedAvatarId(avatarId);
+  const setSelectedAvatar = avatarId => {
+    localStorage.setItem('selectedAvatar', avatarId)
+    _setSelectedAvatar(avatarId);
   };
 
   const resetConversation = () => {
     if(window.confirm("Are you sure you want to create a new avatar?  This entire conversation will be permanently lost!")) {
       localStorage.removeItem('conversationId')
-      localStorage.removeItem('selectedAvatarId')
+      localStorage.removeItem('selectedAvatar')
       setConversationId(null)
-      setSelectedAvatarId(null)
+      setSelectedAvatar(null)
     }
   }
+
+  const avatars = [
+    {   id: 'keli',     name: 'Keli',     gender: 'female',   voice: 'en-US-JennyNeural',   },
+    {   id: 'janice',   name: 'Janice',   gender: 'female',   voice: 'en-US-EmmaNeural',    },
+    {   id: 'robyn',    name: 'Robyn',    gender: 'female',   voice: 'en-US-AriaNeural',    },
+    {   id: 'raymond',  name: 'Raymond',  gender: 'male',     voice: 'en-US-DavisNeural',   },
+    {   id: 'allen',    name: 'Allen',    gender: 'male',     voice: 'en-US-JasonNeural',   },
+    {   id: 'tonya',    name: 'Tonya',    gender: 'female',   voice: 'en-US-JaneNeural',    },
+    {   id: 'david',    name: 'David',    gender: 'male',     voice: 'en-US-GuyNeural',     },
+    {   id: 'tina',     name: 'Tina',     gender: 'female',   voice: 'en-US-SaraNeural',    },
+  ]
 
   return (
     <AvatarContext.Provider
       value={{
-        selectedAvatarId,
-        setSelectedAvatarId,
+        avatars,
+        selectedAvatar,
+        setSelectedAvatar,
         resetConversation,
       }}
     >

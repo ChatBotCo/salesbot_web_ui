@@ -9,12 +9,12 @@ import {ChatWindow} from "./ChatWindow.jsx";
 
 export const AvatarChatPage = () => {
   const {
-    selectedAvatarId,
+    selectedAvatar,
   } = useAvatar()
 
   const [showConfigMenu, setShowConfigMenu] = useState(false)
 
-  if(!selectedAvatarId)
+  if(!selectedAvatar)
     return <></>
 
   return (
@@ -33,11 +33,11 @@ export const AvatarChatPage = () => {
           camera={{ position: [0, 0, 1], fov: 30 }}
           onClick={()=>console.log('clicked the avatar')}
         >
-          <Experience selectedAvatarId={selectedAvatarId} />
+          <Experience />
         </Canvas>
       </div>
       <div className="w-full h-1/3 md:w-1/2 md:h-full">
-        <ChatWindow selectedAvatarId={selectedAvatarId} />
+        <ChatWindow selectedAvatar={selectedAvatar} />
       </div>
     </div>
   );

@@ -5,24 +5,14 @@ import {useAvatar} from "../hooks/useAvatar.jsx";
 
 export const AvatarPickerPage = () => {
   const {
-    selectedAvatarId,
-    setSelectedAvatarId,
+    avatars,
+    selectedAvatar,
+    setSelectedAvatar,
   } = useAvatar()
 
   const [tempSelectedAvatar, setTempSelectedAvatar] = useState()
 
-  const avatarIds = [
-    'keli',
-    'janice',
-    'robyn',
-    'raymond',
-    'allen',
-    'tonya',
-    'david',
-    'tina',
-  ]
-
-  if(selectedAvatarId)
+  if(selectedAvatar)
     return <></>
 
   return (
@@ -30,17 +20,17 @@ export const AvatarPickerPage = () => {
       <div className="text-blue-800 font-extrabold text-2xl border-yellow-300 border-2 bg-amber-100 rounded-xl p-2 m-1">Pick your new friend</div>
       <button
         className={`md:fixed top-1 right-1 text-amber-100 font-extrabold text-2xl border-yellow-300 border-2 bg-blue-500 rounded-xl p-2 m-1 ${tempSelectedAvatar ? 'block' : 'hidden'}`}
-        onClick={()=>setSelectedAvatarId(tempSelectedAvatar)}
+        onClick={()=>setSelectedAvatar(tempSelectedAvatar)}
       >
         <div className="flex flex-row items-center">Done <FaArrowRight/></div>
       </button>
       <div className="flex flex-row flex-wrap justify-center items-start">
-        {avatarIds.map(avatarId =>
+        {avatars.map(avatar =>
           <AvatarPickerItem
-            avatarId={avatarId}
-            onClick={avatarId=>setTempSelectedAvatar(avatarId)}
-            selected={tempSelectedAvatar===avatarId}
-            key={avatarId}
+            avatar={avatar}
+            onClick={()=>setTempSelectedAvatar(avatar)}
+            selected={tempSelectedAvatar && tempSelectedAvatar.id===avatar.id}
+            key={avatar.id}
           />
         )}
       </div>

@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import {useRef, useState} from "react";
 import { useChat } from "../hooks/useChat";
 import {  FaCog } from 'react-icons/fa';
 import {SpeechTypeToggle} from "./SpeechTypeToggle.jsx";
@@ -6,7 +6,7 @@ import {TextInput} from "./TextInput.jsx";
 import {AvatarResponse} from "./AvatarResponse.jsx";
 import {SpeechInput} from "./SpeechInput.jsx";
 
-export const ChatWindow = ({selectedAvatarId}) => {
+export const ChatWindow = () => {
   const input = useRef();
   const {
     loading,
@@ -100,7 +100,7 @@ export const ChatWindow = ({selectedAvatarId}) => {
             <FaCog className="animate-spin" style={{ fontSize: '24px' }} />
           </div>
         )}
-        <AvatarResponse extraClassNames={'hidden md:flex'} orientation='horizontal' selectedAvatarId={selectedAvatarId} />
+        <AvatarResponse extraClassNames={'hidden md:flex'} orientation='horizontal' />
 
         {
           inputMode==='text' ?

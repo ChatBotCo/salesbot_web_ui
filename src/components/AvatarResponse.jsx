@@ -1,14 +1,15 @@
 import {useChat} from "../hooks/useChat.jsx";
 import {MuteBtn} from "./MuteBtn.jsx";
+import {useAvatar} from "../hooks/useAvatar.jsx";
 
-export const AvatarResponse = ({extraClassNames='', orientation, selectedAvatarId}) => {
+export const AvatarResponse = ({extraClassNames='', orientation}) => {
+  const {
+    selectedAvatar,
+  } = useAvatar()
+
   const {
     lastAvatarResponseText,
   } = useChat();
-
-  // console.log(`AvatarResponse selectedAvatarId:${selectedAvatarId}`)
-  const nameCapitalized = selectedAvatarId ? (selectedAvatarId.charAt(0).toUpperCase() + selectedAvatarId.slice(1)) : ''
-  // console.log(`AvatarResponse nameCapitalized:${nameCapitalized}`)
 
   if(orientation==='horizontal') {
     // horizontal - DESKTOP
@@ -19,7 +20,7 @@ export const AvatarResponse = ({extraClassNames='', orientation, selectedAvatarI
             <img src='/chat_triangle_horizontal.png' className="opacity-80 mb-10" style={{width:'30px'}}/>
           </div>
           <div className="flex-grow flex flex-col justify-start items-start text-xl overflow-y-auto bg-white rounded-2xl bg-opacity-80 p-3 m-3 ml-0">
-            <div className="flex-grow">{lastAvatarResponseText || `Hello!  It's nice to meet you!`}</div>
+            <div className="flex-grow">{lastAvatarResponseText || `Hello!  My name is ${selectedAvatar.name}.  It's nice to meet you!`}</div>
             <MuteBtn />
           </div>
         </div>

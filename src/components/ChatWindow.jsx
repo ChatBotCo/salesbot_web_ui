@@ -39,6 +39,7 @@ export const ChatWindow = ({selectedAvatarId}) => {
         },
         body: body,
       });
+      console.log(data)
       const newAvatarResponse = await data.json()
       console.log(newAvatarResponse)
       // Example: avatarResponse = {

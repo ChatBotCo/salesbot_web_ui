@@ -30,10 +30,10 @@ export const AvatarProvider = ({ children }) => {
     {   id: 'keli',     name: 'Keli',     gender: 'female',   voice: 'en-US-JennyNeural',   },
     {   id: 'janice',   name: 'Janice',   gender: 'female',   voice: 'en-US-EmmaNeural',    },
     {   id: 'robyn',    name: 'Robyn',    gender: 'female',   voice: 'en-US-AriaNeural',    },
-    {   id: 'raymond',  name: 'Raymond',  gender: 'male',     voice: 'en-US-DavisNeural',   },
-    {   id: 'allen',    name: 'Allen',    gender: 'male',     voice: 'en-US-JasonNeural',   },
+    {   id: 'raymond',  name: 'Raymond',  gender: 'male',     voice: 'en-US-BrandonNeural',   },
+    {   id: 'allen',    name: 'Allen',    gender: 'male',     voice: 'en-US-SteffanNeural',   },
     {   id: 'tonya',    name: 'Tonya',    gender: 'female',   voice: 'en-US-JaneNeural',    },
-    {   id: 'david',    name: 'David',    gender: 'male',     voice: 'en-US-GuyNeural',     },
+    {   id: 'david',    name: 'David',    gender: 'male',     voice: 'en-US-JacobNeural',     },
     {   id: 'tina',     name: 'Tina',     gender: 'female',   voice: 'en-US-SaraNeural',    },
   ]
 

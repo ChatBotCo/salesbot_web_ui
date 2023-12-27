@@ -28,13 +28,14 @@ export const AvatarChatPage = () => {
         <AvatarResponse orientation='vertical' />
       </div>
       <div className="w-full h-1/3 md:w-1/2 md:h-full border-b-2 border-blue-700 md:border-0 relative">
-        <div className='absolute bottom-1 md:top-1 md:bottom-auto left-1/2
-        transform -translate-x-4
+        <div className={`absolute bottom-1 left-1/2
+        ${selectedAvatar.gender==='male' && 'transform -translate-x-10 md:-translate-x-14'}
+        ${selectedAvatar.gender==='female' && 'transform -translate-x-4'}
         z-10
         bg-blue-500 text-white border-yellow-300 border-double border-4
         p-1 md:p-3
         md:text-2xl
-        rounded'>
+        rounded`}>
           {selectedAvatar.name}
         </div>
         <Canvas

@@ -114,7 +114,7 @@ export function Avatar() {
   const { avatarResponse, audio } = useChat();
 
   const { nodes, materials, scene } = useGLTF(
-    `/models/${selectedAvatar.id || 'keli'}.glb`
+    `/models/${selectedAvatar.id}.glb`
   );
 
   const [lipsync, setLipsync] = useState();

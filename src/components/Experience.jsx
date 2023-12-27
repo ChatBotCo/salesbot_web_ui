@@ -47,7 +47,7 @@ export const Experience = () => {
   // }, []);
   const { camera } = useThree();
   useEffect(() => {
-    camera.position.set(0, 1.5, 1.5);
+    camera.position.set(-0.1, 1.7, 1.5);
     camera.lookAt(new THREE.Vector3(0, 1.5, 0));
   }, [camera]);
   return (

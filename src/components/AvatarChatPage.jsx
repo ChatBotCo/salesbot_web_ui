@@ -27,7 +27,16 @@ export const AvatarChatPage = () => {
       <div className="flex w-full h-1/3 md:w-1/2 md:h-full border-blue-300 md:border-0 md:hidden">
         <AvatarResponse orientation='vertical' />
       </div>
-      <div className="w-full h-1/3 md:w-1/2 md:h-full border-b-2 border-blue-700 md:border-0">
+      <div className="w-full h-1/3 md:w-1/2 md:h-full border-b-2 border-blue-700 md:border-0 relative">
+        <div className='absolute bottom-1 md:top-1 md:bottom-auto left-1/2
+        transform -translate-x-4
+        z-10
+        bg-blue-500 text-white border-yellow-300 border-double border-4
+        p-1 md:p-3
+        md:text-2xl
+        rounded'>
+          {selectedAvatar.name}
+        </div>
         <Canvas
           shadows
           camera={{ position: [0, 0, 1], fov: 30 }}
@@ -40,6 +49,7 @@ export const AvatarChatPage = () => {
         <ChatWindow selectedAvatar={selectedAvatar} />
       </div>
     </div>
+
   );
 
 };

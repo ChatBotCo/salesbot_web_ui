@@ -5,9 +5,14 @@ import {SpeechTypeToggle} from "./SpeechTypeToggle.jsx";
 import {TextInput} from "./TextInput.jsx";
 import {AvatarResponse} from "./AvatarResponse.jsx";
 import {SpeechInput} from "./SpeechInput.jsx";
+import {useAvatar} from "../hooks/useAvatar.jsx";
 
 export const ChatWindow = () => {
   const input = useRef();
+  const {
+    selectedAvatar,
+  } = useAvatar()
+
   const {
     loading,
     avatarResponse,
@@ -30,6 +35,7 @@ export const ChatWindow = () => {
       const body = JSON.stringify({
         user_msg:  text || "Hello",
         mute,
+        voice: selectedAvatar.voice,
       })
       // console.log(body)
       const data = await fetch(`${backendUrl}/api/submit_user_message?convoid=${conversationId}`, {

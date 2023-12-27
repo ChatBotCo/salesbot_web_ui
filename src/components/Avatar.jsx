@@ -111,8 +111,6 @@ export function Avatar() {
     selectedAvatar,
   } = useAvatar()
 
-  console.log(selectedAvatar)
-
   const { avatarResponse, audio } = useChat();
 
   const { nodes, materials, scene } = useGLTF(

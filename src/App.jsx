@@ -20,7 +20,7 @@ function App() {
       <AvatarPickerPage/>
       <AvatarChatPage />
       {
-        debugging && <div className='fixed bottom-1 left-1 z-10 text-red-100 bg-red-700'>
+        debugging && <div className='fixed bottom-1 left-1 z-10 text-gray-500 bg-opacity-80 bg-white p-1 rounded'>
           convo: {conversationId || '[not set]'}
         </div>
       }

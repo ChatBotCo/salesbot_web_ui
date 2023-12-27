@@ -2,8 +2,14 @@ import {useState} from "react";
 import {AvatarPickerItem} from "./AvatarPickerItem.jsx";
 import {FaArrowRight} from "react-icons/fa";
 import {useAvatar} from "../hooks/useAvatar.jsx";
+import {useChat} from "../hooks/useChat.jsx";
 
 export const AvatarPickerPage = () => {
+  const {
+    backendUrl,
+    setConversationId,
+  } = useChat()
+
   const {
     avatars,
     selectedAvatar,
@@ -11,6 +17,24 @@ export const AvatarPickerPage = () => {
   } = useAvatar()
 
   const [tempSelectedAvatar, setTempSelectedAvatar] = useState()
+
+  const createNewConvoWithAvatar = avatar => {
+    fetch(`${backendUrl}/api/create_conversation`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then(r1 => r1.json())
+      .then(r2 => {
+        const _conversationId = r2.id
+        setConversationId(_conversationId)
+        setSelectedAvatar(avatar)
+        localStorage.setItem('conversationId', _conversationId)
+      })
+      .catch(e=>{
+        console.trace(e)
+      })
+  }
 
   if(selectedAvatar)
     return <></>
@@ -20,7 +44,7 @@ export const AvatarPickerPage = () => {
       <div className="text-blue-800 font-extrabold text-2xl border-yellow-300 border-2 bg-amber-100 rounded-xl p-2 m-1">Pick your new friend</div>
       <button
         className={`md:fixed top-1 right-1 text-amber-100 font-extrabold text-2xl border-yellow-300 border-2 bg-blue-500 rounded-xl p-2 m-1 ${tempSelectedAvatar ? 'block' : 'hidden'}`}
-        onClick={()=>setSelectedAvatar(tempSelectedAvatar)}
+        onClick={()=>createNewConvoWithAvatar(tempSelectedAvatar)}
       >
         <div className="flex flex-row items-center">Done <FaArrowRight/></div>
       </button>

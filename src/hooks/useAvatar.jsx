@@ -9,12 +9,12 @@ export const AvatarProvider = ({ children }) => {
   } = useChat();
 
   const [selectedAvatar, _setSelectedAvatar] = useState(
-    localStorage.getItem('selectedAvatar')
+    JSON.parse(localStorage.getItem('selectedAvatar'))
   );
 
-  const setSelectedAvatar = avatarId => {
-    localStorage.setItem('selectedAvatar', avatarId)
-    _setSelectedAvatar(avatarId);
+  const setSelectedAvatar = avatar => {
+    localStorage.setItem('selectedAvatar', JSON.stringify(avatar))
+    _setSelectedAvatar(avatar);
   };
 
   const resetConversation = () => {

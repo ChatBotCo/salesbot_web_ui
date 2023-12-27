@@ -129,7 +129,7 @@ export function Avatar() {
     setLipsync(avatarResponse.lipsync);
   }, [avatarResponse]);
 
-  const { animations } = useGLTF("/models/animations.glb");
+  const { animations } = useGLTF(`/animations/${selectedAvatar.gender}/animations_${selectedAvatar.gender}.glb`);
 
   const group = useRef();
   const { actions, mixer } = useAnimations(animations, group);
@@ -306,6 +306,5 @@ export function Avatar() {
   );
 }
 
-// useGLTF.preload("/models/64f1a714fe61576b46f27ca2.glb");
-// useGLTF.preload("/models/keli.glb");
-useGLTF.preload("/models/animations.glb");
+useGLTF.preload("/animations/female/animations_female.glb");
+useGLTF.preload("/animations/male/animations_male.glb");

@@ -1,13 +1,15 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {AvatarPickerItem} from "./AvatarPickerItem.jsx";
 import {FaArrowRight} from "react-icons/fa";
 import {useAvatar} from "../hooks/useAvatar.jsx";
 import {useChat} from "../hooks/useChat.jsx";
 
+let initialized = false
 export const AvatarPickerPage = () => {
   const {
     backendUrl,
     setConversationId,
+    resetAvatarResponse,
   } = useChat()
 
   const {
@@ -29,12 +31,20 @@ export const AvatarPickerPage = () => {
         const _conversationId = r2.id
         setConversationId(_conversationId)
         setSelectedAvatar(avatar)
+        resetAvatarResponse(avatar)
         localStorage.setItem('conversationId', _conversationId)
       })
       .catch(e=>{
         console.trace(e)
       })
   }
+
+  useEffect(() => {
+    if(!initialized && selectedAvatar) {
+      initialized = true
+      resetAvatarResponse(selectedAvatar)
+    }
+  }, [selectedAvatar]);
 
   if(selectedAvatar)
     return <></>

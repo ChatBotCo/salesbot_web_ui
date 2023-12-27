@@ -35,7 +35,7 @@ export const ChatWindow = () => {
       const body = JSON.stringify({
         user_msg:  text || "Hello",
         mute,
-        voice: selectedAvatar.voice,
+        avatar: selectedAvatar,
       })
       // console.log(body)
       const data = await fetch(`${backendUrl}/api/submit_user_message?convoid=${conversationId}`, {

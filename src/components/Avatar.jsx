@@ -125,7 +125,7 @@ export function Avatar() {
       return;
     }
     // setAnimation(avatarResponse.animation);
-    setFacialExpression(avatarResponse.assistant_response.facialExpression);
+    // setFacialExpression(avatarResponse.assistant_response.facialExpression);
     setLipsync(avatarResponse.lipsync);
   }, [avatarResponse]);
 

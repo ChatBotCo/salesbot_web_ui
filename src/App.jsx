@@ -3,7 +3,7 @@ import {AvatarPickerPage} from "./components/AvatarPickerPage.jsx";
 import {AvatarChatPage} from "./components/AvatarChatPage.jsx";
 import {useEffect, useState} from "react";
 import {useChat} from "./hooks/useChat.jsx";
-import {UserDataEntryFormPage} from "./components/UserDataEntryFormPage.jsx";
+import {IntakeFormPage} from "./components/intake/IntakeFormPage.jsx";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import {useAvatar} from "./hooks/useAvatar.jsx";
 
@@ -47,7 +47,7 @@ function App() {
       <Loader />
       <Routes>
         <Route path="/avatars" element={<AvatarPickerPage />} />
-        <Route path="/intake" element={<UserDataEntryFormPage />} />
+        <Route path="/intake" element={<IntakeFormPage />} />
         <Route path="/chat" element={<AvatarChatPage />} />
       </Routes>
       {

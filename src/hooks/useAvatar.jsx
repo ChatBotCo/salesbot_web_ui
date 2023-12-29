@@ -17,12 +17,16 @@ export const AvatarProvider = ({ children }) => {
     _setSelectedAvatar(avatar);
   };
 
+  const resetAvatar = () => {
+    setConversationId(null)
+    setSelectedAvatar(null)
+    localStorage.removeItem('conversationId')
+    localStorage.removeItem('selectedAvatar')
+  }
+
   const resetConversation = () => {
     if(window.confirm("Are you sure you want to create a new avatar?  This entire conversation will be permanently lost!")) {
-      localStorage.removeItem('conversationId')
-      localStorage.removeItem('selectedAvatar')
-      setConversationId(null)
-      setSelectedAvatar(null)
+      resetAvatar()
     }
   }
 
@@ -44,6 +48,7 @@ export const AvatarProvider = ({ children }) => {
         selectedAvatar,
         setSelectedAvatar,
         resetConversation,
+        resetAvatar,
       }}
     >
       {children}

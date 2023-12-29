@@ -1,4 +1,5 @@
 import {useAvatar} from "../hooks/useAvatar.jsx";
+import {useNavigate} from "react-router-dom";
 
 export const ConfigMenu = ({showMenu, onDismiss}) => {
 
@@ -6,9 +7,12 @@ export const ConfigMenu = ({showMenu, onDismiss}) => {
     resetConversation,
   } = useAvatar();
 
+  const navigate = useNavigate();
+
   const closeAndResetConvo = ()=> {
     onDismiss()
     resetConversation()
+    navigate("/avatars")
   }
 
   if(showMenu) {

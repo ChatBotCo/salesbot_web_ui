@@ -5,6 +5,7 @@ import {useEffect, useState} from "react";
 import {useChat} from "./hooks/useChat.jsx";
 import {UserDataEntryFormPage} from "./components/UserDataEntryFormPage.jsx";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import {useAvatar} from "./hooks/useAvatar.jsx";
 
 let initialized = false
 function App() {
@@ -13,6 +14,10 @@ function App() {
     conversationId,
   } = useChat();
 
+  const {
+    resetConversation,
+  } = useAvatar();
+
   const navigate = useNavigate();
 
   const [debugging, _] = useState(
@@ -20,21 +25,28 @@ function App() {
   )
 
   useEffect(() => {
-    if (
-      !initialized &&
-      localStorage.getItem('selectedAvatar') &&
-      localStorage.getItem('conversationId')
-    ) {
+    if(!initialized) {
       initialized = true
-      navigate('/chat');
-    } else initialized = true
+      const selectedAvatar = localStorage.getItem('selectedAvatar')
+      const convoId = localStorage.getItem('conversationId')
+      if (!selectedAvatar && !convoId) {
+        navigate('/avatars')
+      } else if (selectedAvatar && !convoId) {
+        navigate('/intake')
+      } else if (!selectedAvatar && convoId) {
+        resetConversation()
+        navigate('/avatars')
+      } else {
+        navigate('/chat')
+      }
+    }
   }, []);
 
   return (
     <>
       <Loader />
       <Routes>
-        <Route path="/" element={<AvatarPickerPage />} />
+        <Route path="/avatars" element={<AvatarPickerPage />} />
         <Route path="/intake" element={<UserDataEntryFormPage />} />
         <Route path="/chat" element={<AvatarChatPage />} />
       </Routes>

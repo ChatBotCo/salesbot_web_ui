@@ -3,6 +3,7 @@ import {AvatarPickerItem} from "./AvatarPickerItem.jsx";
 import {FaArrowRight} from "react-icons/fa";
 import {useAvatar} from "../hooks/useAvatar.jsx";
 import {useChat} from "../hooks/useChat.jsx";
+import {useNavigate} from "react-router-dom";
 
 let initialized = false
 export const AvatarPickerPage = () => {
@@ -16,11 +17,14 @@ export const AvatarPickerPage = () => {
     setSelectedAvatar,
   } = useAvatar()
 
+  const navigate = useNavigate();
+
   const [tempSelectedAvatar, setTempSelectedAvatar] = useState()
 
   const _setSelectedAvatar = avatar => {
     resetAvatarResponse(avatar)
     setSelectedAvatar(avatar)
+    navigate('/intake')
   }
 
   useEffect(() => {

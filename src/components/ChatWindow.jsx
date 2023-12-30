@@ -6,6 +6,7 @@ import {TextInput} from "./TextInput.jsx";
 import {AvatarResponse} from "./AvatarResponse.jsx";
 import {SpeechInput} from "./SpeechInput.jsx";
 import {useAvatar} from "../hooks/useAvatar.jsx";
+import {ChatTopicHints} from "./ChatTopicHints.jsx";
 
 export const ChatWindow = () => {
   const input = useRef();
@@ -28,6 +29,11 @@ export const ChatWindow = () => {
 
   const [inputMode, setInputMode] = useState('text')
 
+  const onSelectTopic = topicPrompt => {
+    input.current.value = topicPrompt
+    return sendMessage()
+  }
+
   const sendMessage = async () => {
     const text = input.current.value;
     if (!loading && !avatarResponse) {
@@ -37,7 +43,6 @@ export const ChatWindow = () => {
         mute,
         avatar: selectedAvatar,
       })
-      // console.log(body)
       const data = await fetch(`${backendUrl}/api/submit_user_message?convoid=${conversationId}`, {
         method: "PUT",
         headers: {
@@ -47,36 +52,10 @@ export const ChatWindow = () => {
       });
       console.log(data)
       const newAvatarResponse = await data.json()
-      console.log(newAvatarResponse)
-      // Example: avatarResponse = {
-      // {
-      //     "assistant_response": {
-      //         "role": "assistant",
-      //         "content": "{\"text\": \"Hello world!\", \"facialExpression\": \"smile\", \"animation\": \"Talking_0\"}"
-      //     },
-      //     "usage": {
-      //         "completion_tokens": 24,
-      //         "prompt_tokens": 241,
-      //         "total_tokens": 265
-      //     },
-      //     "lipsync": {
-      //         "mouthCues": [
-      //             {
-      //                 "start": 0,
-      //                 "end": 0.05,
-      //                 "target": "viseme_sil",
-      //                 "value": 1
-      //             },
-      //             ...
-      //         ]
-      //     },
-      //     "audio": "..."
-      // }
 
       // Update state
       setLoading(false);
       setAvatarResponse(newAvatarResponse)// ephemeral
-      console.log(`content:${newAvatarResponse.assistant_response.content}`)
       setLastAvatarResponseText(newAvatarResponse.assistant_response.content)// persists - so the text remains on the screen
       input.current.value = "";
 
@@ -107,13 +86,13 @@ export const ChatWindow = () => {
           </div>
         )}
         <AvatarResponse extraClassNames={'hidden md:flex'} orientation='horizontal' />
-
         {
           inputMode==='text' ?
             <TextInput inputActive={!(loading || avatarResponse)} sendMessage={sendMessage} inputRef={input} /> :
             <SpeechInput inputActive={!(loading || avatarResponse)} sendMessage={sendMessage} inputRef={input} />
         }
         <SpeechTypeToggle inputMode={inputMode} setMode={setInputMode} />
+        <ChatTopicHints onSelectTopic={onSelectTopic} />
       </div>
     </>
   );

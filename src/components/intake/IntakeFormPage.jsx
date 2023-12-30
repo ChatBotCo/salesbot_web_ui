@@ -5,12 +5,18 @@ import {Name} from "./Name.jsx";
 import {Age} from "./Age.jsx";
 import {useNavigate} from "react-router-dom";
 import {Hobbies} from "./Hobbies.jsx";
+import {useChat} from "../../hooks/useChat.jsx";
 
 export const IntakeFormPage = () => {
   const {
     selectedAvatar,
     resetAvatar,
   } = useAvatar();
+
+  const {
+    backendUrl,
+    setConversationId,
+  } = useChat();
 
   const navigate = useNavigate();
 
@@ -32,6 +38,7 @@ export const IntakeFormPage = () => {
 
   const addCustomUserHobby = () => {
     const hobby = inputHobby.current.value
+    inputHobby.current.value = ''
     setCustomUserHobbies([...customUserHobbies, hobby]);
     setUserHobbies([...userHobbies, hobby]);
   };
@@ -58,28 +65,6 @@ export const IntakeFormPage = () => {
     />,
   ]
 
-  // const createNewConvo = () => {
-  //   const body = JSON.stringify({
-  //     user_name:  userName,
-  //     user_birthday: userBirthday,
-  //   })
-  //   fetch(`${backendUrl}/api/create_conversation`, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: body,
-  //   }).then(r1 => r1.json())
-  //     .then(r2 => {
-  //       const _conversationId = r2.id
-  //       setConversationId(_conversationId)
-  //       localStorage.setItem('conversationId', _conversationId)
-  //     })
-  //     .catch(e=>{
-  //       console.trace(e)
-  //     })
-  // }
-
   const backToAvatarSelection = ()=>{
     resetAvatar()
     navigate("/avatars")
@@ -98,10 +83,26 @@ export const IntakeFormPage = () => {
   }
 
   const onStartChatting = ()=>{
-    console.log(`name:${name}`)
-    console.log(`birthYear:${birthYear}`)
-    console.log(`userHobbies:${userHobbies}`)
-    navigate('/chat')
+    const body = JSON.stringify({
+      user_name:  name,
+      user_birth_year: birthYear,
+      user_hobbies: userHobbies
+    })
+    fetch(`${backendUrl}/api/create_conversation`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: body,
+    }).then(r1 => r1.json())
+      .then(r2 => {
+        const _conversationId = r2.id
+        setConversationId(_conversationId)
+        navigate('/chat')
+      })
+      .catch(e=>{
+        console.trace(e)
+      })
   }
 
   const avatarImg = selectedAvatar ? (<img

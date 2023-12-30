@@ -17,9 +17,14 @@ export const ChatProvider = ({ children }) => {
   const [cameraZoomed, setCameraZoomed] = useState(true);
   const [mute, setMute] = useState(false);
   const [audio, setAudio] = useState();
-  const [conversationId, setConversationId] = useState(
+  const [conversationId, _setConversationId] = useState(
     localStorage.getItem('conversationId')
   )
+
+  const setConversationId = convoId => {
+    localStorage.setItem('conversationId', convoId)
+    _setConversationId(convoId)
+  }
 
   const onMessagePlayed = () => {
     setAvatarResponse();

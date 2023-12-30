@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react";
 
 let backendUrl = "https://keli-chatbot-003.azurewebsites.net";
 // let backendUrl = "http://localhost:7071";
-if(localStorage.getItem('local_backend')) {
+if(!!!localStorage.getItem('local_backend')) {
   backendUrl = "http://localhost:7071"
 }
 

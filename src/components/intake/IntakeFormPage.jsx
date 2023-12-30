@@ -3,8 +3,8 @@ import {useAvatar} from "../../hooks/useAvatar.jsx";
 import {useRef, useState} from "react";
 import {Name} from "./Name.jsx";
 import {Age} from "./Age.jsx";
-import {HobbiesInterests} from "./HobbiesInterests.jsx";
 import {useNavigate} from "react-router-dom";
+import {Hobbies} from "./Hobbies.jsx";
 
 export const IntakeFormPage = () => {
   const {
@@ -15,25 +15,47 @@ export const IntakeFormPage = () => {
   const navigate = useNavigate();
 
   const input = useRef();
+  const inputHobby = useRef();
 
   const [name, setName] = useState()
   const [birthYear, setBirthYear] = useState()
   const [curItemIndex, setCurItemIndex] = useState(0)
+  const [userHobbies, setUserHobbies] = useState([])
+  const [customUserHobbies, setCustomUserHobbies] = useState([])
 
   const speech = [
     `Hi, I'm ${selectedAvatar && selectedAvatar.name}! Before we start chatting I'd like to know a little about you.`,
     'What is your name or what would you like me to call you?',
     'What year were you born?',
     'What hobbies do you enjoy?',
-    'What types of things are you interested in?',
   ]
+
+  const addCustomUserHobby = () => {
+    const hobby = inputHobby.current.value
+    setCustomUserHobbies([...customUserHobbies, hobby]);
+    setUserHobbies([...userHobbies, hobby]);
+  };
+
+  const addHobby = hobby => {
+    setUserHobbies([...userHobbies, hobby]);
+  };
+
+  const removeHobby = hobby => {
+    setUserHobbies(userHobbies.filter(h => h !== hobby));
+  };
 
   const items = [
     <></>,
     <Name input={input}/>,
     <Age birthYear={birthYear} setBirthYear={setBirthYear}/>,
-    <HobbiesInterests title={'hobbies'}/>,
-    <HobbiesInterests title={'interests'}/>,
+    <Hobbies
+      input={inputHobby}
+      addHobby={addHobby}
+      removeHobby={removeHobby}
+      addCustomUserHobby={addCustomUserHobby}
+      customUserHobbies={customUserHobbies}
+      selectedHobbies={userHobbies}
+    />,
   ]
 
   // const createNewConvo = () => {
@@ -73,10 +95,12 @@ export const IntakeFormPage = () => {
         break;
     }
     setCurItemIndex(Math.min(curItemIndex+1, items.length-1))
-    console.log(`name:${name}`)
   }
 
   const onStartChatting = ()=>{
+    console.log(`name:${name}`)
+    console.log(`birthYear:${birthYear}`)
+    console.log(`userHobbies:${userHobbies}`)
     navigate('/chat')
   }
 

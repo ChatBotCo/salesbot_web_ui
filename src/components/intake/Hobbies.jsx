@@ -51,7 +51,11 @@ export const Hobbies = ({ addHobby, removeHobby, input, customUserHobbies, addCu
         ref={input}
         className="p-2 m-2 border-2 border-gray-300 rounded"
       />
-      <button onClick={() => addCustomUserHobby(input.current.value)} className="p-2 m-2 bg-blue-500 text-white rounded">Add</button>
+      <button
+        onClick={() => addCustomUserHobby(input.current.value)}
+        className="p-2 m-2 bg-blue-500 text-white rounded"
+      >
+        Add</button>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import {FaArrowRight, FaArrowLeft, FaUsers, FaComment} from "react-icons/fa";
+import {FaArrowRight, FaArrowLeft, FaUsers, FaComment, FaCog} from "react-icons/fa";
 import {useAvatar} from "../../hooks/useAvatar.jsx";
 import {useRef, useState} from "react";
 import {Name} from "./Name.jsx";
@@ -23,6 +23,7 @@ export const IntakeFormPage = () => {
   const input = useRef();
   const inputHobby = useRef();
 
+  const [waiting, setWaiting] = useState(false)
   const [name, setName] = useState()
   const [birthYear, setBirthYear] = useState()
   const [curItemIndex, setCurItemIndex] = useState(0)
@@ -38,9 +39,11 @@ export const IntakeFormPage = () => {
 
   const addCustomUserHobby = () => {
     const hobby = inputHobby.current.value
-    inputHobby.current.value = ''
-    setCustomUserHobbies([...customUserHobbies, hobby]);
-    setUserHobbies([...userHobbies, hobby]);
+    if(hobby && hobby.trim().length>0) {
+      inputHobby.current.value = ''
+      setCustomUserHobbies([...customUserHobbies, hobby]);
+      setUserHobbies([...userHobbies, hobby]);
+    }
   };
 
   const addHobby = hobby => {
@@ -83,6 +86,7 @@ export const IntakeFormPage = () => {
   }
 
   const onStartChatting = ()=>{
+    setWaiting(true)
     const body = JSON.stringify({
       user_name:  name,
       user_birth_year: birthYear,
@@ -103,6 +107,7 @@ export const IntakeFormPage = () => {
       .catch(e=>{
         console.trace(e)
       })
+      .finally(()=>setWaiting(false))
   }
 
   const avatarImg = selectedAvatar ? (<img
@@ -113,6 +118,11 @@ export const IntakeFormPage = () => {
 
   return (
     <div className="h-screen overflow-y-scroll flex flex-col justify-start items-center pt-20">
+      {waiting && (
+        <div className="absolute inset-0 bg-white bg-opacity-50 flex items-center justify-center z-50 select-none">
+          <FaCog className="animate-spin" style={{ fontSize: '24px' }} />
+        </div>
+      )}
       <div
         className='flex flex-row justify-start items-center md:fixed top-1 left-1 text-amber-100 border-yellow-300 border-2 bg-blue-500 rounded-l cursor-pointer p-1'
         onClick={backToAvatarSelection}

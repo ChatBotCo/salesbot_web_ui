@@ -6,6 +6,7 @@ import {AvatarResponse} from "./AvatarResponse.jsx";
 import {Canvas} from "@react-three/fiber";
 import {Experience} from "./Experience.jsx";
 import {ChatWindow} from "./ChatWindow.jsx";
+import {Feedback} from "./Feedback.jsx";
 
 export const AvatarChatPage = () => {
   const {
@@ -19,6 +20,7 @@ export const AvatarChatPage = () => {
 
   return (
     <div className="flex h-screen flex-col md:flex-row">
+      <Feedback/>
       <FaCog
         className='md:fixed top-1 left-1 hover:bg-blue-500 text-2xl z-10 rounded cursor-pointer'
         onClick={()=>setShowConfigMenu(!showConfigMenu)}

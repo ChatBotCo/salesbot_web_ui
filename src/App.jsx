@@ -2,8 +2,8 @@ import {Loader} from "@react-three/drei";
 import {useState} from "react";
 import {useChat} from "./hooks/useChat.jsx";
 import {ChatPage} from "./pages/ChatPage.jsx";
+import {CreateNewConvoPage} from "./pages/CreateNewConvoPage.jsx";
 
-let initialized = false
 function App() {
 
   const {
@@ -17,7 +17,7 @@ function App() {
   return (
     <>
       <Loader />
-      <ChatPage />
+      {conversationId ? <ChatPage /> : <CreateNewConvoPage/>}
       {
         debugging && <div className='fixed bottom-1 left-1 z-10 text-gray-500 bg-opacity-80 bg-white p-1 rounded'>
           convo: {conversationId || '[not set]'}

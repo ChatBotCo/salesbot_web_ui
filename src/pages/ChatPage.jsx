@@ -39,8 +39,8 @@ export const ChatPage = () => {
   };
 
   return (
-    <div className="flex h-screen w-full flex-col justify-end items-center">
-      <h1>Welcome to {company && company.name} Chat Page</h1>
+    <div className="flex h-screen w-full flex-col justify-center items-center pb-2">
+      <h1>Welcome to <span className='font-extrabold text-xl'>{company && company.name}</span></h1>
       <TextInput inputActive={true} inputRef={input} sendMessage={sendMessage}/>
     </div>
   );

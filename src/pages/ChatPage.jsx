@@ -1,6 +1,7 @@
 import {useRef} from "react";
 import {useChat} from "../hooks/useChat.jsx";
 import {TextInput} from "../components/TextInput.jsx";
+import {AvatarResponse} from "../components/AvatarResponse.jsx";
 
 export const ChatPage = () => {
   const {
@@ -17,7 +18,7 @@ export const ChatPage = () => {
 
   const sendMessage = async () => {
     const text = input.current.value;
-    if (!loading && !avatarResponse) {
+    if (!loading) {
       setLoading(true);
       const body = JSON.stringify({
         user_msg:  text || "Hello",
@@ -33,7 +34,7 @@ export const ChatPage = () => {
       const newAvatarResponse = await data.json()
 
       // Update state
-      setAvatarResponse(newAvatarResponse)
+      setAvatarResponse(newAvatarResponse.assistant_response.content)
       input.current.value = "";
     }
   };
@@ -42,6 +43,7 @@ export const ChatPage = () => {
     <div className="flex h-screen w-full flex-col justify-center items-center pb-2">
       <h1>Welcome to <span className='font-extrabold text-xl'>{company && company.name}</span></h1>
       <TextInput inputActive={true} inputRef={input} sendMessage={sendMessage}/>
+      <AvatarResponse />
     </div>
   );
 

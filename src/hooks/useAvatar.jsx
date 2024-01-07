@@ -8,7 +8,13 @@ export const AvatarProvider = ({ children }) => {
     setConversation,
   } = useChat();
 
-  const [showAvatar, setShowAvatar] = useState(true)
+  const [showAvatar, _setShowAvatar] = useState(
+    (!localStorage.getItem('showAvatar')) ? true : localStorage.getItem('showAvatar')==='true'
+  )
+  const setShowAvatar = _show => {
+    localStorage.setItem('showAvatar', _show)
+    _setShowAvatar(_show)
+  }
 
   const [selectedAvatar, _setSelectedAvatar] = useState(
     {

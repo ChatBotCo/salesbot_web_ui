@@ -22,16 +22,24 @@ export const ChatProvider = ({ children }) => {
   const [companyId, setCompanyId] = useState(
     query.get("company_id")
   )
+  const [avatarResponse, setAvatarResponse] = useState()
   const [company, setCompany] = useState()
   const [conversation, _setConversation] = useState(
     JSON.parse(localStorage.getItem('conversation'))
   )
-  const [avatarResponse, setAvatarResponse] = useState()
-
   const setConversation = convo => {
     localStorage.setItem('conversation', JSON.stringify(convo))
     _setConversation(convo)
   }
+
+
+  const [mute, _setMute] = useState(localStorage.getItem('mute')==='true' )
+  const setMute = _mute => {
+    localStorage.setItem('mute', _mute)
+    _setMute(_mute)
+  }
+
+
 
   const resetConvo = () => {
     if(window.confirm("Are you sure you want to reset this conversation?")) {
@@ -81,6 +89,7 @@ export const ChatProvider = ({ children }) => {
         createNewConvo,
         avatarResponse,
         setAvatarResponse,
+        mute, setMute,
       }}
     >
       {children}

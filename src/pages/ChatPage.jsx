@@ -2,6 +2,7 @@ import {AvatarWindow} from "../components/avatar/AvatarWindow.jsx";
 import {ChatWindow} from "../components/ChatWindow.jsx";
 import {ToggleAvatarVisibility} from "../components/avatar/ToggleAvatarVisibility.jsx";
 import {useAvatar} from "../hooks/useAvatar.jsx";
+import {MuteBtn} from "../components/MuteBtn.jsx";
 
 export const ChatPage = () => {
   const {
@@ -12,7 +13,13 @@ export const ChatPage = () => {
     <div className="flex h-full w-full flex-row justify-between items-center">
       {showAvatar && <AvatarWindow/>}
       <ChatWindow />
-      <ToggleAvatarVisibility/>
+      <div className='
+        fixed bottom-1 right-1
+        flex flex-row
+      '>
+        <MuteBtn/>
+        <ToggleAvatarVisibility/>
+      </div>
     </div>
   );
 

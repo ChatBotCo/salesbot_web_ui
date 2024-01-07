@@ -10,6 +10,7 @@ function App() {
   const {
     companyId,
     conversation,
+    companyLoadError,
   } = useChat();
 
   const [showCompanyIdError, setShowCompanyIdError] = useState(false);
@@ -33,6 +34,11 @@ function App() {
       {showCompanyIdError && (
         <div className="flex h-screen w-full flex-col justify-center items-center">
           <h1>Missing parameter: <em>company_id</em></h1>
+        </div>
+      )}
+      {companyLoadError && (
+        <div className="flex h-screen w-full flex-col justify-center items-center">
+          <h1>Error loading companyId <em>{companyId}</em></h1>
         </div>
       )}
       {conversation ? <ChatPage /> : <CreateNewConvoPage/>}

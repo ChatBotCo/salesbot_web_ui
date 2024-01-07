@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import {useChat} from "./hooks/useChat.jsx";
 import {ChatPage} from "./pages/ChatPage.jsx";
 import {CreateNewConvoPage} from "./pages/CreateNewConvoPage.jsx";
+import { FaCog } from 'react-icons/fa';
 
 let initialized = false
 function App() {
@@ -11,6 +12,7 @@ function App() {
     companyId,
     conversation,
     companyLoadError,
+    loading,
   } = useChat();
 
   const [showCompanyIdError, setShowCompanyIdError] = useState(false);
@@ -47,6 +49,11 @@ function App() {
           convo: {conversation || '[not set]'}
         </div>
       }
+      {loading && (
+        <div className="fixed top-0 left-0 w-full h-full bg-white bg-opacity-50 flex items-center justify-center z-99">
+          <FaCog className="animate-spin" style={{ fontSize: '24px' }} />
+        </div>
+      )}
     </>
   );
 }

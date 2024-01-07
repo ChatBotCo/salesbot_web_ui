@@ -33,16 +33,26 @@ export const ChatProvider = ({ children }) => {
     _setConversation(convo)
   }
 
+  const resetConvo = () => {
+    if(window.confirm("Are you sure you want to reset this conversation?")) {
+      setConversation(null)
+      localStorage.removeItem('conversation')
+      location.reload()
+    }
+  }
+
   useEffect(() => {
     if(!initialized) {
       initialized = true
       if(companyId && !company) {
+        setLoading(true)
         fetch(`${backendUrl}/api/company?companyid=${companyId}`, {
           method: "GET",
         })
           .then(data=>data.json())
           .then(setCompany)
           .catch(()=>setCompanyLoadError(true))
+          .finally(()=>setLoading(false))
       }
     }
   }, []);
@@ -64,6 +74,7 @@ export const ChatProvider = ({ children }) => {
         backendUrl,
         conversation,
         setConversation,
+        resetConvo,
         companyId,
         company,
         companyLoadError,

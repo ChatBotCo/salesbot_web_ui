@@ -2,6 +2,8 @@ import {useRef} from "react";
 import {useChat} from "../hooks/useChat.jsx";
 import {TextInput} from "../components/TextInput.jsx";
 import {AvatarResponse} from "../components/AvatarResponse.jsx";
+import {InstallDemoApp} from "../components/InstallDemoApp.jsx";
+import {ContactSales} from "../components/ContactSales.jsx";
 
 export const ChatPage = () => {
   const {
@@ -10,8 +12,8 @@ export const ChatPage = () => {
     setLoading,
     company,
     conversation,
-    avatarResponse,
     setAvatarResponse,
+    resetConvo,
   } = useChat();
 
   const input = useRef();
@@ -30,20 +32,26 @@ export const ChatPage = () => {
         },
         body: body,
       }).finally(()=>setLoading(false))
-      console.log(data)
       const newAvatarResponse = await data.json()
+      console.log(newAvatarResponse)
 
       // Update state
-      setAvatarResponse(newAvatarResponse.assistant_response.content)
+      setAvatarResponse(newAvatarResponse)
       input.current.value = "";
     }
   };
 
   return (
-    <div className="flex h-screen w-full flex-col justify-center items-center pb-2">
+    <div className="flex h-screen w-full flex-col justify-start md:justify-center items-center pb-2 pt-5">
       <h1>Welcome to <span className='font-extrabold text-xl'>{company && company.name}</span></h1>
       <TextInput inputActive={true} inputRef={input} sendMessage={sendMessage}/>
       <AvatarResponse />
+      <InstallDemoApp />
+      <ContactSales />
+      <a
+        className='text-blue-500 underline cursor-pointer'
+        onClick={resetConvo}
+      >Reset conversation</a>
     </div>
   );
 

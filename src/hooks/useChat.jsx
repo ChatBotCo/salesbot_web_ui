@@ -26,6 +26,7 @@ export const ChatProvider = ({ children }) => {
   const [conversation, _setConversation] = useState(
     JSON.parse(localStorage.getItem('conversation'))
   )
+  const [avatarResponse, setAvatarResponse] = useState()
 
   const setConversation = convo => {
     localStorage.setItem('conversation', JSON.stringify(convo))
@@ -67,6 +68,8 @@ export const ChatProvider = ({ children }) => {
         company,
         companyLoadError,
         createNewConvo,
+        avatarResponse,
+        setAvatarResponse,
       }}
     >
       {children}

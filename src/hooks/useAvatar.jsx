@@ -8,11 +8,12 @@ export const AvatarProvider = ({ children }) => {
     setConversation,
   } = useChat();
 
+  const [showAvatar, setShowAvatar] = useState(true)
+
   const [selectedAvatar, _setSelectedAvatar] = useState(
     {
       id:'keli',name:'Keli',gender:'female'
     }
-    // JSON.parse(localStorage.getItem('selectedAvatar'))
   );
 
   const setSelectedAvatar = avatar => {
@@ -23,7 +24,7 @@ export const AvatarProvider = ({ children }) => {
   const resetAvatar = () => {
     setConversation(null)
     setSelectedAvatar(null)
-    localStorage.removeItem('conversationId')
+    localStorage.removeItem('conversation')
     localStorage.removeItem('selectedAvatar')
   }
 
@@ -52,6 +53,8 @@ export const AvatarProvider = ({ children }) => {
         setSelectedAvatar,
         resetConversation,
         resetAvatar,
+        showAvatar,
+        setShowAvatar,
       }}
     >
       {children}

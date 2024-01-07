@@ -12,18 +12,48 @@ export const ChatWindow = () => {
     setLoading,
     company,
     conversation,
+    avatarResponse,
     setAvatarResponse,
+    setLastAvatarResponseText,
     resetConvo,
+    mute,
+    onMessagePlayed,
+    setAudio,
   } = useChat();
 
   const input = useRef();
 
+  // const sendMessage = async () => {
+  //   const text = input.current.value;
+  //   if (!loading) {
+  //     setLoading(true);
+  //     const body = JSON.stringify({
+  //       user_msg:  text || "Hello",
+  //       mute,
+  //     })
+  //     const data = await fetch(`${backendUrl}/api/submit_user_message?convoid=${conversation.id}&companyid=${company.company_id}`, {
+  //       method: "PUT",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: body,
+  //     }).finally(()=>setLoading(false))
+  //     const newAvatarResponse = await data.json()
+  //     console.log(newAvatarResponse)
+  //
+  //     // Update state
+  //     setAvatarResponse(newAvatarResponse)
+  //     input.current.value = "";
+  //   }
+  // };
+
   const sendMessage = async () => {
     const text = input.current.value;
-    if (!loading) {
+    if (!loading && !avatarResponse) {
       setLoading(true);
       const body = JSON.stringify({
         user_msg:  text || "Hello",
+        mute,
       })
       const data = await fetch(`${backendUrl}/api/submit_user_message?convoid=${conversation.id}&companyid=${company.company_id}`, {
         method: "PUT",
@@ -31,13 +61,31 @@ export const ChatWindow = () => {
           "Content-Type": "application/json",
         },
         body: body,
-      }).finally(()=>setLoading(false))
+      });
+      console.log(data)
       const newAvatarResponse = await data.json()
-      console.log(newAvatarResponse)
 
       // Update state
-      setAvatarResponse(newAvatarResponse)
+      setLoading(false);
+      setAvatarResponse(newAvatarResponse)// ephemeral
+      setLastAvatarResponseText(newAvatarResponse.assistant_response.content)// persists - so the text remains on the screen
       input.current.value = "";
+
+      if(!mute) {
+        // Play the audio - this must be inline with the user-initiated event (button press) due to mobile device auto-playback permission issues
+        if(newAvatarResponse.audio.startsWith("AAAAAAAAAAAAAAAA")) {
+          console.error(`Bad audio file data:${newAvatarResponse.audio}`)
+          onMessagePlayed()
+        } else {
+          const audio = new Audio("data:audio/mp3;base64," + newAvatarResponse.audio);
+          audio.play();
+          setAudio(audio);
+          audio.onended = onMessagePlayed;
+        }
+      } else {
+        // If muted, then immediately clear the message
+        onMessagePlayed()
+      }
     }
   };
 

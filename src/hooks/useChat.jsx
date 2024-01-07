@@ -23,6 +23,8 @@ export const ChatProvider = ({ children }) => {
     query.get("company_id")
   )
   const [avatarResponse, setAvatarResponse] = useState()
+  const [lastAvatarResponseText, setLastAvatarResponseText] = useState('Hello!')
+
   const [company, setCompany] = useState()
   const [conversation, _setConversation] = useState(
     JSON.parse(localStorage.getItem('conversation'))
@@ -74,6 +76,12 @@ export const ChatProvider = ({ children }) => {
       .catch(()=>alert("error creating conversation"))
   }
 
+  const [audio, setAudio] = useState();
+
+  const onMessagePlayed = () => {
+    setAvatarResponse();
+  };
+
   return (
     <ChatContext.Provider
       value={{
@@ -89,7 +97,10 @@ export const ChatProvider = ({ children }) => {
         createNewConvo,
         avatarResponse,
         setAvatarResponse,
+        lastAvatarResponseText, setLastAvatarResponseText,
         mute, setMute,
+        onMessagePlayed,
+        audio, setAudio,
       }}
     >
       {children}

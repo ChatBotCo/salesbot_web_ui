@@ -1,10 +1,10 @@
 import {useRef} from "react";
-import {useChat} from "../hooks/useChat.jsx";
+import {useChat} from "../../hooks/useChat.jsx";
 import {TextInput} from "./TextInput.jsx";
 import {AvatarResponse} from "./AvatarResponse.jsx";
 import {InstallDemoApp} from "./InstallDemoApp.jsx";
 import {ContactSales} from "./ContactSales.jsx";
-import {useAvatar} from "../hooks/useAvatar.jsx";
+import {useAvatar} from "../../hooks/useAvatar.jsx";
 
 export const ChatWindow = () => {
   const {

@@ -1,4 +1,4 @@
-import {useChat} from "../hooks/useChat.jsx";
+import {useChat} from "../../hooks/useChat.jsx";
 
 export const ContactSales = () => {
   const {

@@ -1,5 +1,5 @@
 import {AvatarWindow} from "../components/avatar/AvatarWindow.jsx";
-import {ChatWindow} from "../components/ChatWindow.jsx";
+import {ChatWindow} from "../components/chat/ChatWindow.jsx";
 import {ToggleAvatarVisibility} from "../components/avatar/ToggleAvatarVisibility.jsx";
 import {useAvatar} from "../hooks/useAvatar.jsx";
 import {MuteBtn} from "../components/avatar/MuteBtn.jsx";

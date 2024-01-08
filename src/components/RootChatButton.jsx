@@ -7,7 +7,6 @@ export const RootChatButton = () => {
     setShowChat,
   } = useChat();
 
-  console.log(showChat)
   if(showChat) return <></>
 
   return (

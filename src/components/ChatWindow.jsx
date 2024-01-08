@@ -4,6 +4,7 @@ import {TextInput} from "./TextInput.jsx";
 import {AvatarResponse} from "./AvatarResponse.jsx";
 import {InstallDemoApp} from "./InstallDemoApp.jsx";
 import {ContactSales} from "./ContactSales.jsx";
+import {useAvatar} from "../hooks/useAvatar.jsx";
 
 export const ChatWindow = () => {
   const {
@@ -21,31 +22,11 @@ export const ChatWindow = () => {
     setAudio,
   } = useChat();
 
-  const input = useRef();
+  const {
+    showAvatar,
+  } = useAvatar()
 
-  // const sendMessage = async () => {
-  //   const text = input.current.value;
-  //   if (!loading) {
-  //     setLoading(true);
-  //     const body = JSON.stringify({
-  //       user_msg:  text || "Hello",
-  //       mute,
-  //     })
-  //     const data = await fetch(`${backendUrl}/api/submit_user_message?convoid=${conversation.id}&companyid=${company.company_id}`, {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: body,
-  //     }).finally(()=>setLoading(false))
-  //     const newAvatarResponse = await data.json()
-  //     console.log(newAvatarResponse)
-  //
-  //     // Update state
-  //     setAvatarResponse(newAvatarResponse)
-  //     input.current.value = "";
-  //   }
-  // };
+  const input = useRef();
 
   const sendMessage = async () => {
     const text = input.current.value;
@@ -53,7 +34,7 @@ export const ChatWindow = () => {
       setLoading(true);
       const body = JSON.stringify({
         user_msg:  text || "Hello",
-        mute,
+        mute: (mute || !showAvatar),
       })
       const data = await fetch(`${backendUrl}/api/submit_user_message?convoid=${conversation.id}&companyid=${company.company_id}`, {
         method: "PUT",

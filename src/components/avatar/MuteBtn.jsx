@@ -1,5 +1,6 @@
 import {FaVolumeMute, FaVolumeUp} from "react-icons/fa";
-import {useChat} from "../hooks/useChat.jsx";
+import {useChat} from "../../hooks/useChat.jsx";
+import {useAvatar} from "../../hooks/useAvatar.jsx";
 
 export const MuteBtn = () => {
 
@@ -8,8 +9,14 @@ export const MuteBtn = () => {
     setMute,
   } = useChat();
 
+  const {
+    showAvatar,
+  } = useAvatar()
+
   const muteBtnColor = mute? 'text-red-400' : 'text-blue-500'
   const padding = mute ? 'p-1' : 'p-2'
+
+  if(!showAvatar) return <></>
 
   return (
     <div className='

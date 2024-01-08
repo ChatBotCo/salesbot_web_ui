@@ -114,7 +114,7 @@ export function Avatar() {
   const { avatarResponse, audio } = useChat();
 
   const { nodes, materials, scene } = useGLTF(
-    `/models/${selectedAvatar.id}.glb`
+    `https://kelichatbot2.blob.core.windows.net/salesbot-assets/${selectedAvatar.id}.glb`
   );
 
   const [lipsync, setLipsync] = useState();

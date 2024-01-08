@@ -6,7 +6,7 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import {AvatarProvider} from "./hooks/useAvatar.jsx";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
+ReactDOM.createRoot(document.getElementById("sales_chatbot_root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <ChatProvider>

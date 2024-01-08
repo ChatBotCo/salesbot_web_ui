@@ -7,7 +7,7 @@
   --leva-sizes-rootWidth: 340px;
 }
 
-#root {
+#sales_chatbot_root {
   width: 100vw;
   height: 100vh;
   overflow: hidden;

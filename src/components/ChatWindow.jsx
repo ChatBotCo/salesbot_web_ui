@@ -32,9 +32,10 @@ export const ChatWindow = () => {
     const text = input.current.value;
     if (!loading && !avatarResponse) {
       setLoading(true);
+      const _muted = mute || !showAvatar
       const body = JSON.stringify({
         user_msg:  text || "Hello",
-        mute: (mute || !showAvatar),
+        mute: _muted,
       })
       const data = await fetch(`${backendUrl}/api/submit_user_message?convoid=${conversation.id}&companyid=${company.company_id}`, {
         method: "PUT",
@@ -43,8 +44,10 @@ export const ChatWindow = () => {
         },
         body: body,
       });
-      console.log(data)
+      // console.log(data)
       const newAvatarResponse = await data.json()
+      console.log(newAvatarResponse)
+      // console.log(newAvatarResponse.assistant_response.content)
 
       // Update state
       setLoading(false);
@@ -52,7 +55,7 @@ export const ChatWindow = () => {
       setLastAvatarResponseText(newAvatarResponse.assistant_response.content)// persists - so the text remains on the screen
       input.current.value = "";
 
-      if(!mute) {
+      if(!_muted) {
         // Play the audio - this must be inline with the user-initiated event (button press) due to mobile device auto-playback permission issues
         if(newAvatarResponse.audio.startsWith("AAAAAAAAAAAAAAAA")) {
           console.error(`Bad audio file data:${newAvatarResponse.audio}`)

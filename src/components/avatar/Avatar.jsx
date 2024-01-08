@@ -129,7 +129,7 @@ export function Avatar() {
     setLipsync(avatarResponse.lipsync);
   }, [avatarResponse]);
 
-  const { animations } = useGLTF(`/animations/${selectedAvatar.gender}/animations_${selectedAvatar.gender}.glb`);
+  const { animations } = useGLTF(`https://kelichatbot2.blob.core.windows.net/salesbot-assets/animations_${selectedAvatar.gender}.glb`);
 
   const group = useRef();
   const { actions, mixer } = useAnimations(animations, group);
@@ -306,5 +306,5 @@ export function Avatar() {
   );
 }
 
-useGLTF.preload("/animations/female/animations_female.glb");
-useGLTF.preload("/animations/male/animations_male.glb");
+useGLTF.preload("https://kelichatbot2.blob.core.windows.net/salesbot-assets/animations_female.glb");
+useGLTF.preload("https://kelichatbot2.blob.core.windows.net/salesbot-assets/animations_male.glb");

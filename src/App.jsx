@@ -27,10 +27,6 @@ function App() {
     }
   }, []);
 
-  const [debugging, _] = useState(
-    localStorage.getItem('debugging')
-  )
-
   return (
     <>
       <Loader />
@@ -45,11 +41,6 @@ function App() {
         </div>
       )}
       {conversation ? <ChatPage /> : <CreateNewConvoPage/>}
-      {
-        debugging && <div className='fixed bottom-1 left-1 z-10 text-gray-500 bg-opacity-80 bg-white p-1 rounded'>
-          convo: {conversation || '[not set]'}
-        </div>
-      }
       {loading && (
         <div className="fixed top-0 left-0 w-full h-full bg-white bg-opacity-50 flex items-center justify-center z-99">
           <FaCog className="animate-spin" style={{ fontSize: '24px' }} />

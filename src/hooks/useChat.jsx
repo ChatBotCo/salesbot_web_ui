@@ -13,15 +13,40 @@ const useQuery = () => {
   return new URLSearchParams(useLocation().search);
 }
 
+const getDataCompanyId = debugging => {
+  if(debugging) {
+    return useQuery().get('company_id')
+  } else {
+    const scriptTag = document.querySelector('script[src="sales_chatbot.js"]');
+    if (scriptTag) {
+      const _companyId = scriptTag.getAttribute('data-company-id');
+      if(_companyId) {
+        // console.log(`data-company-id:${_companyId}`);
+        return _companyId
+      } else {
+        console.error('NOT FOUND: data-company-id - Did you forget to add it to the Sales ChatBot HTML element?')
+        return null
+      }
+    } else {
+      console.error('NOT FOUND: script sales_chatbot.js - Did you forget to add the Sales ChatBot HTML script element?')
+      return null
+    }
+  }
+}
+
 let initialized = false
 
 export const ChatProvider = ({ children }) => {
   const query = useQuery();
+  const [debugging, _] = useState(
+    localStorage.getItem('debugging')==='true'
+  )
   const [showChat, setShowChat] = useState(false)
   const [loading, setLoading] = useState(false)
   const [companyLoadError, setCompanyLoadError] = useState(false)
   const [companyId, setCompanyId] = useState(
-    query.get("company_id")
+    // query.get("company_id")
+    getDataCompanyId(debugging)
   )
   const [avatarResponse, setAvatarResponse] = useState()
   const [lastAvatarResponseText, setLastAvatarResponseText] = useState('Hello!')

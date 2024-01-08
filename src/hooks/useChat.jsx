@@ -17,6 +17,7 @@ let initialized = false
 
 export const ChatProvider = ({ children }) => {
   const query = useQuery();
+  const [showChat, setShowChat] = useState(false)
   const [loading, setLoading] = useState(false)
   const [companyLoadError, setCompanyLoadError] = useState(false)
   const [companyId, setCompanyId] = useState(
@@ -101,6 +102,7 @@ export const ChatProvider = ({ children }) => {
         mute, setMute,
         onMessagePlayed,
         audio, setAudio,
+        showChat, setShowChat,
       }}
     >
       {children}

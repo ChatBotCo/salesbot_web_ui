@@ -4,6 +4,7 @@ import {useChat} from "./hooks/useChat.jsx";
 import {ChatPage} from "./pages/ChatPage.jsx";
 import {CreateNewConvoPage} from "./pages/CreateNewConvoPage.jsx";
 import { FaCog } from 'react-icons/fa';
+import {RootChatButton} from "./components/RootChatButton.jsx";
 
 let initialized = false
 function App() {
@@ -54,6 +55,7 @@ function App() {
           <FaCog className="animate-spin" style={{ fontSize: '24px' }} />
         </div>
       )}
+      <RootChatButton/>
     </>
   );
 }

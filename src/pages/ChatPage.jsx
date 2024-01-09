@@ -90,7 +90,7 @@ export const ChatPage = () => {
         p-1
       '>
         <div className="flex flex-row justify-between items-end w-96">
-          <AvatarWindow/>
+          {showAvatar && <AvatarWindow/>}
           <AvatarResponse/>
         </div>
         <TextInput inputActive={true} inputRef={input} sendMessage={sendMessage}/>

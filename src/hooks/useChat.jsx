@@ -1,13 +1,20 @@
-import { createContext, useContext, useState } from "react";
+import {createContext, useContext, useEffect, useState} from "react";
 import {useUtilities} from "./useUtilities.jsx";
+import {useCompany} from "./useCompany.jsx";
 
 const ChatContext = createContext();
+
+let initialized = false
 
 export const ChatProvider = ({ children }) => {
   const {
     backendUrl,
     setLoading,
   } = useUtilities();
+
+  const {
+    companyId,
+  } = useCompany();
 
   const [avatarResponse, setAvatarResponse] = useState()
   const [lastAvatarResponseText, setLastAvatarResponseText] = useState('Hello!')
@@ -19,6 +26,17 @@ export const ChatProvider = ({ children }) => {
     localStorage.setItem('conversation', JSON.stringify(convo))
     _setConversation(convo)
   }
+
+  useEffect(() => {
+    if(!initialized) {
+      initialized = true
+      if(!conversation) {
+        createNewConvo()
+      }
+    }
+  }, []);
+
+
   const [showChat, _setShowChat] = useState(
     localStorage.getItem('showChat')==='true'
   )

@@ -1,16 +1,19 @@
 import {AvatarWindow} from "../components/avatar/AvatarWindow.jsx";
 import {useAvatar} from "../hooks/useAvatar.jsx";
-import {MuteBtn} from "../components/avatar/MuteBtn.jsx";
 import {useChat} from "../hooks/useChat.jsx";
-import {useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import {TextInput} from "../components/chat/TextInput.jsx";
 import {InstallDemoApp} from "../components/chat/InstallDemoApp.jsx";
 import {ContactSales} from "../components/chat/ContactSales.jsx";
 import {AvatarResponse} from "../components/chat/AvatarResponse.jsx";
 import {HeaderBar} from "../components/HeaderBar.jsx";
 
+
+let initialized = false
+
 export const ChatPage = () => {
   const {
+    companyId,
     backendUrl,
     loading,
     setLoading,
@@ -18,12 +21,12 @@ export const ChatPage = () => {
     conversation,
     avatarResponse,
     setAvatarResponse,
-    lastAvatarResponseText,
     setLastAvatarResponseText,
     resetConvo,
     mute,
     onMessagePlayed,
     setAudio,
+    companyLoadError,
   } = useChat();
 
   const {
@@ -31,6 +34,17 @@ export const ChatPage = () => {
   } = useAvatar()
 
   const input = useRef();
+
+  const [showCompanyIdError, setShowCompanyIdError] = useState(false);
+
+  useEffect(() => {
+    if(!initialized) {
+      initialized = true
+      if(!companyId) {
+        setShowCompanyIdError(true)
+      }
+    }
+  }, []);
 
   const sendMessage = async () => {
     const text = input.current.value;
@@ -80,23 +94,39 @@ export const ChatPage = () => {
   return (
     <div className="flex flex-col w-full h-full justify-between items-center">
       <HeaderBar/>
-      <a
-        className='text-blue-500 underline cursor-pointer'
-        onClick={resetConvo}
-      >Reset conversation</a>
-      <div className='
-        flex flex-col justify-end grow
-        overflow-x-hidden overflow-y-scroll
-        p-1
-      '>
-        <div className="flex flex-row justify-between items-end w-96">
-          {showAvatar && <AvatarWindow/>}
-          <AvatarResponse/>
-        </div>
-        <TextInput inputActive={true} inputRef={input} sendMessage={sendMessage}/>
-        <InstallDemoApp />
-        <ContactSales />
-      </div>
+      {
+        showCompanyIdError ? (
+          <div className="flex h-96 w-full flex-col justify-center items-center p-4">
+            <h1>Missing parameter: <em>company_id</em></h1>
+          </div>
+        ) : (
+          companyLoadError ? (
+            <div className="flex h-96 w-full flex-col justify-center items-center p-4">
+              <h1>Error loading companyId <em>{companyId}</em></h1>
+            </div>
+          ) : (
+            <>
+              <a
+                className='text-blue-500 underline cursor-pointer'
+                onClick={resetConvo}
+              >Reset conversation</a>
+              <div className='
+                flex flex-col justify-end grow
+                overflow-x-hidden overflow-y-scroll
+                p-1
+              '>
+                <div className="flex flex-row justify-between items-end w-96">
+                  {showAvatar && <AvatarWindow/>}
+                  <AvatarResponse/>
+                </div>
+                <TextInput inputActive={true} inputRef={input} sendMessage={sendMessage}/>
+                <InstallDemoApp />
+                <ContactSales />
+              </div>
+            </>
+          )
+        )
+      }
     </div>
   );
 

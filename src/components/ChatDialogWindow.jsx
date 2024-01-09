@@ -28,17 +28,18 @@ export const ChatDialogWindow = () => {
   if(!showChat) return <></>
 
   return (
-    <div style={{
-      position: 'fixed',
-      boxShadow: 'rgba(23, 73, 77, 0.15) 0px 20px 30px',
-      zIndex: 999999,
-      borderRadius: '10px',
-      transformOrigin: 'center bottom',
-      border: '0px',
-      height: '700px',
-      maxHeight: 'calc(100vh - 104px)',
-      inset: 'auto 20px 20px auto',
-    }} className='pointer-events-auto'>
+    <div className='
+      flex flex-col justify-end
+      fixed
+      shadow-[0_20px_30px_rgba(23,73,77,0.15)]
+      z-[999999]
+      rounded-[10px]
+      origin-center-bottom
+      border-0
+      h-[700px]
+      max-h-[calc(100vh-104px)]
+      inset-auto right-5 bottom-5
+      pointer-events-auto'>
       {showCompanyIdError && (
         <div className="flex h-screen w-full flex-col justify-center items-center">
           <h1>Missing parameter: <em>company_id</em></h1>
@@ -50,12 +51,13 @@ export const ChatDialogWindow = () => {
           <h1>Error loading companyId <em>{companyId}</em></h1>
         </div>
       )}
-      {conversation ? <ChatPage /> : <CreateNewConvoPage/>}
       {loading && (
         <div className="flex h-screen w-full flex-col justify-center items-center bg-white bg-opacity-50 z-99">
           <FaCog className="animate-spin" style={{ fontSize: '24px' }} />
         </div>
       )}
+
+      {conversation ? <ChatPage /> : <CreateNewConvoPage/>}
     </div>
   );
 

@@ -74,7 +74,7 @@ export const ChatWindow = () => {
   };
 
   return (
-    <div className="flex h-screen w-full flex-col justify-start md:justify-center items-center pb-2 pt-5">
+    <div className="flex w-full flex-col justify-start md:justify-end items-center pb-2 pt-5">
       <h1>Welcome to <span className='font-extrabold text-xl'>{company && company.name}</span></h1>
       <TextInput inputActive={true} inputRef={input} sendMessage={sendMessage}/>
       <AvatarResponse />

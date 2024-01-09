@@ -7,7 +7,7 @@ export const AvatarWindow = () => {
       shadows
       camera={{ position: [0, 0, 1], fov: 30 }}
       onClick={()=>console.log('clicked the avatar')}
-      className=''
+      className='w-44'
     >
       <Experience />
     </Canvas>

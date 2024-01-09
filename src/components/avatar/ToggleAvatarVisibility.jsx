@@ -7,11 +7,8 @@ export const ToggleAvatarVisibility = () => {
   } = useAvatar()
 
   return (
-    <div className='
-        flex flex-row items-center justify-center
-        bg-red-500 rounded-xl p-1
-      '>
-      <span className='text-white font-bold mr-2'>Avatar:</span>
+    <div className='flex flex-row items-center justify-center rounded-xl p-1'>
+      <span className='font-bold mr-2'>Avatar:</span>
       <button
         className={`
           text-amber-100 font-extrabold border-yellow-300 border-2 rounded-xl p-2 mx-1

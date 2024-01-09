@@ -8,11 +8,6 @@ import { useThree } from '@react-three/fiber';
 import * as THREE from "three";
 
 export const Experience = () => {
-  // const cameraControls = useRef();
-  // useEffect(() => {
-  //   console.log(cameraControls.current.setLookAt)
-  //   cameraControls.current.setLookAt(0, 1.5, 1.5, 0, 1.5, 0, false);
-  // }, []);
   const { camera } = useThree();
   useEffect(() => {
     camera.position.set(-0.1, 1.7, 1.5);

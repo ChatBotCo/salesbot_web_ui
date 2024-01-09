@@ -41,7 +41,6 @@ export const ChatProvider = ({ children }) => {
   const [debugging, _] = useState(
     localStorage.getItem('debugging')==='true'
   )
-  const [showChat, setShowChat] = useState(false)
   const [loading, setLoading] = useState(false)
   const [companyLoadError, setCompanyLoadError] = useState(false)
   const [companyId, setCompanyId] = useState(
@@ -58,6 +57,13 @@ export const ChatProvider = ({ children }) => {
   const setConversation = convo => {
     localStorage.setItem('conversation', JSON.stringify(convo))
     _setConversation(convo)
+  }
+  const [showChat, _setShowChat] = useState(
+    localStorage.getItem('showChat')==='true'
+  )
+  const setShowChat = _showChat => {
+    localStorage.setItem('showChat', _showChat)
+    _setShowChat(_showChat)
   }
 
 

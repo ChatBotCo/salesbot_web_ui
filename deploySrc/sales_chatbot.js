@@ -18,7 +18,7 @@
   // Load the chatbot's CSS
   var chatbotCSS = document.createElement('link');
   // chatbotCSS.href = 'http://localhost:5173/deleteme/index.css';
-  chatbotCSS.href = 'https://kelichatbot2.blob.core.windows.net/salesbot-assets/index-deploySrc_v0.1.css';
+  chatbotCSS.href = 'https://kelichatbot2.blob.core.windows.net/salesbot-assets/index-deploySrc_v0.2.css';
   chatbotCSS.rel = 'stylesheet';
   chatbotCSS.type = 'text/css';
   document.head.appendChild(chatbotCSS);
@@ -26,7 +26,7 @@
   // Load the chatbot's JavaScript bundle
   var chatbotScript = document.createElement('script');
   // chatbotScript.src = 'http://localhost:5173/deleteme/index.js';
-  chatbotScript.src = 'https://kelichatbot2.blob.core.windows.net/salesbot-assets/index-deploySrc_v0.1.js';
+  chatbotScript.src = 'https://kelichatbot2.blob.core.windows.net/salesbot-assets/index-deploySrc_v0.2.js';
   chatbotScript.async = true;
   chatbotScript.onload = function() {
     // Initialize the chatbot here if needed

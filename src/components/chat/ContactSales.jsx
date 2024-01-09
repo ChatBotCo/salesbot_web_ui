@@ -12,7 +12,6 @@ export const ContactSales = () => {
     colorBorder,
   } = useStyle();
 
-  console.log(colorText)
   if(company && company.contact_form) {
     return (
       <div className={`text-[${colorText}] font-extrabold border-[${colorBorder}] border-2 bg-[${colorBg}] rounded-xl p-2 m-1`}>

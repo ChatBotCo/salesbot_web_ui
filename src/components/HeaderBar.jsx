@@ -11,7 +11,7 @@ export const HeaderBar = () => {
     <div className='
       flex flex-row justify-between items-center
       w-full bg-blue-500
-      text-white rounded-t-[8px] p-4
+      text-white md:rounded-t-[8px] p-4
     '>
       <h1>Welcome to <span className='font-extrabold text-xl'>{company && company.name}</span></h1>
       <button

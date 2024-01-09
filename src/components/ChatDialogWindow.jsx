@@ -16,13 +16,14 @@ export const ChatDialogWindow = () => {
       fixed
       shadow-[0_20px_30px_rgba(23,73,77,0.15)]
       z-[999999]
-      rounded-[10px]
+      sm:rounded-[10px]
       origin-center-bottom
-      max-h-[calc(100vh-104px)]
-      inset-auto right-5 bottom-5
+      sm:max-h-[calc(100vh-104px)]
+      inset-0 sm:inset-auto sm:right-5 sm:bottom-5
       pointer-events-auto
       border border-blue-500
-      '>
+      w-full h-full sm:w-auto sm:h-auto
+    '>
       {
           conversation ? <ChatPage /> : <CreateNewConvoPage/>
       }

@@ -51,11 +51,6 @@ export const ChatDialogWindow = () => {
           <h1>Error loading companyId <em>{companyId}</em></h1>
         </div>
       )}
-      {loading && (
-        <div className="flex h-screen w-full flex-col justify-center items-center bg-white bg-opacity-50 z-99">
-          <FaCog className="animate-spin" style={{ fontSize: '24px' }} />
-        </div>
-      )}
 
       {conversation ? <ChatPage /> : <CreateNewConvoPage/>}
     </div>

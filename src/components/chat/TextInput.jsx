@@ -1,7 +1,13 @@
-import { FaPaperPlane } from 'react-icons/fa';
+import {FaCog, FaPaperPlane} from 'react-icons/fa';
+import {useChat} from "../../hooks/useChat.jsx";
+import {FaC} from "react-icons/fa6";
 
 export const TextInput = ({sendMessage, inputActive, inputRef}) => {
+  const {
+    loading,
+  } = useChat();
 
+  const chatDisabled = !inputActive || loading
   return (
     <>
       <div className="flex flex-row justify-start items-start w-full md:w-96 p-4 md:pl-0 md:pr-0">
@@ -19,13 +25,16 @@ export const TextInput = ({sendMessage, inputActive, inputRef}) => {
 
         <div className="flex flex-row justify-center">
           <button
-            disabled={!inputActive}
+            disabled={chatDisabled}
             onClick={sendMessage}
             className={`text-white bg-blue-500 rounded p-2 ml-2 ${
-              !inputActive ? "cursor-not-allowed opacity-30" : ""
+              chatDisabled ? "cursor-not-allowed opacity-30" : ""
             }`}
           >
-            <FaPaperPlane className='h-full'/>
+            {chatDisabled ?
+              <FaCog className='h-full animate-spin'/>:
+              <FaPaperPlane className='h-full'/>
+            }
           </button>
         </div>
       </div>
@@ -33,3 +42,9 @@ export const TextInput = ({sendMessage, inputActive, inputRef}) => {
   );
 
 };
+
+// {loading && (
+//   <div className="flex h-screen w-full flex-col justify-center items-center bg-white bg-opacity-50 z-99">
+//     <FaCog className="animate-spin" style={{ fontSize: '24px' }} />
+//   </div>
+// )}

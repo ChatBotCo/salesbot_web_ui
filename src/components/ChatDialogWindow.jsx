@@ -35,11 +35,11 @@ export const ChatDialogWindow = () => {
       z-[999999]
       rounded-[10px]
       origin-center-bottom
-      border-0
-      h-[700px]
       max-h-[calc(100vh-104px)]
       inset-auto right-5 bottom-5
-      pointer-events-auto'>
+      pointer-events-auto
+      border border-blue-500
+      '>
       {showCompanyIdError && (
         <div className="flex h-screen w-full flex-col justify-center items-center">
           <h1>Missing parameter: <em>company_id</em></h1>

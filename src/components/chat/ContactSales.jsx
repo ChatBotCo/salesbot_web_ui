@@ -6,7 +6,7 @@ export const ContactSales = () => {
     avatarResponse,
   } = useChat();
 
-  if(avatarResponse && avatarResponse.user_data.user_wants_to_be_contacted) {
+  if(company.contact_form) {
     return (
       <div className='text-amber-100 font-extrabold border-yellow-300 border-2 bg-blue-500 rounded-xl p-2 m-1'>
         <a target='_blank' href={company.contact_link}><h1>Click HERE to contact us!</h1></a>

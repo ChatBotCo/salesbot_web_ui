@@ -7,6 +7,7 @@ import {TextInput} from "../components/chat/TextInput.jsx";
 import {InstallDemoApp} from "../components/chat/InstallDemoApp.jsx";
 import {ContactSales} from "../components/chat/ContactSales.jsx";
 import {AvatarResponse} from "../components/chat/AvatarResponse.jsx";
+import {HeaderBar} from "../components/HeaderBar.jsx";
 
 export const ChatPage = () => {
   const {
@@ -17,6 +18,7 @@ export const ChatPage = () => {
     conversation,
     avatarResponse,
     setAvatarResponse,
+    lastAvatarResponseText,
     setLastAvatarResponseText,
     resetConvo,
     mute,
@@ -76,20 +78,26 @@ export const ChatPage = () => {
   };
 
   return (
-    <div className="flex flex-col justify-end items-end">
-      <h1>Welcome to <span className='font-extrabold text-xl'>{company && company.name}</span></h1>
-      <div className="flex flex-row justify-between items-end w-96">
-        <AvatarWindow/>
-        <AvatarResponse/>
-      </div>
-      <TextInput inputActive={true} inputRef={input} sendMessage={sendMessage}/>
-      <InstallDemoApp />
-      <ContactSales />
+    <div className="flex flex-col w-full h-full justify-between items-center">
+      <HeaderBar/>
       <a
         className='text-blue-500 underline cursor-pointer'
         onClick={resetConvo}
       >Reset conversation</a>
-      <MuteBtn/>
+      <div className='
+        flex flex-col justify-end grow
+        overflow-x-hidden overflow-y-scroll
+        p-1
+      '>
+        <div className="flex flex-row justify-between items-end w-96">
+          <AvatarWindow/>
+          <AvatarResponse/>
+        </div>
+        <TextInput inputActive={true} inputRef={input} sendMessage={sendMessage}/>
+        <InstallDemoApp />
+        <ContactSales />
+        <MuteBtn/>
+      </div>
     </div>
   );
 

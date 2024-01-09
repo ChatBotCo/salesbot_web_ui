@@ -1,6 +1,7 @@
 import {FaVolumeMute, FaVolumeUp} from "react-icons/fa";
 import {useChat} from "../../hooks/useChat.jsx";
 import {useAvatar} from "../../hooks/useAvatar.jsx";
+import {useStyle} from "../../hooks/useStyle.jsx";
 
 export const MuteBtn = () => {
 
@@ -13,16 +14,22 @@ export const MuteBtn = () => {
     showAvatar,
   } = useAvatar()
 
-  const muteBtnColor = mute? 'text-red-400' : 'text-blue-500'
+  const {
+    colorBg,
+    colorBorder,
+  } = useStyle()
+
+  const muteBtnColor = mute? 'text-red-400' : `text-[${colorBg}]`
   const padding = mute ? 'p-1' : 'p-2'
 
   if(!showAvatar) return <></>
 
+  console.log(colorBg)
   return (
     <div className={`
         flex flex-row items-center justify-center
         rounded-xl mr-3
-        border-2 ${mute ? 'border-red-400' : 'border-blue-500'}
+        border-2 ${mute ? 'border-red-400' : `border-[${colorBg}]`}
         bg-white
       `}>
       <button

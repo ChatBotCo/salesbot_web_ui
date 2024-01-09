@@ -1,10 +1,17 @@
 import {FaCog, FaPaperPlane} from 'react-icons/fa';
 import {useUtilities} from "../../hooks/useUtilities.jsx";
+import {useStyle} from "../../hooks/useStyle.jsx";
 
 export const TextInput = ({sendMessage, inputActive, inputRef}) => {
   const {
     loading,
   } = useUtilities();
+
+  const {
+    colorBg,
+    colorText,
+    colorBorder,
+  } = useStyle();
 
   const chatDisabled = !inputActive || loading
   return (
@@ -12,7 +19,9 @@ export const TextInput = ({sendMessage, inputActive, inputRef}) => {
       <div className="flex flex-row justify-start items-start w-full md:w-96 p-4 md:pl-0 md:pr-0">
         <input
           disabled={!inputActive}
-          className="w-full h-full placeholder:text-gray-500 placeholder:italic italic focus:outline-none rounded resize-none p-1"
+          className={`w-full h-full placeholder:text-gray-500 placeholder:italic italic focus:outline-none rounded resize-none p-1
+          border border-[${colorBorder}]
+          `}
           placeholder="Type your question here"
           ref={inputRef}
           onKeyDown={(e) => {
@@ -26,7 +35,7 @@ export const TextInput = ({sendMessage, inputActive, inputRef}) => {
           <button
             disabled={chatDisabled}
             onClick={sendMessage}
-            className={`text-white bg-blue-500 rounded p-2 ml-2 ${
+            className={`text-[${colorText}] bg-[${colorBg}] rounded p-2 ml-2 ${
               chatDisabled ? "cursor-not-allowed opacity-30" : ""
             }`}
           >

@@ -55,7 +55,9 @@ export const CompanyProvider = ({ children }) => {
           method: "GET",
         })
           .then(data=>data.json())
-          .then(setCompany)
+          .then(_company =>{
+            setCompany(_company)
+          })
           .catch(()=>setCompanyLoadError(true))
           .finally(()=>setLoading(false))
       }

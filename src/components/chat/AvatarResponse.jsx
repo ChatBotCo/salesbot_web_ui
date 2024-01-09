@@ -1,11 +1,14 @@
 import {useChat} from "../../hooks/useChat.jsx";
-import {useAvatar} from "../../hooks/useAvatar.jsx";
+import {useCompany} from "../../hooks/useCompany.jsx";
 
 export const AvatarResponse = () => {
   const {
-    company,
     lastAvatarResponseText,
   } = useChat();
+
+  const {
+    company,
+  } = useCompany();
 
   if(company && lastAvatarResponseText) {
     return (

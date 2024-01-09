@@ -1,57 +1,17 @@
-import { createContext, useContext, useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-
-let backendUrl = "https://salesbot-001.azurewebsites.net";
-// let backendUrl = "http://localhost:7071";
-if(localStorage.getItem('local_backend') === 'true') {
-  backendUrl = "http://localhost:7071"
-}
+import { createContext, useContext, useState } from "react";
+import {useUtilities} from "./useUtilities.jsx";
 
 const ChatContext = createContext();
 
-const useQuery = () => {
-  return new URLSearchParams(useLocation().search);
-}
-
-const getDataCompanyId = debugging => {
-  if(debugging) {
-    return useQuery().get('company_id');
-  } else {
-    const scriptTag = document.querySelector('script#sales_chatbot_script');
-    if (scriptTag) {
-      const _companyId = scriptTag.getAttribute('data-company-id');
-      if(_companyId) {
-        // console.log(`data-company-id:${_companyId}`);
-        return _companyId;
-      } else {
-        console.error('NOT FOUND: data-company-id - Did you forget to add it to the Sales ChatBot HTML element?');
-        return null;
-      }
-    } else {
-      console.error('NOT FOUND: script sales_chatbot.js - Did you forget to add the Sales ChatBot HTML script element?');
-      return null;
-    }
-  }
-}
-
-
-let initialized = false
-
 export const ChatProvider = ({ children }) => {
-  const query = useQuery();
-  const [debugging, _] = useState(
-    localStorage.getItem('debugging')==='true'
-  )
-  const [loading, setLoading] = useState(false)
-  const [companyLoadError, setCompanyLoadError] = useState(false)
-  const [companyId, setCompanyId] = useState(
-    // query.get("company_id")
-    getDataCompanyId(debugging)
-  )
+  const {
+    backendUrl,
+    setLoading,
+  } = useUtilities();
+
   const [avatarResponse, setAvatarResponse] = useState()
   const [lastAvatarResponseText, setLastAvatarResponseText] = useState('Hello!')
 
-  const [company, setCompany] = useState()
   const [conversation, _setConversation] = useState(
     JSON.parse(localStorage.getItem('conversation'))
   )
@@ -74,8 +34,6 @@ export const ChatProvider = ({ children }) => {
     _setMute(_mute)
   }
 
-
-
   const resetConvo = () => {
     if(window.confirm("Are you sure you want to reset this conversation?")) {
       setConversation(null)
@@ -84,29 +42,15 @@ export const ChatProvider = ({ children }) => {
     }
   }
 
-  useEffect(() => {
-    if(!initialized) {
-      initialized = true
-      if(companyId && !company) {
-        setLoading(true)
-        fetch(`${backendUrl}/api/company?companyid=${companyId}`, {
-          method: "GET",
-        })
-          .then(data=>data.json())
-          .then(setCompany)
-          .catch(()=>setCompanyLoadError(true))
-          .finally(()=>setLoading(false))
-      }
-    }
-  }, []);
-
   const createNewConvo = () => {
+    setLoading(true)
     fetch(`${backendUrl}/api/create_conversation?companyid=${companyId}`, {
       method: "POST",
     })
       .then(data=>data.json())
       .then(setConversation)
       .catch(()=>alert("error creating conversation"))
+      .finally(()=>setLoading(false))
   }
 
   const [audio, setAudio] = useState();
@@ -118,15 +62,9 @@ export const ChatProvider = ({ children }) => {
   return (
     <ChatContext.Provider
       value={{
-        loading,
-        setLoading,
-        backendUrl,
         conversation,
         setConversation,
         resetConvo,
-        companyId,
-        company,
-        companyLoadError,
         createNewConvo,
         avatarResponse,
         setAvatarResponse,

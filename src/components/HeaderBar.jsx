@@ -1,11 +1,15 @@
 import {useChat} from "../hooks/useChat.jsx";
 import {FaArrowDown} from "react-icons/fa";
+import {useCompany} from "../hooks/useCompany.jsx";
 
 export const HeaderBar = () => {
   const {
-    company,
     setShowChat,
   } = useChat();
+
+  const {
+    company,
+  } = useCompany();
 
   return (
     <div className='

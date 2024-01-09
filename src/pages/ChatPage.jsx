@@ -1,6 +1,8 @@
 import {AvatarWindow} from "../components/avatar/AvatarWindow.jsx";
 import {useAvatar} from "../hooks/useAvatar.jsx";
 import {useChat} from "../hooks/useChat.jsx";
+import {useUtilities} from "../hooks/useUtilities.jsx";
+import {useCompany} from "../hooks/useCompany.jsx";
 import {useEffect, useRef, useState} from "react";
 import {TextInput} from "../components/chat/TextInput.jsx";
 import {InstallDemoApp} from "../components/chat/InstallDemoApp.jsx";
@@ -13,11 +15,6 @@ let initialized = false
 
 export const ChatPage = () => {
   const {
-    companyId,
-    backendUrl,
-    loading,
-    setLoading,
-    company,
     conversation,
     avatarResponse,
     setAvatarResponse,
@@ -26,8 +23,19 @@ export const ChatPage = () => {
     mute,
     onMessagePlayed,
     setAudio,
-    companyLoadError,
   } = useChat();
+
+  const {
+    companyId,
+    company,
+    companyLoadError,
+  } = useCompany();
+
+  const {
+    backendUrl,
+    loading,
+    setLoading,
+  } = useUtilities();
 
   const {
     showAvatar,

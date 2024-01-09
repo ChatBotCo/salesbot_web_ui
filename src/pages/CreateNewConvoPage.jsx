@@ -1,10 +1,14 @@
 import {useChat} from "../hooks/useChat.jsx";
+import {useCompany} from "../hooks/useCompany.jsx";
 
 export const CreateNewConvoPage = () => {
   const {
-    company,
     createNewConvo,
   } = useChat();
+
+  const {
+    company,
+  } = useCompany();
 
   return (
     <div className="flex h-screen w-full flex-col justify-center items-center">

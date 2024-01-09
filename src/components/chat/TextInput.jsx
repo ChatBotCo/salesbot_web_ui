@@ -1,11 +1,10 @@
 import {FaCog, FaPaperPlane} from 'react-icons/fa';
-import {useChat} from "../../hooks/useChat.jsx";
-import {FaC} from "react-icons/fa6";
+import {useUtilities} from "../../hooks/useUtilities.jsx";
 
 export const TextInput = ({sendMessage, inputActive, inputRef}) => {
   const {
     loading,
-  } = useChat();
+  } = useUtilities();
 
   const chatDisabled = !inputActive || loading
   return (

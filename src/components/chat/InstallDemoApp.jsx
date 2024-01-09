@@ -1,10 +1,9 @@
-import {useChat} from "../../hooks/useChat.jsx";
+import {useCompany} from "../../hooks/useCompany.jsx";
 
 export const InstallDemoApp = () => {
   const {
     company,
-    avatarResponse,
-  } = useChat();
+  } = useCompany();
 
   if(company && company.contact_demo_app_install) {
     return (

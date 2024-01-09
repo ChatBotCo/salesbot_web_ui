@@ -96,7 +96,6 @@ export const ChatPage = () => {
         <TextInput inputActive={true} inputRef={input} sendMessage={sendMessage}/>
         <InstallDemoApp />
         <ContactSales />
-        <MuteBtn/>
       </div>
     </div>
   );

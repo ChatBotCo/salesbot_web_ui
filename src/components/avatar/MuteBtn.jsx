@@ -19,16 +19,17 @@ export const MuteBtn = () => {
   if(!showAvatar) return <></>
 
   return (
-    <div className='
+    <div className={`
         flex flex-row items-center justify-center
         rounded-xl mr-3
-        border-2 border-blue-500
-      '>
+        border-2 ${mute ? 'border-red-400' : 'border-blue-500'}
+        bg-white
+      `}>
       <button
-        className={`flex-shrink-0 flex flex-row items-center ${padding} bg-blend-luminosity bg-opacity-80 ${muteBtnColor} pointer-events-auto`}
+        className={`flex-shrink-0 flex flex-row items-center p-2 bg-blend-luminosity bg-opacity-80 ${muteBtnColor} pointer-events-auto`}
         onClick={()=>setMute(!mute)}
       >
-        <span className="pr-3">{mute ? 'Muted' : 'Unmuted'}</span>
+        {/*<span className="pr-3">{mute ? 'Muted' : 'Unmuted'}</span>*/}
         {mute ? <FaVolumeMute /> : <FaVolumeUp />}
       </button>
     </div>

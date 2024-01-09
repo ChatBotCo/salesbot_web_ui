@@ -6,7 +6,6 @@ export const InstallDemoApp = () => {
     avatarResponse,
   } = useChat();
 
-  console.log(company)
   if(company && company.contact_demo_app_install) {
     return (
       <div className='text-amber-100 font-extrabold border-yellow-300 border-2 bg-blue-500 rounded-xl p-2 m-1'>

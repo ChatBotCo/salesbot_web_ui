@@ -17,13 +17,16 @@ export const HeaderBar = () => {
     company,
   } = useCompany();
 
+  const avatarName = company && company.avatar.name
+
   return (
     <div className={`
       flex flex-row justify-between items-center w-full
       ${colorBgEm} ${colorTextEm} 
       md:rounded-t-[8px] p-4
+      font-extrabold
     `}>
-      <h1>Welcome to <span className='font-extrabold text-xl'>{company?.name}</span></h1>
+      <h1>Chat with {avatarName}</h1>
       <button onClick={() => setShowChat(false)} className={`${colorTextEm} ${colorBgEm} rounded w-4 cursor-pointer`}>
         <FaArrowDown className='w-full h-full'/>
       </button>

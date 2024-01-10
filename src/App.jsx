@@ -16,7 +16,7 @@ function App() {
   } = useCompany();
 
   return (
-    <div className='pointer-events-auto'>
+    <div>
       {company && (
         showChat ?
           <ChatDialogWindow /> :

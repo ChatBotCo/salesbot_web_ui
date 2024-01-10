@@ -44,13 +44,7 @@ export const ChatProvider = ({ children }) => {
   }, []);
 
 
-  const [showChat, _setShowChat] = useState(
-    localStorage.getItem('showChat')==='true'
-  )
-  const setShowChat = _showChat => {
-    localStorage.setItem('showChat', _showChat)
-    _setShowChat(_showChat)
-  }
+  const [showChat, setShowChat] = useState(false)
 
 
   const [mute, _setMute] = useState(localStorage.getItem('mute')==='true' )

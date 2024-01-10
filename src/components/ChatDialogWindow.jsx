@@ -1,5 +1,4 @@
 import {ChatPage} from "../pages/ChatPage.jsx";
-import {CreateNewConvoPage} from "../pages/CreateNewConvoPage.jsx";
 import {useChat} from "../hooks/useChat.jsx";
 import {useCompany} from "../hooks/useCompany.jsx";
 import {useStyle} from "../hooks/useStyle.jsx";
@@ -35,7 +34,7 @@ export const ChatDialogWindow = () => {
       w-full h-full sm:w-auto sm:h-auto
     `}>
       {
-          conversation ? <ChatPage /> : <CreateNewConvoPage/>
+          conversation && <ChatPage />
       }
     </div>
   );

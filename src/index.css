@@ -1,11 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root {
-  --leva-sizes-rootWidth: 340px;
-}
 
 #sales_chatbot_root {
   width: 100vw;
@@ -13,12 +8,6 @@
   background-color: transparent;
   pointer-events: none;
   overflow: hidden;
-}
-
-body {
-  margin: 0;
-  overflow: hidden;
-  background-color: #5f5fbe;
 }
 
 @keyframes spin {

@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded",
     var chatbotContainer = document.createElement('div');
     chatbotContainer.id = 'sales_chatbot_root';
     chatbotContainer.style.pointerEvents = 'none';
+    chatbotContainer.style.width = '1px';
+    chatbotContainer.style.height = '1px';
     document.body.appendChild(chatbotContainer);
 
     // Load the chatbot's CSS

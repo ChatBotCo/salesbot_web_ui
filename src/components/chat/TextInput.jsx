@@ -8,8 +8,8 @@ export const TextInput = ({sendMessage, inputActive, inputRef}) => {
   } = useUtilities();
 
   const {
-    colorBg,
-    colorText,
+    colorBgEm,
+    colorTextEm,
     colorBorder,
   } = useStyle();
 
@@ -20,7 +20,7 @@ export const TextInput = ({sendMessage, inputActive, inputRef}) => {
         <input
           disabled={!inputActive}
           className={`w-full h-full placeholder:text-gray-500 placeholder:italic italic focus:outline-none rounded resize-none p-1
-          border border-[${colorBorder}]
+          border ${colorBorder}
           `}
           placeholder="Type your question here"
           ref={inputRef}
@@ -35,7 +35,7 @@ export const TextInput = ({sendMessage, inputActive, inputRef}) => {
           <button
             disabled={chatDisabled}
             onClick={sendMessage}
-            className={`text-[${colorText}] bg-[${colorBg}] rounded p-2 ml-2 ${
+            className={`${colorTextEm} ${colorBgEm} rounded p-2 ml-2 ${
               chatDisabled ? "cursor-not-allowed opacity-30" : ""
             }`}
           >

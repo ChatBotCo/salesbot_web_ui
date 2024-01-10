@@ -7,14 +7,14 @@ export const InstallDemoApp = () => {
   } = useCompany();
 
   const {
-    colorBg,
-    colorText,
+    colorBgEm,
+    colorTextEm,
     colorBorder,
   } = useStyle();
 
   if(company && company.contact_demo_app_install) {
     return (
-      <div className={`text-[${colorText}] font-extrabold border-[${colorBorder}] border-2 bg-[${colorBg}] rounded-xl p-2 m-1`}>
+      <div className={`${colorTextEm} font-extrabold ${colorBorder} border-2 ${colorBgEm} rounded-xl p-2 m-1`}>
         <a target='_blank' href={company.contact_link}><h1>Click HERE to load the app</h1></a>
       </div>
     )

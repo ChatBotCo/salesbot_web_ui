@@ -31,7 +31,7 @@ export const ChatDialogWindow = () => {
       sm:max-h-[calc(100vh-104px)]
       inset-0 sm:inset-auto sm:right-5 sm:bottom-5
       pointer-events-auto
-      border border-[${colorBorder}]
+      border ${colorBorder}
       w-full h-full sm:w-auto sm:h-auto
     `}>
       {

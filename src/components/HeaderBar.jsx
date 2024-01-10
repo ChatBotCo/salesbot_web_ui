@@ -9,8 +9,8 @@ export const HeaderBar = () => {
   } = useChat();
 
   const {
-    colorBg,
-    colorText,
+    colorBgEm,
+    colorTextEm,
   } = useStyle();
 
   const {
@@ -19,12 +19,12 @@ export const HeaderBar = () => {
 
   return (
     <div className={`
-      flex flex-row justify-between items-center w-full 
-      bg-[${colorBg}] text-[${colorText}] 
+      flex flex-row justify-between items-center w-full
+      ${colorBgEm} ${colorTextEm} 
       md:rounded-t-[8px] p-4
     `}>
       <h1>Welcome to <span className='font-extrabold text-xl'>{company?.name}</span></h1>
-      <button onClick={() => setShowChat(false)} className={`text-[${colorText}] bg-[${colorBg}] rounded w-4 cursor-pointer`}>
+      <button onClick={() => setShowChat(false)} className={`${colorTextEm} ${colorBgEm} rounded w-4 cursor-pointer`}>
         <FaArrowDown className='w-full h-full'/>
       </button>
     </div>

@@ -15,21 +15,19 @@ export const MuteBtn = () => {
   } = useAvatar()
 
   const {
-    colorBg,
-    colorBorder,
+    colorText,
   } = useStyle()
 
-  const muteBtnColor = mute? 'text-red-400' : `text-[${colorBg}]`
-  const padding = mute ? 'p-1' : 'p-2'
+  const muteBtnColor = mute? 'text-red-400' : `${colorText}`
+  const borderColor = mute? 'text-red-400' : 'border-gray'
 
   if(!showAvatar) return <></>
 
-  console.log(colorBg)
   return (
     <div className={`
         flex flex-row items-center justify-center
         rounded-xl mr-3
-        border-2 ${mute ? 'border-red-400' : `border-[${colorBg}]`}
+        border-2 ${mute ? 'border-red-400' : `${borderColor}`}
         bg-white
       `}>
       <button

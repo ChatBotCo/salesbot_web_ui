@@ -8,22 +8,50 @@ export const StyleProvider = ({ children }) => {
     company
   } = useCompany();
 
-  const [colorBg, setColorBg] = useState('blue-500');
-  const [colorText, setColorText] = useState('white');
-  const [colorBorder, setColorBorder] = useState('blue-800');
+  const [colorBgEm, setColorBgEm] = useState();
+  const [colorTextEm, setColorTextEm] = useState();
+  const [colorText, setColorText] = useState();
+  const [colorBorder, setColorBorder] = useState();
+
+  // Fucking tailwind piece of shit fuckwits
+  const companyToStyle = {
+    // 'edge.app': {color_bg: '#66EDA8', color_text: '#0D2145', color_border: '#0D2145'},
+    'edge.app': {
+      colorBgEm: 'bg-[#66EDA8]',
+      colorTextEm: 'text-[#0D2145]',
+      colorText: 'text-[#0D2145]',
+      colorBorder: 'border-[#0D2145]'
+    },
+    'blacktiecasinoevents': {
+      colorBgEm: 'bg-[rgb(175,132,44)]',
+      colorTextEm: 'text-white',
+      colorText: 'text-[rgb(175,132,44)]',
+      colorBorder: 'border-black'
+    },
+    'saleschat_bot': {
+      colorBgEm: 'bg-[rgb(51,65,85)]',
+      colorTextEm: 'text-white',
+      colorText: 'text-[rgb(51,65,85)]',
+      colorBorder: 'border-[rgb(4,162,247)]'
+    },
+  }
 
   useEffect(() => {
     if (company && company.style) {
-      setColorBg(company.style['color_bg']);
-      setColorText(company.style['color_text']);
-      setColorBorder(company.style['color_border']);
+      const companyStyle = companyToStyle[company.company_id]
+      // const companyStyle = company.style
+      setColorBgEm(companyStyle.colorBgEm);
+      setColorTextEm(companyStyle.colorTextEm);
+      setColorText(companyStyle.colorText);
+      setColorBorder(companyStyle.colorBorder);
     }
   }, [company]);
 
   return (
     <StyleContext.Provider
       value={{
-        colorBg,
+        colorBgEm,
+        colorTextEm,
         colorText,
         colorBorder,
       }}

@@ -7,14 +7,14 @@ export const ContactSales = () => {
   } = useCompany();
 
   const {
-    colorBg,
-    colorText,
+    colorBgEm,
+    colorTextEm,
     colorBorder,
   } = useStyle();
 
   if(company && company.contact_form) {
     return (
-      <div className={`text-[${colorText}] font-extrabold border-[${colorBorder}] border-2 bg-[${colorBg}] rounded-xl p-2 m-1`}>
+      <div className={`${colorTextEm} font-extrabold ${colorBorder} border-2 ${colorBgEm} rounded-xl p-2 m-1`}>
         <a target='_blank' href={company.contact_link}><h1>Click HERE to contact us!</h1></a>
       </div>
     )

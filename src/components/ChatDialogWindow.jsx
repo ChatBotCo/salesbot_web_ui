@@ -32,6 +32,7 @@ export const ChatDialogWindow = () => {
       pointer-events-auto
       border ${colorBorder}
       w-full h-full sm:w-auto sm:h-auto
+      bg-white
     `}>
       {
           conversation && <ChatPage />

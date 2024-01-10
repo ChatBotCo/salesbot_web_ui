@@ -18,11 +18,7 @@
 body {
   margin: 0;
   overflow: hidden;
-}
-
-body.greenScreen {
-  background-color: #00ff00;
-  background-image: none;
+  background-color: #5f5fbe;
 }
 
 @keyframes spin {

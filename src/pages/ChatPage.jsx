@@ -114,13 +114,9 @@ export const ChatPage = () => {
             </div>
           ) : (
             <>
-              <a
-                className='text-blue-500 underline cursor-pointer'
-                onClick={resetConvo}
-              >Reset conversation</a>
               <div className='
                 flex flex-col justify-end grow
-                overflow-x-hidden overflow-y-scroll
+                overflow-x-hidden overflow-y-auto
                 p-1
               '>
                 <div className="flex flex-row justify-between items-end w-96">

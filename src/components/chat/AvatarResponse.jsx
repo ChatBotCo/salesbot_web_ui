@@ -18,8 +18,7 @@ export const AvatarResponse = () => {
   // console.log(colorBgEm)
   if(company && lastAvatarResponseText) {
     return (
-      <div className={`w-full max-w-lg h-full max-h-56 p-4 md:pl-0 md:pr-0 italic ${colorText} overflow-y-scroll`}>
-        From <span className='font-semibold ml-1'>{company.name}</span>:<br/>
+      <div className={`w-full max-w-lg h-full max-h-56 p-4 md:pl-0 md:pr-0 italic ${colorText} overflow-y-auto`}>
         {lastAvatarResponseText}
       </div>
     );

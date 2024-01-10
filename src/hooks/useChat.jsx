@@ -14,10 +14,11 @@ export const ChatProvider = ({ children }) => {
 
   const {
     companyId,
+    company,
   } = useCompany();
 
   const [avatarResponse, setAvatarResponse] = useState()
-  const [lastAvatarResponseText, setLastAvatarResponseText] = useState('Hello!')
+  const [lastAvatarResponseText, setLastAvatarResponseText] = useState()
 
   const [conversation, _setConversation] = useState(
     JSON.parse(localStorage.getItem('conversation'))
@@ -26,6 +27,12 @@ export const ChatProvider = ({ children }) => {
     localStorage.setItem('conversation', JSON.stringify(convo))
     _setConversation(convo)
   }
+
+  useEffect(() => {
+    if(company && !lastAvatarResponseText) {
+      setLastAvatarResponseText(company.greeting)
+    }
+  }, [company]);
 
   useEffect(() => {
     if(!initialized) {

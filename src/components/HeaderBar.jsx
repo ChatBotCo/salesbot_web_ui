@@ -26,7 +26,7 @@ export const HeaderBar = () => {
       md:rounded-t-[8px] p-4
       font-extrabold
     `}>
-      <h1>Chat with {avatarName}</h1>
+      <h1 className={`${colorTextEm}`}>Chat with {avatarName}</h1>
       <button onClick={() => setShowChat(false)} className={`${colorTextEm} ${colorBgEm} rounded w-4 cursor-pointer`}>
         <FaArrowDown className='w-full h-full'/>
       </button>

@@ -50,9 +50,3 @@ export const TextInput = ({sendMessage, inputActive, inputRef}) => {
   );
 
 };
-
-// {loading && (
-//   <div className="flex h-screen w-full flex-col justify-center items-center bg-white bg-opacity-50 z-99">
-//     <FaCog className="animate-spin" style={{ fontSize: '24px' }} />
-//   </div>
-// )}

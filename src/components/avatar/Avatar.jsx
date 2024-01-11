@@ -137,11 +137,17 @@ export function Avatar() {
     animations.find((a) => a.name === "Idle") ? "Idle" : animations[0].name // Check if Idle animation exists otherwise use first animation
   );
   useEffect(() => {
+    const warn = console.warn;
+    console.warn = () => {};
     actions[animation]
       .reset()
       .fadeIn(mixer.stats.actions.inUse === 0 ? 0 : 0.5)
       .play();
-    return () => actions[animation].fadeOut(0.5);
+    console.warn = warn;
+    return () => {
+      const _anim = actions[animation]
+      _anim && _anim.fadeOut(0.5);
+    }
   }, [animation]);
 
   const lerpMorphTarget = (target, value, speed = 0.1) => {

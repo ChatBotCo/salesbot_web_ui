@@ -1,9 +1,8 @@
 import {AvatarWindow} from "./avatar/AvatarWindow.jsx";
-import {AvatarResponse} from "./avatar/AvatarResponse.jsx";
 import {useChat} from "../hooks/useChat.jsx";
 import {FaTimes} from "react-icons/fa";
 import {useStyle} from "../hooks/useStyle.jsx";
-import {useState} from "react";
+import {useCompany} from "../hooks/useCompany.jsx";
 
 export const AvatarWithGreeting = () => {
   const {
@@ -13,7 +12,12 @@ export const AvatarWithGreeting = () => {
   const {
     colorBgEm,
     colorTextEm,
+    colorText,
   } = useStyle()
+
+  const {
+    company,
+  } = useCompany()
 
   const onClickAvatar = () => {
     setViewMode(viewModes.chat)
@@ -28,6 +32,7 @@ export const AvatarWithGreeting = () => {
       pointer-events-auto
       w-96
     `}>
+
       <div className={`
         ${colorBgEm} ${colorTextEm} 
         rounded-3xl 
@@ -42,8 +47,22 @@ export const AvatarWithGreeting = () => {
       >
         <FaTimes />
       </div>
-      <AvatarResponse showSpeechBubble={true} onClick={onClickAvatar}/>
+
+      {company && (
+        <div className={`
+          w-full max-w-lg h-full max-h-56 
+          italic ${colorText} 
+          overflow-y-auto
+          bg-white p-2 rounded-lg border-gray-300 transform translate-x-16
+        `}
+             onClick={onClickAvatar}
+        >
+          {company.greeting}
+        </div>
+      )}
+
       <AvatarWindow showMuteBtn={false} onClick={onClickAvatar}/>
+
     </div>
   );
 

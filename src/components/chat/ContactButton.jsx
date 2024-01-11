@@ -13,7 +13,12 @@ export const ContactButton = ({label}) => {
   } = useStyle();
 
   return (
-    <div className={`${colorTextEm} font-extrabold ${colorBorder} border-2 ${colorBgEm} rounded-xl p-2 text-center`}>
+    <div className={`
+      ${colorTextEm} font-extrabold 
+      ${colorBorder} border-2 ${colorBgEm} rounded-xl 
+      p-2 ml-10 mr-10 mb-1
+      text-center
+    `}>
       <a target='_blank' href={company.contact_link}><h1 className={`${colorTextEm}`}>{label}</h1></a>
     </div>
   )

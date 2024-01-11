@@ -37,7 +37,7 @@ export const MuteBtn = () => {
     <div className={`
         flex flex-row items-center justify-center
         rounded-xl mr-3
-        border-2 ${mute ? 'border-red-400' : `${borderColor}`}
+        ${mute ? 'border-2 border-red-400 ml-0 mt-0' : 'ml-0.5 mt-0.5'}
         bg-white
       `}>
       <button

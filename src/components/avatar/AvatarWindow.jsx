@@ -14,7 +14,7 @@ export const AvatarWindow = ({showMuteBtn, onClick}) => {
         <Experience />
       </Canvas>
       {showMuteBtn &&
-        <div className="absolute bottom-0 right-0 p-2">
+        <div className="absolute top-0 left-0 p-2">
           <MuteBtn/>
         </div>
       }

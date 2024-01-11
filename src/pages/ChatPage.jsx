@@ -5,8 +5,8 @@ import {useUtilities} from "../hooks/useUtilities.jsx";
 import {useCompany} from "../hooks/useCompany.jsx";
 import {useEffect, useRef, useState} from "react";
 import {TextInput} from "../components/chat/TextInput.jsx";
-import {InstallDemoApp} from "../components/chat/InstallDemoApp.jsx";
-import {ContactSales} from "../components/chat/ContactSales.jsx";
+import {ButtonInstallDemoApp} from "../components/chat/ButtonInstallDemoApp.jsx";
+import {ButtonContactSales} from "../components/chat/ButtonContactSales.jsx";
 import {AvatarResponse} from "../components/avatar/AvatarResponse.jsx";
 import {HeaderBar} from "../components/HeaderBar.jsx";
 
@@ -124,8 +124,8 @@ export const ChatPage = () => {
                   <AvatarResponse/>
                 </div>
                 <TextInput inputActive={true} inputRef={input} sendMessage={sendMessage}/>
-                <InstallDemoApp />
-                <ContactSales />
+                <ButtonInstallDemoApp />
+                <ButtonContactSales />
               </div>
             </>
           )

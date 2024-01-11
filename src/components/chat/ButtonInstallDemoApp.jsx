@@ -1,7 +1,7 @@
 import {useCompany} from "../../hooks/useCompany.jsx";
 import {useStyle} from "../../hooks/useStyle.jsx";
 
-export const InstallDemoApp = () => {
+export const ButtonInstallDemoApp = () => {
   const {
     company,
   } = useCompany();

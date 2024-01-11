@@ -1,5 +1,5 @@
 import {AvatarWindow} from "./avatar/AvatarWindow.jsx";
-import {AvatarResponse} from "./chat/AvatarResponse.jsx";
+import {AvatarResponse} from "./avatar/AvatarResponse.jsx";
 import {useChat} from "../hooks/useChat.jsx";
 import {FaTimes} from "react-icons/fa";
 import {useStyle} from "../hooks/useStyle.jsx";

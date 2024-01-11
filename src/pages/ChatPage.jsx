@@ -7,7 +7,7 @@ import {useEffect, useRef, useState} from "react";
 import {TextInput} from "../components/chat/TextInput.jsx";
 import {InstallDemoApp} from "../components/chat/InstallDemoApp.jsx";
 import {ContactSales} from "../components/chat/ContactSales.jsx";
-import {AvatarResponse} from "../components/chat/AvatarResponse.jsx";
+import {AvatarResponse} from "../components/avatar/AvatarResponse.jsx";
 import {HeaderBar} from "../components/HeaderBar.jsx";
 
 

@@ -1,23 +1,15 @@
 import {ChatPage} from "../pages/ChatPage.jsx";
 import {useChat} from "../hooks/useChat.jsx";
-import {useCompany} from "../hooks/useCompany.jsx";
 import {useStyle} from "../hooks/useStyle.jsx";
 
 export const ChatDialogWindow = () => {
   const {
     conversation,
-    showChat,
   } = useChat();
-
-  const {
-    company,
-  } = useCompany();
 
   const {
     colorBorder,
   } = useStyle();
-
-  if(!showChat || !company) return <></>
 
   return (
     <div className={`

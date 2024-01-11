@@ -7,7 +7,7 @@ import {useState} from "react";
 
 export const AvatarWithGreeting = () => {
   const {
-    setShowChat,
+    viewModes, setViewMode,
   } = useChat()
 
   const {
@@ -15,10 +15,8 @@ export const AvatarWithGreeting = () => {
     colorTextEm,
   } = useStyle()
 
-  const [showSpeechBubble, setShowSpeechBubble] = useState(true);
-
   const onClickAvatar = () => {
-    setShowChat(true)
+    setViewMode(viewModes.chat)
   }
 
   return (
@@ -30,23 +28,21 @@ export const AvatarWithGreeting = () => {
       pointer-events-auto
       w-96
     `}>
-      {showSpeechBubble &&
-        <div className={`
-          ${colorBgEm} ${colorTextEm} 
-          rounded-3xl 
-          w-10 h-6 
-          text-xs 
-          flex items-center justify-center 
-          cursor-pointer
-          transform translate-x-16
-          z-10
-        `}
-             onClick={()=>setShowSpeechBubble(false)}
-        >
-          <FaTimes />
-        </div>
-      }
-      {showSpeechBubble && <AvatarResponse showSpeechBubble={true} onClick={onClickAvatar}/>}
+      <div className={`
+        ${colorBgEm} ${colorTextEm} 
+        rounded-3xl 
+        w-10 h-6 
+        text-xs 
+        flex items-center justify-center 
+        cursor-pointer
+        transform translate-x-16
+        z-10
+      `}
+           onClick={()=>setViewMode(viewModes.collapsed)}
+      >
+        <FaTimes />
+      </div>
+      <AvatarResponse showSpeechBubble={true} onClick={onClickAvatar}/>
       <AvatarWindow showMuteBtn={false} onClick={onClickAvatar}/>
     </div>
   );

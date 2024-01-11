@@ -5,7 +5,7 @@ import {useStyle} from "../hooks/useStyle.jsx";
 
 export const HeaderBar = () => {
   const {
-    setShowChat,
+      viewModes, setViewMode,
   } = useChat();
 
   const {
@@ -27,7 +27,7 @@ export const HeaderBar = () => {
       font-extrabold
     `}>
       <h1 className={`${colorTextEm}`}>Chat with {avatarName}</h1>
-      <button onClick={() => setShowChat(false)} className={`${colorTextEm} ${colorBgEm} rounded w-4 cursor-pointer`}>
+      <button onClick={() => setViewMode(viewModes.greeting)} className={`${colorTextEm} ${colorBgEm} rounded w-4 cursor-pointer`}>
         <FaArrowDown className='w-full h-full'/>
       </button>
     </div>

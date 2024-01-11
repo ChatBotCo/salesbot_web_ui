@@ -44,8 +44,12 @@ export const ChatProvider = ({ children }) => {
   }, []);
 
 
-  const [showChat, setShowChat] = useState(false)
-
+  const viewModes = {
+    collapsed:'collapsed',
+    greeting:'greeting',
+    chat:'chat',
+  }
+  const [viewMode, setViewMode] = useState(viewModes.greeting)
 
   const [mute, _setMute] = useState(localStorage.getItem('mute')==='true' )
   const setMute = _mute => {
@@ -91,7 +95,7 @@ export const ChatProvider = ({ children }) => {
         mute, setMute,
         onMessagePlayed,
         audio, setAudio,
-        showChat, setShowChat,
+        viewModes, viewMode, setViewMode,
       }}
     >
       {children}

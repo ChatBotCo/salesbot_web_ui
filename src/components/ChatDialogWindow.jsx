@@ -1,4 +1,4 @@
-import {ChatPage} from "../pages/ChatPage.jsx";
+import {ChatPage} from "./ChatPage.jsx";
 import {useChat} from "../hooks/useChat.jsx";
 import {useStyle} from "../hooks/useStyle.jsx";
 

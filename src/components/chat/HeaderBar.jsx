@@ -1,7 +1,7 @@
-import {useChat} from "../hooks/useChat.jsx";
+import {useChat} from "../../hooks/useChat.jsx";
 import {FaArrowDown} from "react-icons/fa";
-import {useCompany} from "../hooks/useCompany.jsx";
-import {useStyle} from "../hooks/useStyle.jsx";
+import {useCompany} from "../../hooks/useCompany.jsx";
+import {useStyle} from "../../hooks/useStyle.jsx";
 
 export const HeaderBar = () => {
   const {

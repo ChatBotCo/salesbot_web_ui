@@ -20,6 +20,7 @@ export const RootChatButton = () => {
         ${colorTextEm} ${colorBgEm} 
         border border-white rounded p-2 ml-2 w-12 h-12 
         cursor-pointer pointer-events-auto
+        z-[999999]
       `}
     >
       <FaComments className='w-full h-full'/>

@@ -4,8 +4,6 @@ import {useCompany} from "./useCompany.jsx";
 
 const ChatContext = createContext();
 
-let initialized = false
-
 export const ChatProvider = ({ children }) => {
   const {
     backendUrl,
@@ -37,15 +35,6 @@ export const ChatProvider = ({ children }) => {
       setLastAvatarResponseText(company.greeting)
     }
   }, [company]);
-
-  useEffect(() => {
-    if(!initialized) {
-      initialized = true
-      if(!conversation) {
-        createNewConvo()
-      }
-    }
-  }, []);
 
 
   const viewModes = {

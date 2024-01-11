@@ -1,15 +1,27 @@
+import {useEffect} from "react";
 import {ChatPage} from "./chat/ChatPage.jsx";
 import {useChat} from "../hooks/useChat.jsx";
 import {useStyle} from "../hooks/useStyle.jsx";
 
+let initialized = false
 export const ChatDialogWindow = () => {
   const {
     conversation,
+    createNewConvo,
   } = useChat();
 
   const {
     colorBorder,
   } = useStyle();
+
+  useEffect(() => {
+    if(!initialized) {
+      initialized = true
+      if(!conversation) {
+        createNewConvo()
+      }
+    }
+  }, []);
 
   return (
     <div className={`

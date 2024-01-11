@@ -9,6 +9,7 @@ import {ButtonInstallDemoApp} from "./chat/ButtonInstallDemoApp.jsx";
 import {ButtonContactSales} from "./chat/ButtonContactSales.jsx";
 import {AvatarResponse} from "./avatar/AvatarResponse.jsx";
 import {HeaderBar} from "./chat/HeaderBar.jsx";
+import {ContactButton} from "./chat/ContactButton.jsx";
 
 
 let initialized = false
@@ -124,8 +125,8 @@ export const ChatPage = () => {
                   <AvatarResponse/>
                 </div>
                 <TextInput inputActive={true} inputRef={input} sendMessage={sendMessage}/>
-                <ButtonInstallDemoApp />
-                <ButtonContactSales />
+                {company.contact_demo_app_install && <ContactButton label='Install Demo App' /> }
+                {company.contact_form && <ContactButton label='Contact Us' /> }
               </div>
             </>
           )

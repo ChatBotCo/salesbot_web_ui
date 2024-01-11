@@ -18,7 +18,11 @@ export const ChatProvider = ({ children }) => {
   } = useCompany();
 
   const [avatarResponse, setAvatarResponse] = useState()
-  const [lastAvatarResponseText, setLastAvatarResponseText] = useState()
+  const [lastAvatarResponseText, _setLastAvatarResponseText] = useState()
+  const setLastAvatarResponseText = _text => {
+    _setLastAvatarResponseText(_text)
+    setFeedbackSent(false)//Reset 'thank you' for user submitting feedback
+  }
 
   const [conversation, _setConversation] = useState(
     JSON.parse(localStorage.getItem('conversation'))
@@ -82,6 +86,20 @@ export const ChatProvider = ({ children }) => {
     setAvatarResponse();
   };
 
+
+  const [feedbackSent, setFeedbackSent] = useState(false);
+  const submitUserFeedback = userFeedback => {
+    setFeedbackSent(true)
+    fetch(`${backendUrl}/api/submit_user_feedback?convoid=${conversation.id}&companyid=${company.company_id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userFeedback),
+    })
+      .catch(()=>alert("error submitting user feedback"))
+  }
+
   return (
     <ChatContext.Provider
       value={{
@@ -96,6 +114,7 @@ export const ChatProvider = ({ children }) => {
         onMessagePlayed,
         audio, setAudio,
         viewModes, viewMode, setViewMode,
+        submitUserFeedback, feedbackSent,
       }}
     >
       {children}

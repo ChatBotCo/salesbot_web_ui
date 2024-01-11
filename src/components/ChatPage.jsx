@@ -8,6 +8,7 @@ import {TextInput} from "./chat/TextInput.jsx";
 import {AvatarResponse} from "./avatar/AvatarResponse.jsx";
 import {HeaderBar} from "./chat/HeaderBar.jsx";
 import {ContactButton} from "./chat/ContactButton.jsx";
+import {UserFeedback} from "./avatar/UserFeedback.jsx";
 
 
 let initialized = false
@@ -118,9 +119,12 @@ export const ChatPage = () => {
                 overflow-x-hidden overflow-y-auto
                 p-1
               '>
-                <div className="flex flex-row justify-between items-end w-96">
+                <div className="relative flex flex-row justify-between items-end w-96">
                   {showAvatar && <AvatarWindow showMuteBtn={true}/>}
                   <AvatarResponse/>
+                  <div className="absolute bottom-0 right-1">
+                    <UserFeedback />
+                  </div>
                 </div>
                 <TextInput inputActive={true} inputRef={input} sendMessage={sendMessage}/>
                 {company.contact_demo_app_install && <ContactButton label='Install Demo App' /> }

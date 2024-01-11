@@ -22,6 +22,7 @@ export const AvatarResponse = ({onClick}) => {
         italic ${colorText} 
         overflow-y-auto
         p-4 md:pl-0 md:pr-0
+        pb-7
       `}
            onClick={()=>{onClick && onClick()}}
       >

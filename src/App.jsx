@@ -17,16 +17,13 @@ function App() {
   let element
   switch(viewMode) {
     case viewModes.collapsed:
-      console.log('set collapsed')
       element = <RootChatButton/>
       break
     case viewModes.greeting:
-      console.log('set greeting')
       element = <AvatarWithGreeting />
       break
     case viewModes.chat:
     default:
-      console.log('set chat')
       element = <ChatDialogWindow />
       break
   }

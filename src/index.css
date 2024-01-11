@@ -20,10 +20,23 @@
 }
 
 @keyframes fadeInOut {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 1; }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .fade-in-out {
-  animation: fadeInOut 1s ease-in-out infinite;
+  animation: fadeInOut 0.2s ease-in-out forwards;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.slide-up-animation {
+  animation: slideUp 0.1s ease-out forwards;
 }

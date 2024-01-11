@@ -5,8 +5,6 @@ import {useUtilities} from "../hooks/useUtilities.jsx";
 import {useCompany} from "../hooks/useCompany.jsx";
 import {useEffect, useRef, useState} from "react";
 import {TextInput} from "./chat/TextInput.jsx";
-import {ButtonInstallDemoApp} from "./chat/ButtonInstallDemoApp.jsx";
-import {ButtonContactSales} from "./chat/ButtonContactSales.jsx";
 import {AvatarResponse} from "./avatar/AvatarResponse.jsx";
 import {HeaderBar} from "./chat/HeaderBar.jsx";
 import {ContactButton} from "./chat/ContactButton.jsx";

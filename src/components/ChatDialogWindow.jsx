@@ -25,6 +25,7 @@ export const ChatDialogWindow = () => {
       border ${colorBorder}
       w-full h-full sm:w-auto sm:h-auto
       bg-white
+      slide-up-animation fade-in-out
     `}>
       {
           conversation && <ChatPage />

@@ -32,6 +32,7 @@ export const AvatarWithGreeting = () => {
       sm:max-h-[calc(100vh-104px)]
       pointer-events-auto
       w-96
+      fade-in-out
     `}>
 
       <div className={`

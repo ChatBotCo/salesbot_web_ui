@@ -1,14 +1,14 @@
-import {AvatarWindow} from "./avatar/AvatarWindow.jsx";
-import {useAvatar} from "../hooks/useAvatar.jsx";
-import {useChat} from "../hooks/useChat.jsx";
-import {useUtilities} from "../hooks/useUtilities.jsx";
-import {useCompany} from "../hooks/useCompany.jsx";
+import {AvatarWindow} from "../avatar/AvatarWindow.jsx";
+import {useAvatar} from "../../hooks/useAvatar.jsx";
+import {useChat} from "../../hooks/useChat.jsx";
+import {useUtilities} from "../../hooks/useUtilities.jsx";
+import {useCompany} from "../../hooks/useCompany.jsx";
 import {useEffect, useRef, useState} from "react";
-import {TextInput} from "./chat/TextInput.jsx";
-import {AvatarResponse} from "./avatar/AvatarResponse.jsx";
-import {HeaderBar} from "./chat/HeaderBar.jsx";
-import {ContactButton} from "./chat/ContactButton.jsx";
-import {UserFeedback} from "./avatar/UserFeedback.jsx";
+import {TextInput} from "./TextInput.jsx";
+import {AvatarResponse} from "../avatar/AvatarResponse.jsx";
+import {HeaderBar} from "./HeaderBar.jsx";
+import {ContactButton} from "./ContactButton.jsx";
+import {UserFeedback} from "../avatar/UserFeedback.jsx";
 
 
 let initialized = false

@@ -13,6 +13,7 @@ export const AvatarWithGreeting = () => {
     colorBgEm,
     colorTextEm,
     colorText,
+    colorBorder,
   } = useStyle()
 
   const {
@@ -58,6 +59,16 @@ export const AvatarWithGreeting = () => {
              onClick={onClickAvatar}
         >
           {company.greeting}
+          <div className={`
+            ${colorTextEm}
+            ${colorBorder} border-2 
+            ${colorBgEm} 
+            rounded-lg p-1
+            text-center
+            cursor-pointer
+          `}>
+            Click here
+          </div>
         </div>
       )}
 

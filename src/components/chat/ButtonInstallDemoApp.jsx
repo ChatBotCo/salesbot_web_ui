@@ -14,7 +14,7 @@ export const ButtonInstallDemoApp = () => {
 
   if(company && company.contact_demo_app_install) {
     return (
-      <div className={`${colorTextEm} font-extrabold ${colorBorder} border-2 ${colorBgEm} rounded-xl p-2 m-1 text-center`}>
+      <div className={`${colorTextEm} font-extrabold ${colorBorder} border-2 ${colorBgEm} rounded-xl p-2 text-center`}>
         <a target='_blank' href={company.contact_link}><h1 className={`${colorTextEm}`}>Install Demo App</h1></a>
       </div>
     )

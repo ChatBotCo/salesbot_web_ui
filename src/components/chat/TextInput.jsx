@@ -16,15 +16,17 @@ export const TextInput = ({sendMessage, inputActive, inputRef}) => {
   const chatDisabled = !inputActive || loading
   return (
     <>
-      <div className="flex flex-row justify-start items-start w-full md:w-96 p-4 md:pl-0 md:pr-0">
+      <div className="flex flex-row justify-start items-start w-full md:w-96 p-2 md:pl-0 md:pr-0">
         <input
           disabled={!inputActive}
           className={`
+            relative
             w-full h-full 
             placeholder:text-gray-500 placeholder:italic italic 
             focus:outline-none rounded resize-none 
-            p-1
+            pt-3 pb-3 pl-2 pr-10
             text-black
+            shadow-[0_20px_30px_rgba(23,73,77,0.15)]
           border ${colorBorder}
           `}
           placeholder="Type your question here"
@@ -36,13 +38,17 @@ export const TextInput = ({sendMessage, inputActive, inputRef}) => {
           }}
         />
 
-        <div className="flex flex-row justify-center">
+        <div className="
+          flex flex-row justify-center
+          absolute right-2
+        ">
           <button
             disabled={chatDisabled}
             onClick={sendMessage}
-            className={`${colorTextEm} ${colorBgEm} rounded p-2 ml-2 ${
-              chatDisabled ? "cursor-not-allowed opacity-30" : ""
-            }`}
+            className={`
+              ${colorTextEm} ${colorBgEm} rounded-lg p-2 ml-2 mt-1 
+              ${chatDisabled ? "cursor-not-allowed opacity-30" : ""}
+            `}
           >
             {chatDisabled ?
               <FaCog className='h-full animate-spin'/>:

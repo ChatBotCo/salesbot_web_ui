@@ -23,7 +23,8 @@ export const HeaderBar = () => {
     <div className={`
       flex flex-row justify-between items-center w-full
       ${colorBgEm} ${colorTextEm} 
-      md:rounded-t-[8px] p-4
+      md:rounded-t-[8px] 
+      pl-4 pr-4 pt-3 pb-3
       font-extrabold
     `}>
       <h1 className={`${colorTextEm}`}>Chat with {avatarName}</h1>

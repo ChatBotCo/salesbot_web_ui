@@ -1,10 +1,10 @@
-import {useCompany} from "../../hooks/useCompany.jsx";
 import {useStyle} from "../../hooks/useStyle.jsx";
+import {useChatbot} from "../../hooks/useChatbot.jsx";
 
 export const ContactButton = ({label}) => {
   const {
-    company,
-  } = useCompany();
+    contactLink,
+  } = useChatbot();
 
   const {
     colorBgEm,
@@ -19,7 +19,7 @@ export const ContactButton = ({label}) => {
       p-2 ml-10 mr-10 mb-1
       text-center
     `}>
-      <a target='_blank' href={company.contact_link}><h1 className={`${colorTextEm}`}>{label}</h1></a>
+      <a target='_blank' href={contactLink}><h1 className={`${colorTextEm}`}>{label}</h1></a>
     </div>
   )
 

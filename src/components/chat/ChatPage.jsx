@@ -39,6 +39,7 @@ export const ChatPage = () => {
 
   const {
     showAvatar,
+    contactMethod,
   } = useChatbot()
 
   const input = useRef();
@@ -127,8 +128,8 @@ export const ChatPage = () => {
                   </div>
                 </div>
                 <TextInput inputActive={true} inputRef={input} sendMessage={sendMessage}/>
-                {company.contact_demo_app_install && <ContactButton label='Install Demo App' /> }
-                {company.contact_form && <ContactButton label='Contact Us' /> }
+                {contactMethod === 'app_install' && <ContactButton label='Install Demo App' /> }
+                {contactMethod === 'contact_form' && <ContactButton label='Contact Us' /> }
               </div>
             </>
           )

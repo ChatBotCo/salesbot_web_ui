@@ -19,6 +19,7 @@ export const ChatbotProvider = ({ children }) => {
 
   const [showAvatar, setShowAvatar] = useState(true)
   const [chatbotGreeting, setChatbotGreeting] = useState('')
+  const [contactMethod, setContactMethod] = useState('')
   useEffect(() => {
     if(!initialized) {
       initialized = true
@@ -32,6 +33,7 @@ export const ChatbotProvider = ({ children }) => {
             console.log(_chatbot)
             setShowAvatar(_chatbot.show_avatar)
             setChatbotGreeting(_chatbot.greeting)
+            setContactMethod(_chatbot.contact_method)
           })
           .catch(()=>setCompanyLoadError(true))
           .finally(()=>setLoading(false))
@@ -44,6 +46,7 @@ export const ChatbotProvider = ({ children }) => {
       value={{
         showAvatar,
         chatbotGreeting,
+        contactMethod,
       }}
     >
       {children}

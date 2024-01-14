@@ -1,6 +1,7 @@
 import {createContext, useContext, useEffect, useState} from "react";
 import {useUtilities} from "./useUtilities.jsx";
 import {useCompany} from "./useCompany.jsx";
+import {useChatbot} from "./useChatbot.jsx";
 
 const ChatContext = createContext();
 
@@ -14,6 +15,10 @@ export const ChatProvider = ({ children }) => {
     companyId,
     company,
   } = useCompany();
+
+  const {
+    chatbotGreeting,
+  } = useChatbot();
 
   const [avatarResponse, setAvatarResponse] = useState()
   const [lastAvatarResponseText, _setLastAvatarResponseText] = useState()
@@ -31,10 +36,10 @@ export const ChatProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    if(company && !lastAvatarResponseText) {
-      setLastAvatarResponseText(company.greeting)
+    if(chatbotGreeting && !lastAvatarResponseText) {
+      setLastAvatarResponseText(chatbotGreeting)
     }
-  }, [company]);
+  }, [chatbotGreeting]);
 
 
   const viewModes = {

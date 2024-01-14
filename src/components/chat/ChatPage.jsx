@@ -1,5 +1,4 @@
 import {AvatarWindow} from "../avatar/AvatarWindow.jsx";
-import {useAvatar} from "../../hooks/useAvatar.jsx";
 import {useChat} from "../../hooks/useChat.jsx";
 import {useUtilities} from "../../hooks/useUtilities.jsx";
 import {useCompany} from "../../hooks/useCompany.jsx";
@@ -9,6 +8,7 @@ import {AvatarResponse} from "../avatar/AvatarResponse.jsx";
 import {HeaderBar} from "./HeaderBar.jsx";
 import {ContactButton} from "./ContactButton.jsx";
 import {UserFeedback} from "../avatar/UserFeedback.jsx";
+import {useChatbot} from "../../hooks/useChatbot.jsx";
 
 
 let initialized = false
@@ -39,7 +39,7 @@ export const ChatPage = () => {
 
   const {
     showAvatar,
-  } = useAvatar()
+  } = useChatbot()
 
   const input = useRef();
 

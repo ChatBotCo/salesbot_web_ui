@@ -2,6 +2,7 @@ import {FaVolumeMute, FaVolumeUp} from "react-icons/fa";
 import {useChat} from "../../hooks/useChat.jsx";
 import {useAvatar} from "../../hooks/useAvatar.jsx";
 import {useStyle} from "../../hooks/useStyle.jsx";
+import {useChatbot} from "../../hooks/useChatbot.jsx";
 
 export const MuteBtn = () => {
 
@@ -14,7 +15,7 @@ export const MuteBtn = () => {
 
   const {
     showAvatar,
-  } = useAvatar()
+  } = useChatbot()
 
   const {
     colorText,

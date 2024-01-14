@@ -2,8 +2,8 @@ import {AvatarWindow} from "./avatar/AvatarWindow.jsx";
 import {useChat} from "../hooks/useChat.jsx";
 import {FaTimes} from "react-icons/fa";
 import {useStyle} from "../hooks/useStyle.jsx";
-import {useCompany} from "../hooks/useCompany.jsx";
 import {useAvatar} from "../hooks/useAvatar.jsx";
+import {useChatbot} from "../hooks/useChatbot.jsx";
 
 export const AvatarWithGreeting = () => {
   const {
@@ -18,12 +18,9 @@ export const AvatarWithGreeting = () => {
   } = useStyle()
 
   const {
-    company,
-  } = useCompany()
-
-  const {
     showAvatar,
-  } = useAvatar()
+    chatbotGreeting,
+  } = useChatbot()
 
   const onClickAvatar = () => {
     setViewMode(viewModes.chat)
@@ -55,7 +52,7 @@ export const AvatarWithGreeting = () => {
         <FaTimes />
       </div>
 
-      {company && (
+      {chatbotGreeting && (
         <div className={`
           w-full max-w-lg h-full max-h-56 
           italic ${colorText} 
@@ -65,7 +62,7 @@ export const AvatarWithGreeting = () => {
         `}
              onClick={onClickAvatar}
         >
-          {company.greeting}
+          {chatbotGreeting}
           <div className={`
             ${colorTextEm}
             ${colorBorder} border-2 

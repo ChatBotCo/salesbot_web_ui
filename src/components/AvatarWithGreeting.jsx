@@ -37,28 +37,15 @@ export const AvatarWithGreeting = () => {
       fade-in-out
     `}>
 
-      <div className={`
-        ${colorBgEm} ${colorTextEm} 
-        rounded-3xl 
-        w-10 h-6 
-        text-xs 
-        flex items-center justify-center 
-        cursor-pointer
-        ${showAvatar ? 'transform translate-x-16' : 'transform translate-x-6 -translate-y-6'}
-        z-10
-      `}
-           onClick={()=>setViewMode(viewModes.collapsed)}
-      >
-        <FaTimes />
-      </div>
-
       {chatbotGreeting && (
         <div className={`
-          w-full max-w-lg h-full max-h-56 
+          w-60 md:w-full max-w-lg h-full max-h-56 
           italic ${colorText} 
           overflow-y-auto
           translate-y
-          bg-white p-2 rounded-lg border-gray-300 ${showAvatar && 'transform translate-x-16'}
+          bg-white p-2 mb-1
+          rounded-lg border-gray-300 border 
+          ${showAvatar && 'transform translate-x-16'}
         `}
              onClick={onClickAvatar}
         >
@@ -77,6 +64,21 @@ export const AvatarWithGreeting = () => {
       )}
 
       {showAvatar && <AvatarWindow showMuteBtn={false} onClick={onClickAvatar}/>}
+
+      <div className={`
+        ${colorBgEm} ${colorTextEm} 
+        rounded-3xl 
+        w-10 h-6 
+        text-xs 
+        flex items-center justify-center 
+        cursor-pointer
+        ${showAvatar ? 'transform -translate-x-6' : 'transform -translate-x-2 -translate-y-4'}
+        z-10
+      `}
+           onClick={()=>setViewMode(viewModes.collapsed)}
+      >
+        <FaTimes />
+      </div>
 
     </div>
   );

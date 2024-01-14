@@ -3,6 +3,7 @@ import {useChat} from "../hooks/useChat.jsx";
 import {FaTimes} from "react-icons/fa";
 import {useStyle} from "../hooks/useStyle.jsx";
 import {useCompany} from "../hooks/useCompany.jsx";
+import {useAvatar} from "../hooks/useAvatar.jsx";
 
 export const AvatarWithGreeting = () => {
   const {
@@ -19,6 +20,10 @@ export const AvatarWithGreeting = () => {
   const {
     company,
   } = useCompany()
+
+  const {
+    showAvatar,
+  } = useAvatar()
 
   const onClickAvatar = () => {
     setViewMode(viewModes.chat)
@@ -42,7 +47,7 @@ export const AvatarWithGreeting = () => {
         text-xs 
         flex items-center justify-center 
         cursor-pointer
-        transform translate-x-16
+        ${showAvatar ? 'transform translate-x-16' : 'transform translate-x-6 -translate-y-6'}
         z-10
       `}
            onClick={()=>setViewMode(viewModes.collapsed)}
@@ -55,7 +60,8 @@ export const AvatarWithGreeting = () => {
           w-full max-w-lg h-full max-h-56 
           italic ${colorText} 
           overflow-y-auto
-          bg-white p-2 rounded-lg border-gray-300 transform translate-x-16
+          translate-y
+          bg-white p-2 rounded-lg border-gray-300 ${showAvatar && 'transform translate-x-16'}
         `}
              onClick={onClickAvatar}
         >
@@ -73,7 +79,7 @@ export const AvatarWithGreeting = () => {
         </div>
       )}
 
-      <AvatarWindow showMuteBtn={false} onClick={onClickAvatar}/>
+      {showAvatar && <AvatarWindow showMuteBtn={false} onClick={onClickAvatar}/>}
 
     </div>
   );

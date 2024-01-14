@@ -1,20 +1,48 @@
-import { createContext, useContext, useState } from "react";
+import {createContext, useContext, useEffect, useState} from "react";
 import {useChat} from "./useChat.jsx";
+import {useUtilities} from "./useUtilities.jsx";
+import {useCompany} from "./useCompany.jsx";
 
 const AvatarContext = createContext();
+
+let initialized = false
 
 export const AvatarProvider = ({ children }) => {
   const {
     setConversation,
   } = useChat();
 
-  const [showAvatar, _setShowAvatar] = useState(
-    (!localStorage.getItem('showAvatar')) ? true : localStorage.getItem('showAvatar')==='true'
-  )
-  const setShowAvatar = _show => {
-    localStorage.setItem('showAvatar', _show)
-    _setShowAvatar(_show)
-  }
+  const {
+    backendUrl,
+    setLoading,
+  } = useUtilities();
+
+  const {
+    companyId,
+    setCompanyLoadError,
+  } = useCompany();
+
+  const [showAvatar, setShowAvatar] = useState(true)
+  useEffect(() => {
+    if(!initialized) {
+      initialized = true
+      console.log(companyId)
+      if(companyId) {
+        setLoading(true)
+        fetch(`${backendUrl}/api/chatbot?companyid=${companyId}`, {
+          method: "GET",
+        })
+          .then(data=>data.json())
+          .then(_chatbot =>{
+            console.log(_chatbot)
+            setShowAvatar(_chatbot.show_avatar)
+            // setCompany(_company)
+          })
+          .catch(()=>setCompanyLoadError(true))
+          .finally(()=>setLoading(false))
+      }
+    }
+  }, [companyId]);
 
   const [selectedAvatar, _setSelectedAvatar] = useState(
     {

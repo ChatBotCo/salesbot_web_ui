@@ -58,44 +58,51 @@ export const ChatPage = () => {
   const sendMessage = async () => {
     const text = input.current.value;
     if (!loading && !avatarResponse) {
-      setLoading(true);
-      const _muted = mute || !showAvatar
-      const body = JSON.stringify({
-        user_msg:  text || "Hello",
-        mute: _muted,
-      })
-      const data = await fetch(`${backendUrl}/api/submit_user_message?convoid=${conversation.id}&companyid=${company.company_id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: body,
-      });
-      // console.log(data)
-      const newAvatarResponse = await data.json()
-      console.log(newAvatarResponse)
-      // console.log(newAvatarResponse.assistant_response.content)
+      try{
+        setLoading(true);
+        const _muted = mute || !showAvatar
+        const body = JSON.stringify({
+          user_msg:  text || "Hello",
+          mute: _muted,
+        })
+        const data = await fetch(`${backendUrl}/api/submit_user_message?convoid=${conversation.id}&companyid=${company.company_id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: body,
+        });
+        // console.log(data)
+        const newAvatarResponse = await data.json()
+        console.log(newAvatarResponse)
+        // console.log(newAvatarResponse.assistant_response.content)
 
-      // Update state
-      setLoading(false);
-      setAvatarResponse(newAvatarResponse)// ephemeral
-      setLastAvatarResponseText(newAvatarResponse.assistant_response.content)// persists - so the text remains on the screen
-      input.current.value = "";
+        // Update state
+        setLoading(false);
+        setAvatarResponse(newAvatarResponse)// ephemeral
+        setLastAvatarResponseText(newAvatarResponse.assistant_response.content)// persists - so the text remains on the screen
+        input.current.value = "";
 
-      if(!_muted) {
-        // Play the audio - this must be inline with the user-initiated event (button press) due to mobile device auto-playback permission issues
-        if(newAvatarResponse.audio.startsWith("AAAAAAAAAAAAAAAA")) {
-          console.error(`Bad audio file data:${newAvatarResponse.audio}`)
-          onMessagePlayed()
+        if(!_muted) {
+          // Play the audio - this must be inline with the user-initiated event (button press) due to mobile device auto-playback permission issues
+          if(newAvatarResponse.audio.startsWith("AAAAAAAAAAAAAAAA")) {
+            console.error(`Bad audio file data:${newAvatarResponse.audio}`)
+            onMessagePlayed()
+          } else if(!newAvatarResponse.audio) {
+            console.log('No audio')
+            onMessagePlayed()
+          } else {
+            const audio = new Audio("data:audio/mp3;base64," + newAvatarResponse.audio);
+            audio.play();
+            setAudio(audio);
+            audio.onended = onMessagePlayed;
+          }
         } else {
-          const audio = new Audio("data:audio/mp3;base64," + newAvatarResponse.audio);
-          audio.play();
-          setAudio(audio);
-          audio.onended = onMessagePlayed;
+          // If muted, then immediately clear the message
+          onMessagePlayed()
         }
-      } else {
-        // If muted, then immediately clear the message
-        onMessagePlayed()
+      } catch (e) {
+        console.error(e)
       }
     }
   };

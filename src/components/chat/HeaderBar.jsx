@@ -17,7 +17,7 @@ export const HeaderBar = () => {
     company,
   } = useCompany();
 
-  const avatarName = company && company.avatar.name
+  const avatarName = (company && company.avatar && company.avatar.name) || 'Keli'
 
   return (
     <div className={`

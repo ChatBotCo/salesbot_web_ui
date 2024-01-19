@@ -9,6 +9,7 @@ import {HeaderBar} from "./HeaderBar.jsx";
 import {ContactButton} from "./ContactButton.jsx";
 import {UserFeedback} from "../avatar/UserFeedback.jsx";
 import {useChatbot} from "../../hooks/useChatbot.jsx";
+import {RedirectPromptButton} from "./RedirectPromptButton.jsx";
 
 
 let initialized = false
@@ -23,6 +24,7 @@ export const ChatPage = () => {
     mute,
     onMessagePlayed,
     setAudio,
+    redirectUrl, setRedirectUrl,
   } = useChat();
 
   const {
@@ -81,6 +83,7 @@ export const ChatPage = () => {
         setLoading(false);
         setAvatarResponse(newAvatarResponse)// ephemeral
         setLastAvatarResponseText(newAvatarResponse.assistant_response.content)// persists - so the text remains on the screen
+        setRedirectUrl(newAvatarResponse.redirect_url)
         input.current.value = "";
 
         if(!_muted) {

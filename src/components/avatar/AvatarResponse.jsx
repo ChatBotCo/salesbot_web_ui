@@ -5,6 +5,7 @@ import {useStyle} from "../../hooks/useStyle.jsx";
 export const AvatarResponse = ({onClick}) => {
   const {
     lastAvatarResponseText,
+    redirectUrl,
   } = useChat();
 
   const {
@@ -14,6 +15,16 @@ export const AvatarResponse = ({onClick}) => {
   const {
     company,
   } = useCompany();
+
+  const ensureHttpsUrl = url => {
+    const httpsRegex = /^https:\/\//;
+    if (httpsRegex.test(url)) {
+      return url;
+    } else {
+      // If the URL doesn't start with "https://", prepend it
+      return "https://" + url;
+    }
+  }
 
   if(company && lastAvatarResponseText) {
     return (
@@ -27,6 +38,11 @@ export const AvatarResponse = ({onClick}) => {
            onClick={()=>{onClick && onClick()}}
       >
         {lastAvatarResponseText}
+        {redirectUrl &&
+          <a target='_blank'
+             href={ensureHttpsUrl(redirectUrl)}
+             style={{color:'blue', textDecoration:'underline'}}>Click HERE</a>
+        }
       </div>
     );
   } else return <span></span>

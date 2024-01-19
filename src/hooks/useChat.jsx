@@ -26,6 +26,7 @@ export const ChatProvider = ({ children }) => {
     _setLastAvatarResponseText(_text)
     setFeedbackSent(false)//Reset 'thank you' for user submitting feedback
   }
+  const [redirectUrl, setRedirectUrl] = useState('')
 
   const [conversation, _setConversation] = useState(
     JSON.parse(localStorage.getItem('conversation'))
@@ -109,6 +110,7 @@ export const ChatProvider = ({ children }) => {
         audio, setAudio,
         viewModes, viewMode, setViewMode,
         submitUserFeedback, feedbackSent,
+        redirectUrl, setRedirectUrl,
       }}
     >
       {children}

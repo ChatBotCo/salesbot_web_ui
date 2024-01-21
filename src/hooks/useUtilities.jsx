@@ -6,6 +6,11 @@ if(localStorage.getItem('local_backend') === 'true') {
   backendUrl = "http://localhost:7071"
 }
 
+let backendUrlAdmin = "https://salesbot-api-svc.azurewebsites.net";
+if(localStorage.getItem('local_backend_admin') === 'true') {
+  backendUrlAdmin = "http://localhost:5000"
+}
+
 const UtilitiesContext = createContext();
 
 export const UtilitiesProvider = ({ children }) => {
@@ -20,6 +25,7 @@ export const UtilitiesProvider = ({ children }) => {
     <UtilitiesContext.Provider
       value={{
         backendUrl,
+        backendUrlAdmin,
         loading, setLoading,
         debugging,
       }}

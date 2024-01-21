@@ -9,6 +9,7 @@ let initialized = false
 export const ChatbotProvider = ({ children }) => {
   const {
     backendUrl,
+    backendUrlAdmin,
     setLoading,
   } = useUtilities();
 
@@ -18,6 +19,7 @@ export const ChatbotProvider = ({ children }) => {
   } = useCompany();
 
   const [showAvatar, setShowAvatar] = useState(true)
+  const [avatarView, setAvatarView] = useState('')
   const [chatbotGreeting, setChatbotGreeting] = useState('')
   const [contactMethod, setContactMethod] = useState('')
   const [contactLink, setContactLink] = useState('')
@@ -26,13 +28,14 @@ export const ChatbotProvider = ({ children }) => {
       initialized = true
       if(companyId) {
         setLoading(true)
-        fetch(`${backendUrl}/api/chatbot?companyid=${companyId}`, {
+        fetch(`${backendUrlAdmin}/api/chatbots/client?company_id=${companyId}`, {
           method: "GET",
         })
           .then(data=>data.json())
           .then(_chatbot =>{
             console.log(_chatbot)
             setShowAvatar(_chatbot.show_avatar)
+            setAvatarView(_chatbot.avatar_view)
             setChatbotGreeting(_chatbot.greeting)
             setContactMethod(_chatbot.contact_method)
             setContactLink(_chatbot.contact_link)
@@ -47,6 +50,7 @@ export const ChatbotProvider = ({ children }) => {
     <ChatbotContext.Provider
       value={{
         showAvatar,
+        avatarView,
         chatbotGreeting,
         contactMethod,
         contactLink,

@@ -34,7 +34,7 @@ let initialized = false
 
 export const CompanyProvider = ({ children }) => {
   const {
-    backendUrl,
+    backendUrlAdmin,
     setLoading,
     debugging,
   } = useUtilities();
@@ -51,7 +51,7 @@ export const CompanyProvider = ({ children }) => {
       initialized = true
       if(companyId && !company) {
         setLoading(true)
-        fetch(`${backendUrl}/api/company?companyid=${companyId}`, {
+        fetch(`${backendUrlAdmin}/api/companies/client?company_id=${companyId}`, {
           method: "GET",
         })
           .then(data=>data.json())

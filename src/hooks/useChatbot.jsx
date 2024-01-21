@@ -8,7 +8,6 @@ let initialized = false
 
 export const ChatbotProvider = ({ children }) => {
   const {
-    backendUrl,
     backendUrlAdmin,
     setLoading,
   } = useUtilities();

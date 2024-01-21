@@ -41,6 +41,7 @@ export const ChatPage = () => {
 
   const {
     showAvatar,
+    avatarView,
     contactMethod,
   } = useChatbot()
 
@@ -62,7 +63,7 @@ export const ChatPage = () => {
     if (!loading && !avatarResponse) {
       try{
         setLoading(true);
-        const _muted = mute || !showAvatar
+        const _muted = mute || avatarView !== 'avatar'
         const body = JSON.stringify({
           user_msg:  text || "Hello",
           mute: _muted,
@@ -131,7 +132,12 @@ export const ChatPage = () => {
                 p-1
               '>
                 <div className="relative flex flex-row justify-between items-end w-96">
-                  {showAvatar && <AvatarWindow showMuteBtn={true}/>}
+                  {avatarView === 'avatar' && <AvatarWindow showMuteBtn={true}/>}
+                  {avatarView === 'headshot' &&
+                    <img src={'/img/headshot-keli.png'}
+                         className={'w-16 h-16 rounded-lg mt-0 ml-3 mr-2 mb-6'}
+                    />
+                  }
                   <AvatarResponse/>
                   <div className="absolute bottom-0 right-1">
                     <UserFeedback />

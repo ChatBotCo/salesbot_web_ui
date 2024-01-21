@@ -2,7 +2,6 @@ import {AvatarWindow} from "./avatar/AvatarWindow.jsx";
 import {useChat} from "../hooks/useChat.jsx";
 import {FaTimes} from "react-icons/fa";
 import {useStyle} from "../hooks/useStyle.jsx";
-import {useAvatar} from "../hooks/useAvatar.jsx";
 import {useChatbot} from "../hooks/useChatbot.jsx";
 
 export const AvatarWithGreeting = () => {
@@ -18,7 +17,7 @@ export const AvatarWithGreeting = () => {
   } = useStyle()
 
   const {
-    showAvatar,
+    avatarView,
     chatbotGreeting,
   } = useChatbot()
 
@@ -45,7 +44,7 @@ export const AvatarWithGreeting = () => {
           translate-y
           bg-white p-2 mb-1
           rounded-lg border-gray-300 border 
-          ${showAvatar && 'transform translate-x-16'}
+          ${avatarView === 'avatar' && 'transform translate-x-16'}
         `}
              onClick={onClickAvatar}
         >
@@ -63,7 +62,13 @@ export const AvatarWithGreeting = () => {
         </div>
       )}
 
-      {showAvatar && <AvatarWindow showMuteBtn={false} onClick={onClickAvatar}/>}
+      {avatarView === 'avatar' && <AvatarWindow showMuteBtn={false} onClick={onClickAvatar}/>}
+      {avatarView === 'headshot' &&
+        <img src={'/img/headshot-keli.png'}
+             onClick={onClickAvatar}
+             className={'w-24 h-24 rounded-lg mt-0 ml-2 mb-1'}
+        />
+      }
 
       <div className={`
         ${colorBgEm} ${colorTextEm} 
@@ -72,7 +77,7 @@ export const AvatarWithGreeting = () => {
         text-xs 
         flex items-center justify-center 
         cursor-pointer
-        ${showAvatar ? 'transform -translate-x-6' : 'transform -translate-x-2 -translate-y-4'}
+        ${avatarView === 'avatar' ? 'transform -translate-x-6' : 'transform -translate-x-2 -translate-y-4'}
         z-10
       `}
            onClick={()=>setViewMode(viewModes.collapsed)}

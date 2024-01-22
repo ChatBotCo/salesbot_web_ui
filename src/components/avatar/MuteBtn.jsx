@@ -14,7 +14,7 @@ export const MuteBtn = () => {
   } = useChat();
 
   const {
-    showAvatar,
+    avatarView,
   } = useChatbot()
 
   const {
@@ -22,7 +22,6 @@ export const MuteBtn = () => {
   } = useStyle()
 
   const muteBtnColor = mute? 'text-red-400' : `${colorText}`
-  const borderColor = mute? 'text-red-400' : 'border-gray'
 
   const onClickMute = ()=>{
     if (audio && !audio.paused) {
@@ -32,7 +31,7 @@ export const MuteBtn = () => {
     setMute(!mute)
   }
 
-  if(!showAvatar) return <></>
+  if(avatarView !== 'avatar') return <></>
 
   return (
     <div className={`
@@ -45,7 +44,6 @@ export const MuteBtn = () => {
         className={`flex-shrink-0 flex flex-row items-center p-2 bg-blend-luminosity bg-opacity-80 ${muteBtnColor} pointer-events-auto`}
         onClick={onClickMute}
       >
-        {/*<span className="pr-3">{mute ? 'Muted' : 'Unmuted'}</span>*/}
         {mute ? <FaVolumeMute /> : <FaVolumeUp />}
       </button>
     </div>

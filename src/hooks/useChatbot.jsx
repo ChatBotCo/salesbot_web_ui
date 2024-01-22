@@ -17,10 +17,9 @@ export const ChatbotProvider = ({ children }) => {
     setCompanyLoadError,
   } = useCompany();
 
-  const [showAvatar, setShowAvatar] = useState(true)
   const [avatarView, setAvatarView] = useState('')
   const [chatbotGreeting, setChatbotGreeting] = useState('')
-  const [contactMethod, setContactMethod] = useState('')
+  const [showCallToAction, setShowCallToAction] = useState(false)
   const [contactLink, setContactLink] = useState('')
   useEffect(() => {
     if(!initialized) {
@@ -32,12 +31,11 @@ export const ChatbotProvider = ({ children }) => {
         })
           .then(data=>data.json())
           .then(_chatbot =>{
-            console.log(_chatbot)
-            setShowAvatar(_chatbot.show_avatar)
+            // console.log(_chatbot)
             setAvatarView(_chatbot.avatar_view)
             setChatbotGreeting(_chatbot.greeting)
-            setContactMethod(_chatbot.contact_method)
             setContactLink(_chatbot.contact_link)
+            setShowCallToAction(_chatbot.show_call_to_action)
           })
           .catch(()=>setCompanyLoadError(true))
           .finally(()=>setLoading(false))
@@ -48,10 +46,9 @@ export const ChatbotProvider = ({ children }) => {
   return (
     <ChatbotContext.Provider
       value={{
-        showAvatar,
         avatarView,
         chatbotGreeting,
-        contactMethod,
+        showCallToAction,
         contactLink,
       }}
     >

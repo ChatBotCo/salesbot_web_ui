@@ -9,7 +9,6 @@ import {HeaderBar} from "./HeaderBar.jsx";
 import {ContactButton} from "./ContactButton.jsx";
 import {UserFeedback} from "../avatar/UserFeedback.jsx";
 import {useChatbot} from "../../hooks/useChatbot.jsx";
-import {RedirectPromptButton} from "./RedirectPromptButton.jsx";
 
 
 let initialized = false
@@ -20,11 +19,10 @@ export const ChatPage = () => {
     avatarResponse,
     setAvatarResponse,
     setLastAvatarResponseText,
-    resetConvo,
     mute,
     onMessagePlayed,
     setAudio,
-    redirectUrl, setRedirectUrl,
+    setRedirectUrl,
   } = useChat();
 
   const {
@@ -40,9 +38,8 @@ export const ChatPage = () => {
   } = useUtilities();
 
   const {
-    showAvatar,
     avatarView,
-    contactMethod,
+    showCallToAction,
   } = useChatbot()
 
   const input = useRef();
@@ -144,8 +141,7 @@ export const ChatPage = () => {
                   </div>
                 </div>
                 <TextInput inputActive={true} inputRef={input} sendMessage={sendMessage}/>
-                {contactMethod === 'app_install' && <ContactButton label='Install Demo App' /> }
-                {contactMethod === 'contact_form' && <ContactButton label='Contact Us' /> }
+                {showCallToAction && <ContactButton label='Contact Us' /> }
               </div>
             </>
           )

@@ -8,10 +8,10 @@ export const StyleProvider = ({ children }) => {
     company
   } = useCompany();
 
-  const [colorBgEm, setColorBgEm] = useState();
-  const [colorTextEm, setColorTextEm] = useState();
-  const [colorText, setColorText] = useState();
-  const [colorBorder, setColorBorder] = useState();
+  const [colorBgEm, setColorBgEm] = useState('bg-[rgb(51,65,85)]');
+  const [colorTextEm, setColorTextEm] = useState('text-white');
+  const [colorText, setColorText] = useState('text-[rgb(51,65,85)]');
+  const [colorBorder, setColorBorder] = useState('border-[rgb(4,162,247)]');
 
   // Fucking tailwind piece of shit fuckwits
   const companyToStyle = {
@@ -36,16 +36,16 @@ export const StyleProvider = ({ children }) => {
     },
   }
 
-  useEffect(() => {
-    if (company && company.style) {
-      const companyStyle = companyToStyle[company.company_id]
-      // const companyStyle = company.style
-      setColorBgEm(companyStyle.colorBgEm);
-      setColorTextEm(companyStyle.colorTextEm);
-      setColorText(companyStyle.colorText);
-      setColorBorder(companyStyle.colorBorder);
-    }
-  }, [company]);
+  // useEffect(() => {
+  //   if (company && company.style) {
+  //     const companyStyle = companyToStyle[company.company_id]
+  //     // const companyStyle = company.style
+  //     setColorBgEm(companyStyle.colorBgEm);
+  //     setColorTextEm(companyStyle.colorTextEm);
+  //     setColorText(companyStyle.colorText);
+  //     setColorBorder(companyStyle.colorBorder);
+  //   }
+  // }, [company]);
 
   return (
     <StyleContext.Provider

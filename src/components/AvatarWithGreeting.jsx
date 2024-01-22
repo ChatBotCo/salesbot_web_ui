@@ -64,7 +64,7 @@ export const AvatarWithGreeting = () => {
 
       {avatarView === 'avatar' && <AvatarWindow showMuteBtn={false} onClick={onClickAvatar}/>}
       {avatarView === 'headshot' &&
-        <img src={'/img/headshot-keli.png'}
+        <img src={'https://kelichatbot2.blob.core.windows.net/salesbot-assets/headshot-keli.png'}
              onClick={onClickAvatar}
              className={'w-24 h-24 rounded-lg mt-0 ml-2 mb-1'}
         />

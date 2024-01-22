@@ -131,7 +131,7 @@ export const ChatPage = () => {
                 <div className="relative flex flex-row justify-between items-end w-96">
                   {avatarView === 'avatar' && <AvatarWindow showMuteBtn={true}/>}
                   {avatarView === 'headshot' &&
-                    <img src={'/img/headshot-keli.png'}
+                    <img src={'https://kelichatbot2.blob.core.windows.net/salesbot-assets/headshot-keli.png'}
                          className={'w-16 h-16 rounded-lg mt-0 ml-3 mr-2 mb-6'}
                     />
                   }

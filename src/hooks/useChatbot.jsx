@@ -17,7 +17,7 @@ export const ChatbotProvider = ({ children }) => {
     setCompanyLoadError,
   } = useCompany();
 
-  const [avatarView, setAvatarView] = useState('')
+  const [avatarView, setAvatarView] = useState('headshot')
   const [chatbotGreeting, setChatbotGreeting] = useState('')
   const [showCallToAction, setShowCallToAction] = useState(false)
   const [contactLink, setContactLink] = useState('')
@@ -31,8 +31,8 @@ export const ChatbotProvider = ({ children }) => {
         })
           .then(data=>data.json())
           .then(_chatbot =>{
-            // console.log(_chatbot)
-            setAvatarView(_chatbot.avatar_view)
+            let _avatar_view = _chatbot.avatar_view==='avatar' ? 'avatar' : 'headshot'
+            setAvatarView(_avatar_view)
             setChatbotGreeting(_chatbot.greeting)
             setContactLink(_chatbot.contact_link)
             setShowCallToAction(_chatbot.show_call_to_action)

@@ -8,7 +8,7 @@ if(localStorage.getItem('local_backend') === 'true') {
 
 let backendUrlAdmin = "https://salesbot-api-svc.azurewebsites.net";
 if(localStorage.getItem('local_backend_admin') === 'true') {
-  backendUrlAdmin = "http://localhost:5000"
+  backendUrlAdmin = "https://localhost:5001"
 }
 
 const UtilitiesContext = createContext();

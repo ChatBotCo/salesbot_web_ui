@@ -10,7 +10,6 @@ document.addEventListener("DOMContentLoaded",
 
     // Load the chatbot's CSS
     var chatbotCSS = document.createElement('link');
-    // chatbotCSS.href = 'http://localhost:5173/deleteme/index.css';
     chatbotCSS.href = 'https://kelichatbot2.blob.core.windows.net/salesbot-assets/index-v0.11.css';
     chatbotCSS.rel = 'stylesheet';
     chatbotCSS.type = 'text/css';
@@ -18,14 +17,8 @@ document.addEventListener("DOMContentLoaded",
 
     // Load the chatbot's JavaScript bundle
     var chatbotScript = document.createElement('script');
-    // chatbotScript.src = 'http://localhost:5173/deleteme/index.js';
     chatbotScript.src = 'https://kelichatbot2.blob.core.windows.net/salesbot-assets/index-v0.11.js';
     chatbotScript.async = true;
-    chatbotScript.onload = function() {
-      // Initialize the chatbot here if needed
-      // For example, if your chatbot exposes some global function to start
-      // window.initializeChatbot();
-    };
     document.body.appendChild(chatbotScript);
   }
 );

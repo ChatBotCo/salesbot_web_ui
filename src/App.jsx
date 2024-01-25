@@ -23,8 +23,10 @@ function App() {
       element = <AvatarWithGreeting />
       break
     case viewModes.chat:
-    default:
       element = <ChatDialogWindow />
+      break
+    default:
+      element = <></>
       break
   }
 

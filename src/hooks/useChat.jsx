@@ -5,9 +5,11 @@ import {useChatbot} from "./useChatbot.jsx";
 
 const ChatContext = createContext();
 
+let initializedConvo = false
 export const ChatProvider = ({ children }) => {
   const {
     backendUrl,
+    backendUrlAdmin,
     setLoading,
   } = useUtilities();
 
@@ -28,27 +30,46 @@ export const ChatProvider = ({ children }) => {
   }
   const [redirectUrl, setRedirectUrl] = useState('')
 
-  const [conversation, _setConversation] = useState(
-    JSON.parse(localStorage.getItem('conversation'))
-  )
+  const [conversation, _setConversation] = useState()
   const setConversation = convo => {
     localStorage.setItem('conversation', JSON.stringify(convo))
     _setConversation(convo)
   }
 
   useEffect(() => {
+    if(!initializedConvo) {
+      initializedConvo = true
+      // Verify that the saved conversation object exists, if NOT then reset the app storage
+      const _convo = JSON.parse(localStorage.getItem('conversation'))
+      if(_convo && _convo.id) {
+        fetch(`${backendUrlAdmin}/api/conversations/verify?convo_id=${_convo.id}`, {
+          method: "GET",
+        })
+          .then(data=>{
+            if(data.status !== 204) {
+              resetConvo()
+            }
+          })
+          .catch(console.error)
+      }
+    }
+  }, []);
+
+  useEffect(() => {
     if(chatbotGreeting && !lastAvatarResponseText) {
       setLastAvatarResponseText(chatbotGreeting)
+      setViewMode(viewModes.greeting)
     }
   }, [chatbotGreeting]);
 
 
   const viewModes = {
+    none:'none',//This is for "hiding" the chatbot until loading is complete
     collapsed:'collapsed',
     greeting:'greeting',
     chat:'chat',
   }
-  const [viewMode, setViewMode] = useState(viewModes.greeting)
+  const [viewMode, setViewMode] = useState(viewModes.none)
 
   const [mute, _setMute] = useState(localStorage.getItem('mute')==='true' )
   const setMute = _mute => {
@@ -57,11 +78,9 @@ export const ChatProvider = ({ children }) => {
   }
 
   const resetConvo = () => {
-    if(window.confirm("Are you sure you want to reset this conversation?")) {
-      setConversation(null)
-      localStorage.removeItem('conversation')
-      location.reload()
-    }
+    setConversation(null)
+    localStorage.removeItem('conversation')
+    location.reload()
   }
 
   const createNewConvo = () => {
@@ -100,7 +119,6 @@ export const ChatProvider = ({ children }) => {
       value={{
         conversation,
         setConversation,
-        resetConvo,
         createNewConvo,
         avatarResponse,
         setAvatarResponse,

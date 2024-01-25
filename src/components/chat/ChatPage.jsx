@@ -104,6 +104,9 @@ export const ChatPage = () => {
         }
       } catch (e) {
         console.error(e)
+        onMessagePlayed()
+        setLoading(false)
+        setLastAvatarResponseText("I apologize, but an error has occurred. We're working to resolve the issue and appreciate your patience.")
       }
     }
   };

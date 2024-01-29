@@ -30,9 +30,10 @@ export const ChatProvider = ({ children }) => {
   }
   const [redirectUrl, setRedirectUrl] = useState('')
 
-  const [conversation, _setConversation] = useState()
+  const [conversation, _setConversation] = useState(localStorage.getItem('conversation'))
   const setConversation = convo => {
     localStorage.setItem('conversation', JSON.stringify(convo))
+    console.log('_setConversation')
     _setConversation(convo)
   }
 
@@ -47,7 +48,11 @@ export const ChatProvider = ({ children }) => {
         })
           .then(data=>{
             if(data.status !== 204) {
-              resetConvo()
+              console.log('convo invalid, recreating')
+              localStorage.removeItem('conversation')
+              createNewConvo()
+            } else {
+              setConversation(_convo)
             }
           })
           .catch(console.error)
@@ -84,8 +89,9 @@ export const ChatProvider = ({ children }) => {
   }
 
   const createNewConvo = () => {
+    console.log('createNewConvo')
     setLoading(true)
-    fetch(`${backendUrl}/api/create_conversation?companyid=${companyId}`, {
+    fetch(`${backendUrlAdmin}/api/conversations/create?companyid=${companyId}`, {
       method: "POST",
     })
       .then(data=>data.json())

@@ -33,7 +33,6 @@ export const ChatProvider = ({ children }) => {
   const [conversation, _setConversation] = useState(localStorage.getItem('conversation'))
   const setConversation = convo => {
     localStorage.setItem('conversation', JSON.stringify(convo))
-    console.log('_setConversation')
     _setConversation(convo)
   }
 
@@ -89,9 +88,8 @@ export const ChatProvider = ({ children }) => {
   }
 
   const createNewConvo = () => {
-    console.log('createNewConvo')
     setLoading(true)
-    fetch(`${backendUrlAdmin}/api/conversations/create?companyid=${companyId}`, {
+    return fetch(`${backendUrlAdmin}/api/conversations/create?companyid=${companyId}`, {
       method: "POST",
     })
       .then(data=>data.json())

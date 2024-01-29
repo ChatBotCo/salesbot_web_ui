@@ -1,7 +1,8 @@
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {ChatPage} from "./chat/ChatPage.jsx";
 import {useChat} from "../hooks/useChat.jsx";
 import {useStyle} from "../hooks/useStyle.jsx";
+import {FaCog} from "react-icons/fa";
 
 let initialized = false
 export const ChatDialogWindow = () => {
@@ -14,12 +15,15 @@ export const ChatDialogWindow = () => {
     colorBorder,
   } = useStyle();
 
+  const [isCreatingConvo, setIsCreatingConvo] = useState(false);
+
   useEffect(() => {
-    if(!initialized) {
+    if(!initialized && !conversation) {
       initialized = true
-      if(!conversation) {
-        createNewConvo()
-      }
+      setIsCreatingConvo(true)
+      createNewConvo().then(() => {
+        setIsCreatingConvo(false);
+      });
     }
   }, []);
 
@@ -39,9 +43,13 @@ export const ChatDialogWindow = () => {
       bg-white
       slide-up-animation fade-in-out
     `}>
-      {
-          conversation && <ChatPage />
-      }
+      {isCreatingConvo ? (
+        <div className="flex justify-center items-center h-full">
+          <FaCog className='h-full animate-spin'/>
+        </div>
+      ) : (
+        conversation && <ChatPage />
+      )}
     </div>
   );
 

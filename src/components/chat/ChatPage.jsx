@@ -33,6 +33,7 @@ export const ChatPage = () => {
 
   const {
     backendUrl,
+    backendUrlAdmin,
     loading,
     setLoading,
   } = useUtilities();
@@ -65,7 +66,7 @@ export const ChatPage = () => {
           user_msg:  text || "Hello",
           mute: _muted,
         })
-        const data = await fetch(`${backendUrl}/api/submit_user_message?convoid=${conversation.id}&companyid=${company.company_id}`, {
+        const data = await fetch(`${backendUrlAdmin}/api/ai/submit_user_question?convoid=${conversation.id}&companyid=${company.company_id}`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",

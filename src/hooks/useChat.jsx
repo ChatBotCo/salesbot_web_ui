@@ -1,4 +1,4 @@
-import {createContext, useContext, useEffect, useState} from "react";
+import {createContext, useContext, useEffect, useState, useRef} from "react";
 import {useUtilities} from "./useUtilities.jsx";
 import {useCompany} from "./useCompany.jsx";
 import {useChatbot} from "./useChatbot.jsx";
@@ -62,7 +62,7 @@ export const ChatProvider = ({ children }) => {
   useEffect(() => {
     if(chatbotGreeting && !lastAvatarResponseText) {
       setLastAvatarResponseText(chatbotGreeting)
-      setViewMode(viewModes.greeting)
+      setViewMode(viewModes.collapsed)
     }
   }, [chatbotGreeting]);
 
@@ -74,6 +74,26 @@ export const ChatProvider = ({ children }) => {
     chat:'chat',
   }
   const [viewMode, setViewMode] = useState(viewModes.none)
+  const viewModeRef = useRef(viewMode);
+  const timerPopupRef = useRef();
+  useEffect(() => {
+    viewModeRef.current = viewMode;
+  }, [viewMode]);
+  const popupGreetingAfterTimeout = () => {
+    if(viewModeRef.current===viewModes.collapsed) {
+      setViewMode(viewModes.greeting)
+    }
+  };
+  useEffect(() => {
+    timerPopupRef.current = window.setTimeout(popupGreetingAfterTimeout, 5000)
+
+    // Clear the timer when the component unmounts or condition changes
+    return () => {
+      if (timerPopupRef.current) {
+        window.clearTimeout(timerPopupRef.current);
+      }
+    };
+  }, []);
 
   const [mute, _setMute] = useState(localStorage.getItem('mute')==='true' )
   const setMute = _mute => {

@@ -15,14 +15,21 @@ const getDataCompanyId = debugging => {
     const scriptTag = document.querySelector('script#sales_chatbot_script');
     if (scriptTag) {
       const _companyId = scriptTag.getAttribute('data-company-id');
-      if(_companyId) {
-        // console.log(`data-company-id:${_companyId}`);
+      if (_companyId) {
         return _companyId;
       } else {
+        const queryCompanyId = useQuery().get('company_id');
+        if(queryCompanyId) {
+          return queryCompanyId
+        }
         console.error('NOT FOUND: data-company-id - Did you forget to add it to the Sales ChatBot HTML element?');
         return null;
       }
     } else {
+      const queryCompanyId = useQuery().get('company_id');
+      if(queryCompanyId) {
+        return queryCompanyId
+      }
       console.error('NOT FOUND: script sales_chatbot.js - Did you forget to add the Sales ChatBot HTML script element?');
       return null;
     }

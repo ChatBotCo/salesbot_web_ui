@@ -145,7 +145,6 @@ export const ChatPage = () => {
                   </div>
                 </div>
                 <TextInput inputActive={true} inputRef={input} sendMessage={sendMessage}/>
-                {showCallToAction && <ContactButton label='Contact Us' /> }
               </div>
             </>
           )

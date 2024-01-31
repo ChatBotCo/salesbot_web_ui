@@ -49,16 +49,6 @@ export const AvatarWithGreeting = () => {
              onClick={onClickAvatar}
         >
           {chatbotGreeting}
-          <div className={`
-            ${colorTextEm}
-            ${colorBorder} border-2 
-            ${colorBgEm} 
-            rounded-lg p-1
-            text-center
-            cursor-pointer
-          `}>
-            Click here
-          </div>
         </div>
       )}
 

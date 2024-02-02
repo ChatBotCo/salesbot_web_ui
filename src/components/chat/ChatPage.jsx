@@ -58,7 +58,7 @@ export const ChatPage = () => {
   }, []);
 
   const sendMessage = async () => {
-    if(company && company.company_id === 'a1horses' && msgCountBlackTie>=2) {
+    if(company && company.company_id === 'blacktiecasinoevents' && msgCountBlackTie>=2) {
       setLoading(false);
       // setAvatarResponse(newAvatarResponse)// ephemeral
       setLastAvatarResponseText('If you have any further questions the best next step is to have someone from our team contact you to help determine the best solution for your needs. Please fill out this form and we will be in touch as soon as possible.')

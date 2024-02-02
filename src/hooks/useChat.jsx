@@ -81,8 +81,7 @@ export const ChatProvider = ({ children }) => {
     }
 
     // Small hack for Black Tie
-    if(conversation && company && company.company_id==='a1horses') {
-      console.log(`convo id: ${conversation.id}`)
+    if(conversation && company && company.company_id==='blacktiecasinoevents') {
       fetch(`${backendUrlAdmin}/api/conversations/msg_count?convo_id=${conversation.id}`, {
         method: "GET",
       })

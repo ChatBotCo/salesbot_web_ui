@@ -17,6 +17,6 @@ export const RedirectPromptButton = () => {
   if(!redirectUrl) return <></>
 
   return (
-    <a target='_blank' href={redirectUrl}><h1 className={`${colorTextEm}`}>Redirect URL</h1></a>
+    <a href={redirectUrl}><h1 className={`${colorTextEm}`}>Redirect URL</h1></a>
   )
 };

@@ -39,7 +39,7 @@ export const AvatarResponse = ({onClick}) => {
       >
         {lastAvatarResponseText}
         {redirectUrl &&
-          <a target='_blank'
+          <a
              href={ensureHttpsUrl(redirectUrl)}
              style={{color:'blue', textDecoration:'underline'}}>Click HERE</a>
         }

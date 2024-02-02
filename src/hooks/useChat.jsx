@@ -66,6 +66,26 @@ export const ChatProvider = ({ children }) => {
     }
   }, [chatbotGreeting]);
 
+  const [msgCountBlackTie, setMsgCountBlackTie] = useState()
+  const incrementMsgCount = ()=>{
+    setMsgCountBlackTie(msgCountBlackTie+1)
+
+  }
+  useEffect(() => {
+    if(conversation && company && company.company_id==='a1horses') {
+      console.log(`convo id: ${conversation.id}`)
+      fetch(`${backendUrlAdmin}/api/conversations/msg_count?convo_id=${conversation.id}`, {
+        method: "GET",
+      })
+        .then(data=>data.json())
+        .then(many_msgs=>{
+          console.log(many_msgs)
+          setMsgCountBlackTie(many_msgs)
+        })
+        .catch(()=>console.error("error get conversations/msg_count"))
+    }
+  }, [company, conversation]);
+
 
   const viewModes = {
     none:'none',//This is for "hiding" the chatbot until loading is complete
@@ -153,6 +173,7 @@ export const ChatProvider = ({ children }) => {
         viewModes, viewMode, setViewMode,
         submitUserFeedback, feedbackSent,
         redirectUrl, setRedirectUrl,
+        msgCountBlackTie, incrementMsgCount
       }}
     >
       {children}

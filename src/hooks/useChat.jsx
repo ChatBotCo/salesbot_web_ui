@@ -72,6 +72,15 @@ export const ChatProvider = ({ children }) => {
 
   }
   useEffect(() => {
+    // Verify conversation is for the current company, otherwise reset the convo
+    // (this is primarily for dev environment)
+    if(company && conversation && conversation.company_id !== company.company_id) {
+      console.log(`convo.company_id(${conversation.company_id}) !== company.company_id(${company.company_id}), recreating`)
+      localStorage.removeItem('conversation')
+      createNewConvo()
+    }
+
+    // Small hack for Black Tie
     if(conversation && company && company.company_id==='a1horses') {
       console.log(`convo id: ${conversation.id}`)
       fetch(`${backendUrlAdmin}/api/conversations/msg_count?convo_id=${conversation.id}`, {

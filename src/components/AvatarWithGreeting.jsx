@@ -45,7 +45,7 @@ export const AvatarWithGreeting = () => {
       <img src={'https://kelichatbot2.blob.core.windows.net/salesbot-assets/greeter-bot-logo.png'}
            className={`
                w-12 h-12 
-               mt-0 ml-2 mb-1
+               mt-0 ml-2 mb-1 mt-1
                pt-1
              `}
       />
@@ -54,8 +54,7 @@ export const AvatarWithGreeting = () => {
           italic ${colorText} 
           overflow-y-auto
           translate-y
-          bg-white p-2 mb-1
-          ${avatarView === 'avatar' && 'transform translate-x-16'}
+          bg-white p-1 mb-1
         `}
       >
         {chatbotGreeting}

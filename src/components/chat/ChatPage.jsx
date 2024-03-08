@@ -6,7 +6,6 @@ import {useEffect, useRef, useState} from "react";
 import {TextInput} from "./TextInput.jsx";
 import {AvatarResponse} from "../avatar/AvatarResponse.jsx";
 import {HeaderBar} from "./HeaderBar.jsx";
-import {ContactButton} from "./ContactButton.jsx";
 import {UserFeedback} from "../avatar/UserFeedback.jsx";
 import {useChatbot} from "../../hooks/useChatbot.jsx";
 
@@ -145,8 +144,8 @@ export const ChatPage = () => {
                 <div className="relative flex flex-row justify-between items-end w-96">
                   {avatarView === 'avatar' && <AvatarWindow showMuteBtn={true}/>}
                   {avatarView === 'headshot' &&
-                    <img src={'https://kelichatbot2.blob.core.windows.net/salesbot-assets/headshot-keli.png'}
-                         className={'w-16 h-16 rounded-lg mt-0 ml-3 mr-2 mb-6'}
+                    <img src={'https://kelichatbot2.blob.core.windows.net/salesbot-assets/greeter-bot-logo.png'}
+                         className={'w-12 h-12 rounded-lg mt-0 ml-3 mr-2 mb-6'}
                     />
                   }
                   <AvatarResponse/>

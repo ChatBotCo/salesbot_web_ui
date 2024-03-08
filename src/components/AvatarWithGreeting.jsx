@@ -1,4 +1,3 @@
-import {AvatarWindow} from "./avatar/AvatarWindow.jsx";
 import {useChat} from "../hooks/useChat.jsx";
 import {FaTimes} from "react-icons/fa";
 import {useStyle} from "../hooks/useStyle.jsx";
@@ -28,49 +27,53 @@ export const AvatarWithGreeting = () => {
   return (
     <div className={`
       flex flex-row justify-end
-      fixed bottom-0 right-0
+      fixed bottom-5 right-0 md:right-5
+      md:w-96
+      ml-1 mr-1
       z-[999999]
       sm:max-h-[calc(100vh-104px)]
+      md:shadow-[0_20px_30px_rgba(23,73,77,0.15)]
       pointer-events-auto
-      w-96
       fade-in-out
-    `}>
+      rounded-lg border ${colorBorder}
+      cursor-pointer
+      bg-white
+    `}
+         onClick={onClickAvatar}
+    >
 
-      {chatbotGreeting && (
-        <div className={`
-          w-60 md:w-full max-w-lg h-full max-h-56 
+      <img src={'https://kelichatbot2.blob.core.windows.net/salesbot-assets/greeter-bot-logo.png'}
+           className={`
+               w-12 h-12 
+               mt-0 ml-2 mb-1
+               pt-1
+             `}
+      />
+      <div className={`
+          w-full h-full max-h-56 
           italic ${colorText} 
           overflow-y-auto
           translate-y
           bg-white p-2 mb-1
-          rounded-lg border-gray-300 border 
           ${avatarView === 'avatar' && 'transform translate-x-16'}
         `}
-             onClick={onClickAvatar}
-        >
-          {chatbotGreeting}
-        </div>
-      )}
-
-      {avatarView === 'avatar' && <AvatarWindow showMuteBtn={false} onClick={onClickAvatar}/>}
-      {avatarView === 'headshot' &&
-        <img src={'https://kelichatbot2.blob.core.windows.net/salesbot-assets/headshot-keli.png'}
-             onClick={onClickAvatar}
-             className={'w-24 h-24 rounded-lg mt-0 ml-2 mb-1'}
-        />
-      }
+      >
+        {chatbotGreeting}
+      </div>
 
       <div className={`
         ${colorBgEm} ${colorTextEm} 
-        rounded-3xl 
-        w-10 h-6 
+        rounded-tr-md
+        rounded-br-md 
+        w-10
         text-xs 
         flex items-center justify-center 
         cursor-pointer
-        ${avatarView === 'avatar' ? 'transform -translate-x-6' : 'transform -translate-x-2 -translate-y-4'}
-        z-10
       `}
-           onClick={()=>setViewMode(viewModes.collapsed)}
+           onClick={e=>{
+             e.stopPropagation()
+             setViewMode(viewModes.collapsed)
+           }}
       >
         <FaTimes />
       </div>

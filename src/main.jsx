@@ -10,7 +10,7 @@ import {CompanyProvider} from "./hooks/useCompany.jsx";
 import {StyleProvider} from "./hooks/useStyle.jsx";
 import {ChatbotProvider} from "./hooks/useChatbot.jsx";
 
-ReactDOM.createRoot(document.getElementById("sales_chatbot_root")).render(
+ReactDOM.createRoot(document.getElementById("greeterbot_root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <UtilitiesProvider>

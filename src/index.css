@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 
-#sales_chatbot_root {
+#greeterbot_root {
   width: 100vw;
   height: 100vh;
   background-color: transparent;

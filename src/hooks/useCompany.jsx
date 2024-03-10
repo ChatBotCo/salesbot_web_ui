@@ -12,7 +12,7 @@ const getDataCompanyId = debugging => {
   if(debugging) {
     return useQuery().get('company_id');
   } else {
-    const scriptTag = document.querySelector('script#sales_chatbot_script');
+    const scriptTag = document.querySelector('script#greeterbot_script');
     if (scriptTag) {
       const _companyId = scriptTag.getAttribute('data-company-id');
       if (_companyId) {
@@ -30,7 +30,7 @@ const getDataCompanyId = debugging => {
       if(queryCompanyId) {
         return queryCompanyId
       }
-      console.error('NOT FOUND: script sales_chatbot.js - Did you forget to add the Sales ChatBot HTML script element?');
+      console.error('NOT FOUND: script greeterbot.js - Did you forget to add the Sales ChatBot HTML script element?');
       return null;
     }
   }

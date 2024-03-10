@@ -41,8 +41,7 @@ export const AvatarWithGreeting = () => {
     `}
          onClick={onClickAvatar}
     >
-
-      <img src={'https://kelichatbot2.blob.core.windows.net/salesbot-assets/greeter-bot-logo.png'}
+      <img src={'https://greeterbot.blob.core.windows.net/greeterbot-public/greeter-bot-logo.png'}
            className={`
                w-12 h-12 
                mt-0 ml-2 mb-1 mt-1

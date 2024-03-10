@@ -32,7 +32,6 @@ export const ChatPage = () => {
   } = useCompany();
 
   const {
-    backendUrl,
     backendUrlAdmin,
     loading,
     setLoading,
@@ -40,7 +39,6 @@ export const ChatPage = () => {
 
   const {
     avatarView,
-    showCallToAction,
   } = useChatbot()
 
   const input = useRef();
@@ -69,7 +67,7 @@ export const ChatPage = () => {
     if (!loading && !avatarResponse) {
       try{
         setLoading(true);
-        const _muted = mute || avatarView !== 'avatar'
+        const _muted = true
         const body = JSON.stringify({
           user_msg:  text || "Hello",
           mute: _muted,
@@ -142,9 +140,8 @@ export const ChatPage = () => {
                 p-1
               '>
                 <div className="relative flex flex-row justify-between items-end w-96">
-                  {avatarView === 'avatar' && <AvatarWindow showMuteBtn={true}/>}
-                  {avatarView === 'headshot' &&
-                    <img src={'https://kelichatbot2.blob.core.windows.net/salesbot-assets/greeter-bot-logo.png'}
+                  {(avatarView === 'avatar' || avatarView === 'headshot') &&
+                    <img src={'https://greeterbot.blob.core.windows.net/greeterbot-public/greeter-bot-logo.png'}
                          className={'w-12 h-12 rounded-lg mt-0 ml-3 mr-2 mb-6'}
                     />
                   }
